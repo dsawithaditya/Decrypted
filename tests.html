@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logic Tests | Mess Queue Manager</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="nav">
+  <nav class="container nav-inner">
+    <a class="logo" href="index.html">MQM<span>.</span></a>
+    <a class="btn btn-sm" href="index.html">← Home</a>
+  </nav>
+</header>
+<main>
+  <section class="sky page-sky">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="container hero-content">
+      <span class="tag">TEST TABLE</span>
+      <h1 class="page-title">Logic <span>tests</span></h1>
+      <p class="hud-chip" id="summary" style="margin-top:18px">Running…</p>
+    </div>
+    <div class="pixel-edge"></div>
+  </section>
+  <section class="section tight">
+    <div class="container">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>TEST</th><th>INPUT</th><th>EXPECTED</th><th>GOT</th><th>RESULT</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="js/logic.js"></script>
+<script>
+  const S = MQM.DEFAULT_SETTINGS;
+  const off = { crossAccess: false, standbyOpen: false };
+  const fmt = d => `action=${d.action}, standby=${d.standbyOpen ? 'ON' : 'OFF'}, cross=${d.crossAccess ? 'ON' : 'OFF'}`;
+
+  const tests = [
+    ['T1', 'Zone 30%', 'Normal, no alert', () => { const d = MQM.decide(30, off, S); return [d.action === 'close' && !d.standbyOpen, fmt(d)]; }],
+    ['T2', 'Zone 46%', 'Early alert', () => { const d = MQM.decide(46, off, S); return [d.action === 'alert' && !d.standbyOpen, fmt(d)]; }],
+    ['T3', 'Zone 55%', 'Standby opens', () => { const d = MQM.decide(55, off, S); return [d.standbyOpen && !d.crossAccess, fmt(d)]; }],
+    ['T4', 'Zone 85%', 'Cross access ON', () => { const d = MQM.decide(85, off, S); return [d.crossAccess && d.standbyOpen, fmt(d)]; }],
+    ['T5', '85% → 45%', 'Stays open (hysteresis)', () => {
+      const a = MQM.decide(85, off, S); const d = MQM.decide(45, a, S);
+      return [d.standbyOpen && d.crossAccess, fmt(d)]; }],
+    ['T6', 'Drops to 38%', 'Standby + cross close', () => {
+      const d = MQM.decide(38, { crossAccess: true, standbyOpen: true }, S);
+      return [!d.standbyOpen && !d.crossAccess, fmt(d)]; }],
+    ['T7', 'Queue 0', '0%, 0 min', () => {
+      const p = MQM.crowdPct(0, 20), w = MQM.waitMinutes(0, 30);
+      return [p === 0 && w === 0, `${p}%, ${MQM.formatWait(w)}`]; }],
+    ['T8', 'All counters > 80%', 'Least crowded still shown', () => {
+      const c = { a: { name: 'A', type: 'national', capacity: 20, queueCount: 19, open: true },
+                  b: { name: 'B', type: 'national', capacity: 20, queueCount: 17, open: true },
+                  c: { name: 'C', type: 'international', capacity: 15, queueCount: 14, open: true } };
+      const b = MQM.bestCounter(c, { crossAccess: true }, S);
+      return [b && b.name === 'B', b ? b.name : 'none']; }],
+    ['T9', 'Capacity 0', 'N/A, no error', () => {
+      const p = MQM.crowdPct(5, 0);
+      return [p === null && MQM.colorTag(p).label === 'N/A', MQM.colorTag(p).label]; }]
+  ];
+
+  let pass = 0;
+  document.getElementById('rows').innerHTML = tests.map(([id, input, exp, fn]) => {
+    let ok = false, got = '';
+    try { [ok, got] = fn(); } catch (e) { got = 'Error: ' + e.message; }
+    if (ok) pass++;
+    return `<tr><td><strong>${id}</strong></td><td>${input}</td><td>${exp}</td><td>${got}</td>
+            <td class="${ok ? 'pass' : 'fail'}">${ok ? 'PASS' : 'FAIL'}</td></tr>`;
+  }).join('');
+  document.getElementById('summary').textContent = `${pass} / ${tests.length} tests passed`;
+</script>
+</body>
+</html>

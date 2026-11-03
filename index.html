@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1f4b">
+  <title>Mess Queue Manager | Team Decrypted</title>
+  <meta name="description" content="A smart rule-based queue manager for the Jain University canteen mess. Team Decrypted, SE-302A.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <nav class="container nav-inner" aria-label="Main">
+    <a class="logo" href="index.html">MQM<span>.</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#logic">Logic</a></li>
+      <li><a href="#algorithm">Algorithm</a></li>
+      <li><a href="#pillars">CT Pillars</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-sm hide-xs" href="staff.html">Staff</a>
+      <a class="btn btn-sm btn-gold" href="student.html">Student View</a>
+      <button class="btn btn-sm menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="sky">
+    <div class="stars" aria-hidden="true"></div>
+    <svg class="cloud" style="top:110px;left:6%;width:150px;--dur:26s" viewBox="0 0 32 12" shape-rendering="crispEdges" aria-hidden="true">
+      <g fill="#fff"><rect x="10" y="0" width="8" height="2"/><rect x="8" y="2" width="18" height="2"/><rect x="4" y="4" width="24" height="2"/><rect x="2" y="6" width="28" height="2"/><rect x="0" y="8" width="32" height="2"/></g><rect x="0" y="10" width="32" height="2" fill="#cfe3f7"/>
+    </svg>
+    <svg class="cloud" style="top:190px;right:7%;width:210px;--dur:34s" viewBox="0 0 32 12" shape-rendering="crispEdges" aria-hidden="true">
+      <g fill="#fff"><rect x="12" y="0" width="8" height="2"/><rect x="6" y="2" width="18" height="2"/><rect x="4" y="4" width="24" height="2"/><rect x="2" y="6" width="28" height="2"/><rect x="0" y="8" width="32" height="2"/></g><rect x="0" y="10" width="32" height="2" fill="#cfe3f7"/>
+    </svg>
+    <svg class="cloud" style="bottom:90px;left:18%;width:110px;--dur:22s;opacity:.8" viewBox="0 0 32 12" shape-rendering="crispEdges" aria-hidden="true">
+      <g fill="#fff"><rect x="10" y="0" width="8" height="2"/><rect x="8" y="2" width="18" height="2"/><rect x="4" y="4" width="24" height="2"/><rect x="2" y="6" width="28" height="2"/><rect x="0" y="8" width="32" height="2"/></g><rect x="0" y="10" width="32" height="2" fill="#cfe3f7"/>
+    </svg>
+
+    <div class="container hero-content">
+      <span class="tag">TEAM DECRYPTED · SE-302A · IPS</span>
+      <h1 class="hero-title">MESS QUEUE<span class="line2">MANAGER</span></h1>
+      <p class="hero-sub">Shorter lines and less waiting. A smart rule system that checks the crowd at every counter, opens extra counters at rush hour, and tells you exactly where to go.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold btn-lg" href="student.html">▶ Find my counter</a>
+        <a class="btn btn-lg" href="staff.html">Staff console</a>
+      </div>
+
+      <div class="hud-strip" aria-live="polite">
+        <div class="hud-item"><div class="hud-label">ZONE CROWD</div><div class="hud-value" id="live-zone">--</div></div>
+        <div class="hud-item"><div class="hud-label">BEST COUNTER</div><div class="hud-value" id="live-best">--</div></div>
+        <div class="hud-item"><div class="hud-label">STANDBY</div><div class="hud-value" id="live-standby">--</div></div>
+        <div class="hud-item"><div class="hud-label">CROSS ACCESS</div><div class="hud-value" id="live-cross">--</div></div>
+      </div>
+    </div>
+    <div class="pixel-edge"></div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section" id="problem">
+    <div class="container">
+      <p class="eyebrow">01 · Problem statement</p>
+      <h2 class="section-title">Long lines. <span>Empty counters.</span></h2>
+      <p class="lead">At lunch, the mess food counters get very crowded. Some counters are full while others sit empty. We need a simple, smart rule system that checks queue size and moves students to less crowded counters, so food is served faster and nobody waits too long.</p>
+
+      <div class="grid grid-2">
+        <div class="card reveal">
+          <h3>OBJECTIVES</h3>
+          <ul class="list">
+            <li>Reduce total waiting time for students getting food.</li>
+            <li>Use step-by-step logic to manage line capacity.</li>
+            <li>Open extra counters automatically during rush hours.</li>
+            <li>Show a clear flowchart and pseudocode for the process.</li>
+            <li>Collect and apply feedback from students and mess staff.</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <h3>WHO USES IT</h3>
+          <ul class="list">
+            <li><b>Students:</b> scan the QR code, see the best counter, crowd % and wait time.</li>
+            <li><b>Mess staff:</b> update crowd counts, receive alerts, open or close counters.</li>
+            <li><b>Admin (optional):</b> change thresholds, capacity and serving time.</li>
+          </ul>
+          <p style="margin-top:14px">Runs as a <b style="color:var(--gold)">web app</b> on any phone or laptop browser, so there's nothing to install.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT CHANGED -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="eyebrow">02 · Upgrade</p>
+      <h2 class="section-title">Same problem, <span>smarter logic</span></h2>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>OLD LOGIC</th><th>NEW LOGIC</th></tr></thead>
+          <tbody>
+            <tr><td>One overall crowd %</td><td>Crowd calculated <strong>per counter</strong></td></tr>
+            <tr><td>Only 80% and 50% thresholds</td><td>Added <strong>45% early alert</strong> (from survey feedback)</td></tr>
+            <tr><td>Counters could flip open/closed repeatedly</td><td>Added <strong>hysteresis</strong>: close only below 40%</td></tr>
+            <tr><td>No waiting time shown</td><td>Added <strong>estimated wait time</strong> per counter</td></tr>
+            <tr><td>No direction for students</td><td>Added <strong>"best counter" recommendation</strong></td></tr>
+            <tr><td>Only a displayed message</td><td>Added <strong>staff alerts</strong> with a 2-minute notice</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIC -->
+  <section class="section" id="logic">
+    <div class="container">
+      <p class="eyebrow">03 · Core logic</p>
+      <h2 class="section-title">The <span>rules</span></h2>
+      <div class="grid grid-2">
+        <div class="card reveal">
+          <h3>CROWD PERCENTAGE</h3>
+          <pre class="code">crowd_% = (people_in_queue / capacity) × 100
+<span class="c">// capacity 20, people 16 → 80%</span></pre>
+        </div>
+        <div class="card reveal">
+          <h3>ESTIMATED WAIT TIME</h3>
+          <pre class="code">wait_min = (people × avg_serve_sec) / 60
+<span class="c">// 16 × 30 s = 480 s → 8 minutes</span></pre>
+        </div>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="card rule r-amber reveal"><div class="rule-pct">≥45%</div><h3>EARLY ALERT</h3><p>Staff get a 2-minute notice to prepare the standby counter.</p><span class="who">STAFF</span></div>
+        <div class="card rule r-blue reveal"><div class="rule-pct">≥50%</div><h3>OPEN STANDBY</h3><p>The extra standby counter opens.</p><span class="who">STAFF + STUDENTS</span></div>
+        <div class="card rule r-red reveal"><div class="rule-pct">&gt;80%</div><h3>CROSS ACCESS</h3><p>National students may use the international counters.</p><span class="who">STAFF + STUDENTS</span></div>
+        <div class="card rule r-green reveal"><div class="rule-pct">&lt;40%</div><h3>CLOSE / NORMAL</h3><p>The standby counter closes and normal routing resumes.</p><span class="who">STAFF</span></div>
+      </div>
+
+      <div class="callout reveal"><b>WHY HYSTERESIS?</b> If a counter opened at 50% and closed at 49%, it would flip every minute while the crowd hovers around 50%. Closing only below 40% keeps things stable.</div>
+      <div class="callout reveal"><b>WHICH CROWD %?</b> The rules use the <b>average crowd of the national counters</b>, which fill up first. Students still see each counter's own %.</div>
+
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>CROWD %</th><th>COLOR</th><th>LABEL</th></tr></thead>
+          <tbody>
+            <tr><td>Below 50%</td><td><span class="pill pill-green">GREEN</span></td><td>Free</td></tr>
+            <tr><td>50% to 80%</td><td><span class="pill pill-amber">AMBER</span></td><td>Busy</td></tr>
+            <tr><td>Above 80%</td><td><span class="pill pill-red">RED</span></td><td>Very crowded</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALGORITHM -->
+  <section class="section section-alt" id="algorithm">
+    <div class="container">
+      <p class="eyebrow">04 · Algorithm</p>
+      <h2 class="section-title">Step by <span>step</span></h2>
+      <div class="grid grid-2">
+        <div class="card reveal">
+          <h3>STEPS</h3>
+          <ol class="steps">
+            <li>Read the queue count of every counter.</li>
+            <li>Calculate crowd % and wait time for each counter.</li>
+            <li>Calculate the national zone average.</li>
+            <li>Above 80%: cross-counter access ON and standby open.</li>
+            <li>Else 50% or more: open the standby counter.</li>
+            <li>Else 45% or more: send an early alert to staff.</li>
+            <li>Below 40%: close standby and cross access.</li>
+            <li>Choose the best counter and update the student screen.</li>
+            <li>Wait 1–2 minutes and repeat.</li>
+          </ol>
+        </div>
+        <div class="reveal">
+<pre class="code"><span class="k">START</span>
+<span class="k">LOOP</span> every 1-2 minutes:
+  <span class="k">FOR</span> each counter:
+    crowd_pct = queue / capacity * 100
+    wait_min  = queue * avg_serve_sec / 60
+  <span class="k">ENDFOR</span>
+  zone_avg = average crowd_pct of national counters
+
+  <span class="k">IF</span> zone_avg &gt; 80 <span class="k">THEN</span>
+    cross_access = ON ; standby_open = ON
+  <span class="k">ELSE IF</span> zone_avg &gt;= 50 <span class="k">THEN</span>
+    standby_open = ON
+  <span class="k">ELSE IF</span> zone_avg &gt;= 45 <span class="k">THEN</span>
+    SEND alert "Prepare standby in 2 min"
+  <span class="k">ELSE IF</span> zone_avg &lt; 40 <span class="k">THEN</span>
+    cross_access = OFF ; standby_open = OFF
+  <span class="k">ENDIF</span>
+
+  best = open + allowed counter with lowest wait
+  SHOW "Go to " + best.name
+<span class="k">ENDLOOP</span>
+<span class="k">END</span></pre>
+        </div>
+      </div>
+
+      <div class="mermaid-box reveal">
+<pre class="mermaid">
+flowchart TD
+    A[Start: read queue count of each counter] --> B[Calculate crowd % and wait time per counter]
+    B --> C[Calculate national zone average]
+    C --> D{Zone crowd &gt; 80%?}
+    D -- Yes --> E[Turn ON cross-counter access and open standby]
+    D -- No --> F{Zone crowd &gt;= 50%?}
+    F -- Yes --> G[Open standby counter]
+    F -- No --> H{Zone crowd &gt;= 45%?}
+    H -- Yes --> I[Alert staff: 2-minute notice]
+    H -- No --> J{Zone crowd &lt; 40%?}
+    J -- Yes --> K[Close standby and cross access]
+    J -- No --> L[Keep current state]
+    E --> M[Pick best counter by lowest wait]
+    G --> M
+    I --> M
+    K --> M
+    L --> M
+    M --> N[Update student screens]
+    N --> O[Wait 1-2 minutes]
+    O --> A
+</pre>
+      </div>
+      <p style="margin-top:20px"><a class="btn btn-cyan" href="tests.html">Run logic tests T1–T9 →</a></p>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="section" id="pillars">
+    <div class="container">
+      <p class="eyebrow">05 · Computational thinking</p>
+      <h2 class="section-title">The four <span>pillars</span></h2>
+      <div class="grid grid-4">
+        <div class="card pillar reveal"><div class="icon">D</div><h3>DECOMPOSITION</h3><p>Split the problem into measuring queues, checking thresholds, opening counters, directing students, and notifying staff.</p></div>
+        <div class="card pillar reveal"><div class="icon">P</div><h3>PATTERN RECOGNITION</h3><p>National counters fill up at lunch while international ones stay free. The rush peaks at lunch time.</p></div>
+        <div class="card pillar reveal"><div class="icon">A</div><h3>ABSTRACTION</h3><p>Track only queue count, capacity, and serving time. Ignore what food each student picks.</p></div>
+        <div class="card pillar reveal"><div class="icon">∞</div><h3>ALGORITHMIC THINKING</h3><p>Fixed IF/ELSE rules (45/50/80/40), repeated on a timer.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section class="section section-alt" id="feedback">
+    <div class="container">
+      <p class="eyebrow">06 · Feedback</p>
+      <h2 class="section-title">Built from <span>your feedback</span></h2>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>FEEDBACK FROM SURVEY</th><th>FEATURE IN THE NEW DESIGN</th></tr></thead>
+          <tbody>
+            <tr><td>Students didn't know which line to join</td><td>"Go to Counter X" recommendation and big signs</td></tr>
+            <tr><td>Staff need advance alert</td><td>45% early alert with a 2-minute notice</td></tr>
+            <tr><td>Students missed seeing screens</td><td>Floor arrows, plus the phone view via QR code</td></tr>
+            <tr><td>Extra counters helped at 50%</td><td>Kept the 50% standby rule</td></tr>
+            <tr><td>Cross-counter access saved time</td><td>Kept the 80% rule</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card reveal"><h3>FUTURE SCOPE</h3><ul class="list"><li>Camera-based people counting</li><li>Student QR check-in / check-out</li><li>Daily and weekly rush-hour reports</li></ul></div>
+        <div class="card reveal"><h3>&nbsp;</h3><ul class="list"><li>Rush prediction from past data</li><li>Pre-order so food is ready</li><li>Hindi and English options</li></ul></div>
+        <div class="card reveal"><h3>SUCCESS MEASURES</h3><ul class="list"><li>Lower average waiting time (before vs after)</li><li>Students find the message clear</li><li>Standby opened within 2 minutes</li><li>Smaller gap between busiest and emptiest counter</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" id="team">
+    <div class="container">
+      <p class="eyebrow">07 · Team 3</p>
+      <h2 class="section-title">Team <span>Decrypted</span></h2>
+      <p class="lead">IPS: Computational Thinking as an Engineering Mindset · Section SE-302A · Faculty: Dr. Sujithra · Venue: Canteen Mess, Jain (Deemed-to-be University)</p>
+      <div class="grid grid-3">
+        <div class="card member reveal"><div class="avatar">AK</div><div><h4>Aditya Kumar <span class="lead-badge">LEAD</span></h4><div class="role">PROGRAMMING</div><p>logic.js and Firebase</p></div></div>
+        <div class="card member reveal"><div class="avatar">OG</div><div><h4>Ojash Kumar Gupta</h4><div class="role">ALGORITHM</div><p>Rules, tests, pseudocode, flowchart</p></div></div>
+        <div class="card member reveal"><div class="avatar">CK</div><div><h4>Charvi Krithika</h4><div class="role">FRONT END</div><p>Student view</p></div></div>
+        <div class="card member reveal"><div class="avatar">KJ</div><div><h4>Kirtee Jain</h4><div class="role">FRONT END + SLIDES</div><p>Staff view and presentation</p></div></div>
+        <div class="card member reveal"><div class="avatar">AS</div><div><h4>Aman Singh</h4><div class="role">SURVEY + TESTING</div><p>Canteen test, serving-time measurement</p></div></div>
+        <div class="card member reveal"><div class="avatar">SK</div><div><h4>Senthil Kumar S</h4><div class="role">SURVEY + TESTING</div><p>Student feedback round 2</p></div></div>
+        <div class="card member reveal"><div class="avatar">TP</div><div><h4>Thulasi Prasadr</h4><div class="role">DOCUMENTATION</div><p>Report, screenshots, evidence</p></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="container footer-inner">
+    <div>
+      <div class="logo">MQM<span>.</span></div>
+      <p>Team Decrypted · Jain (Deemed-to-be University) · <span data-year></span></p>
+    </div>
+    <p><a class="u" href="https://github.com/dsawithad/IPS" target="_blank" rel="noreferrer">GitHub repo</a> · <a class="u" href="student.html">Student</a> · <a class="u" href="staff.html">Staff</a> · <a class="u" href="tests.html">Tests</a></p>
+  </div>
+</footer>
+
+<script src="js/logic.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  (async () => {
+    await Store.init();
+    const show = d => {
+      const z = MQM.zoneAverage(d.counters);
+      const best = MQM.bestCounter(d.counters, d.state, d.settings, 'national');
+      document.getElementById('live-zone').textContent = z === null ? 'N/A' : Math.round(z) + '%';
+      document.getElementById('live-zone').className = 'hud-value c-' + MQM.colorTag(z).key;
+      document.getElementById('live-best').textContent = best ? best.name : 'None';
+      document.getElementById('live-standby').textContent = d.state.standbyOpen ? 'OPEN' : 'CLOSED';
+      document.getElementById('live-cross').textContent = d.state.crossAccess ? 'ON' : 'OFF';
+    };
+    show(await Store.load());
+    Store.subscribe(show);
+  })();
+</script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
+</body>
+</html>
