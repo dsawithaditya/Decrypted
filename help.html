@@ -19,16 +19,16 @@
     <nav class="container nav-inner" aria-label="Main">
       <a class="logo" href="index.html">MQM<span>.</span></a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="student.html">Student</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="help.html" style="color:var(--gold)">Help</a></li>
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="student.html" data-i18n="nav_student_link">Student</a></li>
+        <li><a href="staff.html" data-i18n="nav_staff_link">Staff</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="help.html" style="color:var(--gold)" data-i18n="nav_help">Help</a></li>
       </ul>
       <div class="nav-actions">
         <button class="btn btn-sm lang-btn-fixed" id="help-lang-btn" type="button" aria-label="Switch language">EN / हिं / ಕನ್</button>
         <div id="nav-user-slot"></div>
-        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html">Student View</a>
+        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html" data-i18n="nav_student_view">Student View</a>
         <button class="btn btn-sm menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
     </nav>
@@ -38,10 +38,10 @@
     <section class="sky page-sky">
       <div class="stars" aria-hidden="true"></div>
       <div class="container hero-content">
-        <span class="tag">SUPPORT &amp; DOCUMENTATION</span>
-        <h1 class="page-title">Help &amp; <span>User Guide</span></h1>
+        <span class="tag" data-i18n="help_tag">SUPPORT &amp; DOCUMENTATION</span>
+        <h1 class="page-title" data-i18n-html="help_h1">Help &amp; <span>User Guide</span></h1>
         <p class="hero-sub" style="margin-top:10px">
-          Everything you need to know about checking queue times, claiming express passes, ordering room food delivery, and managing mess operations.
+          <span data-i18n="help_hero_sub">Everything you need to know about checking queue times, claiming express passes, ordering room food delivery, and managing mess operations.</span>
         </p>
       </div>
       <div class="pixel-edge"></div>
@@ -50,46 +50,46 @@
     <!-- STUDENT GUIDE -->
     <section class="section" id="student-guide">
       <div class="container">
-        <p class="eyebrow">01 · Student Guide</p>
-        <h2 class="section-title">Using the <span>Student Portal</span></h2>
+        <p class="eyebrow" data-i18n="h_eyebrow1">01 · Student Guide</p>
+        <h2 class="section-title" data-i18n-html="h_sec1_title">Using the <span>Student Portal</span></h2>
         
         <div class="grid grid-3" style="margin-top:28px">
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">⚡</div>
-            <h3>FINDING THE BEST COUNTER</h3>
-            <p>Open the Student View on your phone. The gold banner at the top automatically points you to the open counter with the lowest wait time.</p>
+            <h3 data-i18n="h_card1_title">FINDING THE BEST COUNTER</h3>
+            <p><span data-i18n="h_card1_desc">Open the Student View on your phone. The gold banner at the top automatically points you to the open counter with the lowest wait time.</span></p>
           </div>
 
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">🎫</div>
-            <h3>CROSS-ACCESS EXPRESS PASS</h3>
-            <p>When national lines exceed 80%, a glowing banner appears. Tap <b>Claim Express Pass</b> to get a 15-minute token routing you to the least crowded International counter.</p>
+            <h3 data-i18n="h_card2_title">CROSS-ACCESS EXPRESS PASS</h3>
+            <p><span data-i18n="h_card2_desc">When national lines exceed 80%, a glowing banner appears. Tap Claim Express Pass to get a 15-minute token routing you to the least crowded International counter.</span></p>
           </div>
 
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">🔔</div>
-            <h3>"NOTIFY ME WHEN FREE"</h3>
-            <p>Studying in your hostel room? Tap the alert button to receive an audio chime and notification when mess crowd drops below 50%.</p>
+            <h3 data-i18n="h_card3_title">"NOTIFY ME WHEN FREE"</h3>
+            <p><span data-i18n="h_card3_desc">Studying in your hostel room? Tap the alert button to receive an audio chime and notification when mess crowd drops below 50%.</span></p>
           </div>
         </div>
 
         <div class="grid grid-3" style="margin-top:22px">
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">🛏️</div>
-            <h3>DIRECT-TO-ROOM DELIVERY</h3>
-            <p>If you have a high fever, mobility injury, or quarantine, fill out the Room Delivery form. Select <b>Light Sick Diet</b> (Khichdi/Soup) or <b>Standard Thali</b>.</p>
+            <h3 data-i18n="h_card4_title">DIRECT-TO-ROOM DELIVERY</h3>
+            <p><span data-i18n="h_card4_desc">If you have a high fever, mobility injury, or quarantine, fill out the Room Delivery form. Select Light Sick Diet (Khichdi/Soup) or Standard Thali.</span></p>
           </div>
 
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">🔒</div>
-            <h3>4-DIGIT SECURITY OTP</h3>
-            <p>Each delivery generates a unique 4-digit OTP. Keep it on your screen and share it with the runner when your food arrives to verify delivery.</p>
+            <h3 data-i18n="h_card5_title">4-DIGIT SECURITY OTP</h3>
+            <p><span data-i18n="h_card5_desc">Each delivery generates a unique 4-digit OTP. Keep it on your screen and share it with the runner when your food arrives to verify delivery.</span></p>
           </div>
 
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">🌟</div>
-            <h3>EARNING KARMA POINTS</h3>
-            <p>Volunteer as a <b>Hostel Peer Buddy</b> to carry a meal box to an unwell student in your hostel block and earn <b>+10 Mess Karma Points</b>.</p>
+            <h3 data-i18n="h_card6_title">EARNING KARMA POINTS</h3>
+            <p><span data-i18n="h_card6_desc">Volunteer as a Hostel Peer Buddy to carry a meal box to an unwell student in your hostel block and earn +10 Mess Karma Points.</span></p>
           </div>
         </div>
       </div>
@@ -98,26 +98,178 @@
     <!-- STAFF GUIDE -->
     <section class="section section-alt" id="staff-guide">
       <div class="container">
-        <p class="eyebrow">02 · Staff Operations</p>
-        <h2 class="section-title">Operating the <span>Staff Console</span></h2>
+        <p class="eyebrow" data-i18n="h_eyebrow2">02 · Staff Operations</p>
+        <h2 class="section-title" data-i18n-html="h_sec2_title">Operating the <span>Staff Console</span></h2>
 
         <div class="grid grid-3" style="margin-top:28px">
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">🔑</div>
-            <h3>STAFF ACCESS</h3>
-            <p>Open the Staff Console from the navbar. Enter default staff PIN <code>1234</code> or sign in with your staff email address.</p>
+            <h3 data-i18n="h_card7_title">STAFF ACCESS</h3>
+            <p><span data-i18n="h_card7_desc">Open the Staff Console from the navbar. Enter default staff PIN 1234 or sign in with your staff email address.</span></p>
           </div>
 
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">🎛️</div>
-            <h3>QUEUE CONTROLS</h3>
-            <p>Adjust line sizes using sliders or <code>+</code> / <code>−</code> buttons. Check the <b>Sold Out</b> box to immediately divert students from counters that have run out of food.</p>
+            <h3 data-i18n="h_card8_title">QUEUE CONTROLS</h3>
+            <p><span data-i18n="h_card8_desc">Adjust line sizes using sliders or + / − buttons. Check the Sold Out box to immediately divert students from counters that have run out of food.</span></p>
           </div>
 
           <div class="card reveal">
             <div style="font-size:28px;margin-bottom:6px">🚨</div>
-            <h3>KITCHEN EARLY WARNING</h3>
-            <p>If any dish rating falls below 2.5★ or receives 3+ complaint tags (Cold, Salt Issue), an automatic red alert sounds so chefs can correct the recipe.</p>
+            <h3 data-i18n="h_card9_title">KITCHEN EARLY WARNING</h3>
+            <p><span data-i18n="h_card9_desc">If any dish rating falls below 2.5★ or receives 3+ complaint tags (Cold, Salt Issue), an automatic red alert sounds so chefs can correct the recipe.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- MESS STAFF & EMERGENCY CONTACT DIRECTORY (Request 4) -->
+    <section class="section" id="staff-directory">
+      <div class="container">
+        <p class="eyebrow" data-i18n="h_dir_eyebrow">03 · CONTACT DIRECTORY</p>
+        <h2 class="section-title" data-i18n="h_dir_title">Mess Staff & Emergency Contacts</h2>
+        <p class="lead" data-i18n="h_dir_sub">Direct demo phone lines for canteen supervisors, head warden, health centre, and dispatch.</p>
+
+        <div class="contact-grid">
+          <!-- Contact 1: Chief Mess Warden -->
+          <div class="contact-card reveal">
+            <div class="contact-header">
+              <div class="contact-avatar">👑</div>
+              <div>
+                <h4 class="contact-name">Dr. R. K. Sharma</h4>
+                <div class="contact-role">Chief Mess Warden &amp; Dean</div>
+                <span class="contact-badge">ADMIN HEAD</span>
+              </div>
+            </div>
+            <div class="contact-body">
+              <div><b>Responsibility:</b> Dining operations oversight &amp; hostel escalations</div>
+              <div><b>Office:</b> Mess Admin Block, Room 101</div>
+              <div><b>Hours:</b> 08:30 AM – 06:00 PM</div>
+              <div>
+                <a href="tel:+919845012345" class="contact-phone">📞 +91 98450 12345</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact 2: Canteen Operations Manager -->
+          <div class="contact-card reveal">
+            <div class="contact-header">
+              <div class="contact-avatar">👨‍💼</div>
+              <div>
+                <h4 class="contact-name">Mr. Suresh Gowda</h4>
+                <div class="contact-role">Canteen Operations Manager</div>
+                <span class="contact-badge">STAFF LEAD</span>
+              </div>
+            </div>
+            <div class="contact-body">
+              <div><b>Responsibility:</b> Queue controls, staff shifts &amp; counter balancing</div>
+              <div><b>Office:</b> Ground Floor Mess Control Cabin</div>
+              <div><b>Hours:</b> 06:30 AM – 10:30 PM</div>
+              <div>
+                <a href="tel:+919845067890" class="contact-phone">📞 +91 98450 67890</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact 3: Executive Head Chef -->
+          <div class="contact-card reveal">
+            <div class="contact-header">
+              <div class="contact-avatar">👨‍🍳</div>
+              <div>
+                <h4 class="contact-name">Chef Manoj Kumar</h4>
+                <div class="contact-role">Executive Kitchen Supervisor</div>
+                <span class="contact-badge">KITCHEN HEAD</span>
+              </div>
+            </div>
+            <div class="contact-body">
+              <div><b>Responsibility:</b> Menu execution, live sentiment alerts &amp; recipe tuning</div>
+              <div><b>Office:</b> Central Kitchen Bay, Dispatch Gate 2</div>
+              <div><b>Hours:</b> 05:30 AM – 10:00 PM</div>
+              <div>
+                <a href="tel:+919845023456" class="contact-phone">📞 +91 98450 23456</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact 4: Campus Health Centre -->
+          <div class="contact-card reveal">
+            <div class="contact-header">
+              <div class="contact-avatar">🩺</div>
+              <div>
+                <h4 class="contact-name">Sister Ananya / Dr. Divya</h4>
+                <div class="contact-role">Campus Health Centre (Sick Diets)</div>
+                <span class="contact-badge" style="color:var(--red);border-color:var(--red)">24/7 MEDICAL</span>
+              </div>
+            </div>
+            <div class="contact-body">
+              <div><b>Responsibility:</b> Convalescent diet medical approval (fever/mobility)</div>
+              <div><b>Location:</b> Campus Health Clinic, Block C</div>
+              <div><b>Hours:</b> 24/7 On-Call Medical Desk</div>
+              <div>
+                <a href="tel:+919845034567" class="contact-phone">📞 +91 98450 34567</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact 5: Food Logistics & Zero Waste -->
+          <div class="contact-card reveal">
+            <div class="contact-header">
+              <div class="contact-avatar">📦</div>
+              <div>
+                <h4 class="contact-name">Mr. Vinod Nair</h4>
+                <div class="contact-role">Food Logistics &amp; Zero Waste Officer</div>
+                <span class="contact-badge">SUSTAINABILITY</span>
+              </div>
+            </div>
+            <div class="contact-body">
+              <div><b>Responsibility:</b> Attendance headcount forecasts &amp; pantry storage</div>
+              <div><b>Office:</b> Logistics &amp; Grain Cellar</div>
+              <div><b>Hours:</b> 07:00 AM – 05:00 PM</div>
+              <div>
+                <a href="tel:+919845045678" class="contact-phone">📞 +91 98450 45678</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact 6: Student Mess Committee Lead -->
+          <div class="contact-card reveal">
+            <div class="contact-header">
+              <div class="contact-avatar">🎓</div>
+              <div>
+                <h4 class="contact-name">Aryan Patel</h4>
+                <div class="contact-role">Student Mess Committee Lead</div>
+                <span class="contact-badge">STUDENT REP</span>
+              </div>
+            </div>
+            <div class="contact-body">
+              <div><b>Responsibility:</b> Student feedback, peer buddy runners &amp; escalation</div>
+              <div><b>Room:</b> Hostel Block B, Room 312</div>
+              <div><b>Hours:</b> 07:00 PM – 11:00 PM</div>
+              <div>
+                <a href="tel:+919845056789" class="contact-phone">📞 +91 98450 56789</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact 7: 24/7 Dispatch Control Room -->
+          <div class="contact-card reveal" style="border: 2px solid var(--gold)">
+            <div class="contact-header">
+              <div class="contact-avatar">🚨</div>
+              <div>
+                <h4 class="contact-name">24/7 Canteen Dispatch Desk</h4>
+                <div class="contact-role">Emergency Runner Intercom</div>
+                <span class="contact-badge" style="color:var(--gold);border-color:var(--gold)">HOTLINE</span>
+              </div>
+            </div>
+            <div class="contact-body">
+              <div><b>Direct Extension:</b> Dial Ext. 302 from any campus intercom</div>
+              <div><b>Desk:</b> Central Dining Control Station Gate 1</div>
+              <div><b>Hours:</b> 24 Hours Open</div>
+              <div>
+                <a href="tel:+918027509999" class="contact-phone" style="background:var(--gold);color:var(--ink)">📞 +91 80 2750 9999</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -127,7 +279,7 @@
     <section class="section" id="faq">
       <div class="container">
         <p class="eyebrow">03 · Common Questions</p>
-        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+        <h2 class="section-title" data-i18n="h_faq_title">Frequently Asked Questions</h2>
 
         <div style="display:grid;gap:14px;max-width:800px;margin-top:28px">
           <details class="card reveal" style="padding:18px 22px">
@@ -178,7 +330,7 @@
         <p>Team Decrypted · Jain (Deemed-to-be University)</p>
       </div>
       <p>
-        <a class="u" href="index.html">Home</a> · 
+        <a class="u" href="index.html" data-i18n="nav_home">Home</a> · 
         <a class="u" href="student.html">Student Portal</a> · 
         <a class="u" href="staff.html">Staff Console</a> · 
         <a class="u" href="about.html">About &amp; Research</a> · 
@@ -190,25 +342,10 @@
   <script src="js/logic.js"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/ui.js"></script>
   <script>
-    const langOrder = ['en', 'hi', 'kn'];
-    let lang = localStorage.getItem('mqm-lang') || 'en';
-    const syncLang = () => {
-      const btn = document.getElementById('help-lang-btn');
-      if (btn) {
-        if (lang === 'en') btn.textContent = 'EN / हिं / ಕನ್';
-        else if (lang === 'hi') btn.textContent = 'हिं / ಕನ್ / EN';
-        else btn.textContent = 'ಕನ್ / EN / हिं';
-      }
-    };
-    syncLang();
-    document.getElementById('help-lang-btn')?.addEventListener('click', () => {
-      const idx = langOrder.indexOf(lang);
-      lang = langOrder[(idx + 1) % langOrder.length];
-      localStorage.setItem('mqm-lang', lang);
-      syncLang();
-    });
+    if (window.MQM_I18N) MQM_I18N.apply();
   </script>
 </body>
 

@@ -613,9 +613,19 @@
 
     syncLang();
     $('#student-lang-btn')?.addEventListener('click', () => {
-      const curIdx = langOrder.indexOf(lang);
-      lang = langOrder[(curIdx + 1) % langOrder.length];
-      localStorage.setItem('mqm-lang', lang);
+      if (window.MQM_I18N) {
+        lang = MQM_I18N.cycleLang();
+      } else {
+        const curIdx = langOrder.indexOf(lang);
+        lang = langOrder[(curIdx + 1) % langOrder.length];
+        localStorage.setItem('mqm-lang', lang);
+      }
+      syncLang();
+      renderQueue();
+    });
+
+    window.addEventListener('mqm-language-changed', (e) => {
+      lang = e.detail.lang;
       syncLang();
       renderQueue();
     });

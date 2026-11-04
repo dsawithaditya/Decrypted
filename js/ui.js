@@ -1,6 +1,8 @@
-/* Shared UI: mobile menu, year, reveal-on-scroll */
+/* Shared UI: mobile menu, year, scroll-reveal animation, i18n initialization */
 document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', () => {
+  // 1. Mobile navigation menu toggle
   const btn = document.getElementById('menu-btn');
   const links = document.getElementById('nav-links');
   if (btn && links) {
@@ -10,15 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
   }
+
+  // 2. Dynamic Year
   document.querySelectorAll('[data-year]').forEach(e => (e.textContent = new Date().getFullYear()));
 
-  const els = document.querySelectorAll('.reveal');
+  // 3. Scroll-Reveal Animation for Arcade Boxes & Cards (Request 5)
+  const targets = document.querySelectorAll('.reveal, .card, .pillar, .contact-card, .pixel-box, .stat-hud-card');
   if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    }), { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -30px 0px'
+    });
+
+    targets.forEach(el => {
+      el.classList.add('reveal');
+      io.observe(el);
+    });
   } else {
-    els.forEach(el => el.classList.add('in'));
+    targets.forEach(el => el.classList.add('in'));
+  }
+
+  // 4. Trigger i18n application if loaded
+  if (window.MQM_I18N) {
+    window.MQM_I18N.apply();
   }
 });

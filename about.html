@@ -38,16 +38,16 @@
     <nav class="container nav-inner" aria-label="Main">
       <a class="logo" href="index.html">MQM<span>.</span></a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="student.html">Student</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a href="about.html" style="color:var(--gold)">About</a></li>
-        <li><a href="help.html">Help</a></li>
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="student.html" data-i18n="nav_student_link">Student</a></li>
+        <li><a href="staff.html" data-i18n="nav_staff_link">Staff</a></li>
+        <li><a href="about.html" style="color:var(--gold)" data-i18n="nav_about">About</a></li>
+        <li><a href="help.html" data-i18n="nav_help">Help</a></li>
       </ul>
       <div class="nav-actions">
         <button class="btn btn-sm lang-btn-fixed" id="about-lang-btn" type="button" aria-label="Switch language">EN / हिं / ಕನ್</button>
         <div id="nav-user-slot"></div>
-        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html">Student View</a>
+        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html" data-i18n="nav_student_view">Student View</a>
         <button class="btn btn-sm menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
     </nav>
@@ -58,8 +58,8 @@
     <section class="sky page-sky">
       <div class="stars" aria-hidden="true"></div>
       <div class="container hero-content">
-        <span class="tag">RESEARCH &amp; ENGINEERING AUDIT</span>
-        <h1 class="page-title">About <span>Mess Queue Manager</span></h1>
+        <span class="tag" data-i18n="abt_tag">RESEARCH &amp; ENGINEERING AUDIT</span>
+        <h1 class="page-title" data-i18n-html="abt_page_title">About <span>Mess Queue Manager</span></h1>
         <p class="hero-sub" style="margin-top:10px">
           Computational Thinking as an Engineering Mindset · Course SE-302A · Faculty: Dr. Sujithra · Jain (Deemed-to-be University).
         </p>
@@ -70,24 +70,24 @@
     <!-- PROBLEM STATEMENT -->
     <section class="section" id="problem">
       <div class="container">
-        <p class="eyebrow">01 · Problem Statement</p>
-        <h2 class="section-title">Long lines. <span>Empty counters.</span></h2>
+        <p class="eyebrow" data-i18n="abt_prob_eyebrow">01 · Problem Statement</p>
+        <h2 class="section-title" data-i18n-html="abt_prob_title">Long lines. <span>Empty counters.</span></h2>
         <p class="lead">
-          During peak lunch rush (12:15 PM – 1:15 PM), the Jain University mess counters suffered from heavy queuing bottlenecks. National food counters had queues stretching 15–20 students deep, while adjacent international counters sat largely underutilized. Students frequently joined lines only to discover food had run out, and sick or injured students skipped meals entirely.
+          <span data-i18n="abt_prob_lead">During peak lunch rush (12:15 PM – 1:15 PM), the Jain University mess counters suffered from heavy queuing bottlenecks. National food counters had queues stretching 15–20 students deep, while adjacent international counters sat largely underutilized.</span>
         </p>
 
         <div class="grid grid-3" style="margin-top:28px">
           <div class="card reveal">
-            <h3>THE CROWD IMBALANCE</h3>
-            <p>National counters (Counters 1–3) were consistently above 90% capacity, while International counters (Counters 4–5) stayed below 20% capacity.</p>
+            <h3 data-i18n="abt_c1_title">THE CROWD IMBALANCE</h3>
+            <p><span data-i18n="abt_c1_desc">National counters (Counters 1–3) were consistently above 90% capacity, while International counters (Counters 4–5) stayed below 20% capacity.</span></p>
           </div>
           <div class="card reveal">
-            <h3>LACK OF ADVANCE WARNING</h3>
-            <p>Canteen kitchen staff were caught off guard when lines suddenly spiked, delaying the opening of backup standby counters by 6–10 minutes.</p>
+            <h3 data-i18n="abt_c2_title">LACK OF ADVANCE WARNING</h3>
+            <p><span data-i18n="abt_c2_desc">Canteen kitchen staff were caught off guard when lines suddenly spiked, delaying the opening of backup standby counters by 6–10 minutes.</span></p>
           </div>
           <div class="card reveal">
-            <h3>STUDENT VISIBILITY DEFICIT</h3>
-            <p>Students walking in had no way of knowing which counter was fastest before committing to a 10+ minute queue.</p>
+            <h3 data-i18n="abt_c3_title">STUDENT VISIBILITY DEFICIT</h3>
+            <p><span data-i18n="abt_c3_desc">Students walking in had no way of knowing which counter was fastest before committing to a 10+ minute queue.</span></p>
           </div>
         </div>
       </div>
@@ -96,29 +96,29 @@
     <!-- COMPUTATIONAL THINKING PILLARS -->
     <section class="section section-alt" id="pillars">
       <div class="container">
-        <p class="eyebrow">02 · Engineering Mindset</p>
-        <h2 class="section-title">The Four <span>Pillars</span></h2>
-        <p class="lead">How we applied core computational thinking principles to engineer an automated, robust queue balancing system.</p>
+        <p class="eyebrow" data-i18n="abt_p_eyebrow">02 · Engineering Mindset</p>
+        <h2 class="section-title" data-i18n-html="abt_p_title">The Four <span>Pillars</span></h2>
+        <p class="lead"><span data-i18n="abt_p_lead">How we applied core computational thinking principles to engineer an automated, robust queue balancing system.</span></p>
 
         <div class="grid grid-4" style="margin-top:28px">
           <div class="card pillar reveal">
             <div class="icon">D</div>
-            <h3>DECOMPOSITION</h3>
+            <h3 data-i18n="abt_p1_title">DECOMPOSITION</h3>
             <p>Deconstructed canteen operations into discrete modules: queue sensing, zone average calculation, threshold triggers, cross-counter load balancing, and dispatch notification.</p>
           </div>
           <div class="card pillar reveal">
             <div class="icon">P</div>
-            <h3>PATTERN RECOGNITION</h3>
+            <h3 data-i18n="abt_p2_title">PATTERN RECOGNITION</h3>
             <p>Identified daily lunch rush surges peaking at 12:30 PM, the disparity between National and International throughput, and 30-second average serving time.</p>
           </div>
           <div class="card pillar reveal">
             <div class="icon">A</div>
-            <h3>ABSTRACTION</h3>
+            <h3 data-i18n="abt_p3_title">ABSTRACTION</h3>
             <p>Filtered out non-critical details (individual food preference, weather) and focused exclusively on queue count, serving time, capacity, and sold-out flags.</p>
           </div>
           <div class="card pillar reveal">
             <div class="icon">∞</div>
-            <h3>ALGORITHMIC THINKING</h3>
+            <h3 data-i18n="abt_p4_title">ALGORITHMIC THINKING</h3>
             <p>Engineered precise deterministic threshold rules (45/50/80/40) with mathematical hysteresis to prevent rapid flapping between states.</p>
           </div>
         </div>
@@ -128,15 +128,15 @@
     <!-- DECISION RULES & HYSTERESIS -->
     <section class="section" id="logic">
       <div class="container">
-        <p class="eyebrow">03 · Threshold Logic</p>
-        <h2 class="section-title">Rules with <span>Hysteresis</span></h2>
-        <p class="lead">Rules execute on the average crowd of open, available National counters to decide automated actions:</p>
+        <p class="eyebrow" data-i18n="abt_h_eyebrow">03 · Threshold Logic</p>
+        <h2 class="section-title" data-i18n-html="abt_h_title">Rules with <span>Hysteresis</span></h2>
+        <p class="lead"><span data-i18n="abt_h_lead">Rules execute on the average crowd of open, available National counters to decide automated actions:</span></p>
 
         <div class="grid grid-4" style="margin-top:28px">
           <div class="card rule r-amber reveal">
             <div class="rule-pct">≥45<span class="pct-unit">%</span></div>
-            <h3>EARLY ALERT</h3>
-            <p>Triggers audio beep and vibration alert to staff. Kitchen prepares the standby counter with a 2-minute head start.</p>
+            <h3 data-i18n="abt_t45_title">EARLY ALERT</h3>
+            <p><span data-i18n="abt_t45_desc">Triggers audio beep and vibration alert to staff. Kitchen prepares the standby counter with a 2-minute head start.</span></p>
             <span class="who">STAFF ALERT</span>
           </div>
 
@@ -162,10 +162,10 @@
           </div>
         </div>
 
-        <!-- FLOWCHART & PSEUDOCODE -->
-        <div class="grid grid-2" style="margin-top:36px">
+        <!-- ALGORITHM & FLOWCHART -->
+        <div style="display:grid;gap:32px;margin-top:36px">
           <div class="card reveal">
-            <h3>STEP-BY-STEP ALGORITHM</h3>
+            <h3 data-i18n="abt_steps_title">STEP-BY-STEP ALGORITHM</h3>
             <ol class="steps" style="margin-top:14px">
               <li>Read queue counts from all active counters.</li>
               <li>Compute crowd %: <code>queue / capacity × 100</code>.</li>
@@ -179,22 +179,33 @@
             </ol>
           </div>
           <div class="card reveal">
-            <h3>DECISION FLOWCHART</h3>
+            <h3 data-i18n="abt_flowchart_title">DECISION FLOWCHART</h3>
             <div class="mermaid-box" style="margin-top:10px">
               <pre class="mermaid">
 flowchart TD
-    A[Read queue count of each counter] --> B[Calculate crowd % and wait time]
-    B --> C[Compute national zone average]
-    C --> D{Zone crowd > 80%?}
-    D -- Yes --> E[Turn ON Cross-Access + Open Standby]
-    D -- No --> F{Zone crowd >= 50%?}
-    F -- Yes --> G[Open Standby Counter]
-    F -- No --> H{Zone crowd >= 45%?}
-    H -- Yes --> I[Trigger 2-Min Staff Notice]
-    H -- No --> J{Zone crowd < 40%?}
-    J -- Yes --> K[Close Standby & Cross-Access]
-    J -- No --> L[Hysteresis: Keep State]
-    E --> M[Route to lowest wait counter]
+    classDef input fill:#0c2b42,stroke:#5fe3ff,stroke-width:2px,color:#fff;
+    classDef decision fill:#162e5b,stroke:#ffcf3f,stroke-width:2px,color:#ffcf3f;
+    classDef action fill:#0a2942,stroke:#5fe3ff,stroke-width:2px,color:#fff;
+    classDef alert fill:#3b1320,stroke:#ff4f61,stroke-width:2px,color:#fff;
+    classDef target fill:#0f382c,stroke:#3ddc84,stroke-width:3px,color:#ffcf3f;
+
+    A["Read Queue Count of Each Counter"]:::input --> B["Compute Crowd % & Estimated Wait Time"]:::input
+    B --> C["Compute National Zone Average"]:::input
+    C --> D{"Zone Crowd > 80%?"}:::decision
+
+    D -- "YES: Rush Overload" --> E["Turn ON Cross-Access (75% Cap)<br/>+ Open Standby Counter"]:::alert
+    D -- "NO" --> F{"Zone Crowd >= 50%?"}:::decision
+
+    F -- "YES: Surge" --> G["Open Standby Counter"]:::action
+    F -- "NO" --> H{"Zone Crowd >= 45%?"}:::decision
+
+    H -- "YES: Early Alert" --> I["Trigger 2-Min Staff Notice"]:::action
+    H -- "NO" --> J{"Zone Crowd < 40%?"}:::decision
+
+    J -- "YES: Cleared" --> K["Close Standby & Reset Cross-Access"]:::action
+    J -- "NO: 40% - 45%" --> L["Hysteresis: Keep Current State"]:::action
+
+    E --> M["Route Student to Lowest-Wait Counter"]:::target
     G --> M
     I --> M
     K --> M
@@ -209,8 +220,8 @@ flowchart TD
     <!-- MEASURED RESULTS -->
     <section class="section section-alt" id="results">
       <div class="container">
-        <p class="eyebrow">04 · Measured Results</p>
-        <h2 class="section-title">Before vs. After <span>Impact</span></h2>
+        <p class="eyebrow" data-i18n="abt_r_eyebrow">04 · Measured Results</p>
+        <h2 class="section-title" data-i18n="abt_res_title">MEASURED RESULTS</h2>
         <p class="lead">Measured during peak lunch rush at Jain University canteen with empirical stopwatch timing.</p>
 
         <div class="grid grid-4" style="margin-top:28px">
@@ -241,7 +252,7 @@ flowchart TD
     <!-- TEAM DECRYPTED -->
     <section class="section" id="team">
       <div class="container">
-        <p class="eyebrow">05 · Project Team</p>
+        <p class="eyebrow" data-i18n="abt_team_eyebrow">05 · Project Team</p>
         <h2 class="section-title">Team <span>Decrypted (Team 3)</span></h2>
         <p class="lead">SE-302A · Department of Computer Science &amp; Engineering · Jain (Deemed-to-be University)</p>
 
@@ -321,7 +332,7 @@ flowchart TD
         <p>Team Decrypted · Jain (Deemed-to-be University)</p>
       </div>
       <p>
-        <a class="u" href="index.html">Home</a> · 
+        <a class="u" href="index.html" data-i18n="nav_home">Home</a> · 
         <a class="u" href="student.html">Student Portal</a> · 
         <a class="u" href="staff.html">Staff Console</a> · 
         <a class="u" href="help.html">Help &amp; FAQ</a> · 
@@ -333,29 +344,34 @@ flowchart TD
   <script src="js/logic.js"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/ui.js"></script>
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    mermaid.initialize({
+      startOnLoad: true,
+      securityLevel: 'loose',
+      htmlLabels: true,
+      theme: 'base',
+      themeVariables: {
+        darkMode: true,
+        background: '#071330',
+        primaryColor: '#0b1f4b',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#ffcf3f',
+        lineColor: '#5fe3ff',
+        secondaryColor: '#173a80',
+        tertiaryColor: '#071330',
+        edgeLabelBackground: '#071330',
+        nodeTextColor: '#ffffff',
+        mainBkg: '#0b1f4b',
+        nodeBorder: '#ffcf3f',
+        fontFamily: 'Inter, system-ui, sans-serif'
+      }
+    });
   </script>
   <script>
-    const langOrder = ['en', 'hi', 'kn'];
-    let lang = localStorage.getItem('mqm-lang') || 'en';
-    const syncLang = () => {
-      const btn = document.getElementById('about-lang-btn');
-      if (btn) {
-        if (lang === 'en') btn.textContent = 'EN / हिं / ಕನ್';
-        else if (lang === 'hi') btn.textContent = 'हिं / ಕನ್ / EN';
-        else btn.textContent = 'ಕನ್ / EN / हिं';
-      }
-    };
-    syncLang();
-    document.getElementById('about-lang-btn')?.addEventListener('click', () => {
-      const idx = langOrder.indexOf(lang);
-      lang = langOrder[(idx + 1) % langOrder.length];
-      localStorage.setItem('mqm-lang', lang);
-      syncLang();
-    });
+    if (window.MQM_I18N) MQM_I18N.apply();
   </script>
 </body>
 

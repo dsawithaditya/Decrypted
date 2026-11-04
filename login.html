@@ -215,6 +215,8 @@
   <script src="js/logic.js"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/ui.js"></script>
   <script>
     (function () {
       const tabStudent = document.getElementById('tab-student');
@@ -314,9 +316,18 @@
       };
       syncLoginLang();
       document.getElementById('login-lang-btn')?.addEventListener('click', () => {
-        const idx = langOrder.indexOf(lang);
-        lang = langOrder[(idx + 1) % langOrder.length];
-        localStorage.setItem('mqm-lang', lang);
+        if (window.MQM_I18N) {
+          lang = MQM_I18N.cycleLang();
+        } else {
+          const idx = langOrder.indexOf(lang);
+          lang = langOrder[(idx + 1) % langOrder.length];
+          localStorage.setItem('mqm-lang', lang);
+        }
+        syncLoginLang();
+      });
+
+      window.addEventListener('mqm-language-changed', (e) => {
+        lang = e.detail.lang;
         syncLoginLang();
       });
 

@@ -272,18 +272,8 @@
   function renderZoneMarks(s) {
     const marksEl = $('#zone-marks');
     if (!marksEl) return;
-    const thresholds = [s.closeThreshold, s.alertThreshold, s.standbyThreshold, s.crossAccessThreshold];
-    let prevPos = -100;
-    let lastStaggered = false;
-
-    marksEl.innerHTML = thresholds.map(v => {
-      const pos = Math.min(100, Math.max(0, Number(v) || 0));
-      const tooClose = Math.abs(pos - prevPos) < 9;
-      const stagger = tooClose && !lastStaggered;
-      prevPos = pos;
-      lastStaggered = stagger;
-      return `<span class="mark ${stagger ? 'stagger-down' : ''}" style="left:${pos}%"><b>${pos}%</b></span>`;
-    }).join('');
+    // 40, 45, 50, 80% threshold markers removed as requested
+    marksEl.innerHTML = '';
   }
 
   function render() {
@@ -667,15 +657,17 @@
       Auth.logout();
     });
 
-    const url = new URL('student.html', location.href).href;
+    const targetUrl = 'https://mqm.adityak.in/';
     const qrLink = $('#qr-link');
     if (qrLink) {
-      qrLink.href = url;
-      qrLink.textContent = url;
+      qrLink.href = targetUrl;
+      qrLink.textContent = targetUrl;
+      qrLink.style.wordBreak = 'break-all';
+      qrLink.style.color = 'var(--gold)';
     }
     const qrImg = $('#qr-img');
     if (qrImg) {
-      qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(url);
+      qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(targetUrl);
     }
   }
 
@@ -738,10 +730,21 @@
 
     syncStaffLang();
     $('#staff-lang-btn')?.addEventListener('click', () => {
-      const curIdx = langOrder.indexOf(lang);
-      lang = langOrder[(curIdx + 1) % langOrder.length];
-      localStorage.setItem('mqm-lang', lang);
+      if (window.MQM_I18N) {
+        lang = MQM_I18N.cycleLang();
+      } else {
+        const curIdx = langOrder.indexOf(lang);
+        lang = langOrder[(curIdx + 1) % langOrder.length];
+        localStorage.setItem('mqm-lang', lang);
+      }
       syncStaffLang();
+      render();
+    });
+
+    window.addEventListener('mqm-language-changed', (e) => {
+      lang = e.detail.lang;
+      syncStaffLang();
+      render();
     });
   }
 

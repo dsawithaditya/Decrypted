@@ -137,8 +137,88 @@ pre.code .k{color:var(--gold)} pre.code .c{color:#7d8fb8}
 .steps{counter-reset:s;list-style:none;display:grid;gap:12px}
 .steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;color:#dfe6f7}
 .steps li::before{content:counter(s);flex:none;width:32px;height:32px;display:grid;place-items:center;font-family:var(--font-display);font-size:22px;background:var(--gold);color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
-.mermaid-box{background:#f6f1e3;padding:20px;overflow-x:auto;box-shadow:0 0 0 2px var(--ink),6px 6px 0 var(--ink);margin-top:24px}
-.mermaid-box .mermaid{display:flex;justify-content:center;color:#06122e}
+/* High-Contrast Retro Arcade Mermaid Box */
+.mermaid-box {
+  background: #071330;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 24px;
+  overflow-x: auto;
+  box-shadow: 0 0 0 2px var(--ink), 6px 6px 0 var(--ink);
+  margin-top: 24px;
+  position: relative;
+}
+.mermaid-box .mermaid {
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  font-family: var(--font-body);
+}
+.mermaid-box svg {
+  width: 100% !important;
+  max-width: 820px !important;
+  min-width: 580px;
+  height: auto !important;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  margin: 0 auto;
+  display: block;
+}
+.mermaid-box .node rect,
+.mermaid-box .node polygon,
+.mermaid-box .node circle {
+  fill: #0b1f4b !important;
+  stroke: var(--gold) !important;
+  stroke-width: 2px !important;
+}
+.mermaid-box .node .label {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+.mermaid-box .edgePath .path {
+  stroke: var(--cyan) !important;
+  stroke-width: 2.5px !important;
+}
+/* ForeignObject overflow fix for crystal-clear flowchart text */
+.mermaid-box foreignObject {
+  overflow: visible !important;
+}
+.mermaid-box foreignObject > div {
+  overflow: visible !important;
+  width: auto !important;
+}
+.mermaid-box .edgeLabel {
+  background-color: transparent !important;
+}
+.mermaid-box .edgeLabel span,
+.mermaid-box .edgeLabel p {
+  background-color: #0b1f4b !important;
+  color: var(--gold) !important;
+  fill: var(--gold) !important;
+  font-family: var(--font-hud) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--cyan) !important;
+  display: inline-block !important;
+}
+
+/* old edgeLabel */
+.mermaid-box-old-edgeLabel {
+  background-color: #071330 !important;
+  color: var(--gold) !important;
+  fill: var(--gold) !important;
+  font-family: var(--font-hud) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  padding: 3px 6px !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--gold) !important;
+}
+.mermaid-box .marker {
+  fill: var(--cyan) !important;
+  stroke: var(--cyan) !important;
+}
 
 /* pillars + team */
 .pillar .icon{width:52px;height:52px;display:grid;place-items:center;font-family:var(--font-display);font-size:30px;background:var(--cyan);color:var(--ink);box-shadow:0 0 0 2px var(--ink),4px 4px 0 var(--ink);margin-bottom:16px}
@@ -215,7 +295,7 @@ input:disabled{opacity:.5;cursor:not-allowed}
 .dash-main{display:grid;grid-template-columns:1.5fr 1fr;gap:22px;margin-top:22px}
 @media (max-width:900px){.dash-main{grid-template-columns:1fr}}
 .zone-val{font-family:var(--font-display);font-size:84px;line-height:.9;text-shadow:4px 4px 0 var(--ink)}
-.zone-bar-wrap{position:relative;margin:16px 0 30px}
+.zone-bar-wrap{position:relative;margin:16px 0 16px}
 .zone-bar-wrap .bar{height:20px}
 .mark{position:absolute;top:-6px;width:2px;height:32px;background:var(--text)}
 .mark b{position:absolute;top:34px;left:50%;transform:translateX(-50%);font-family:var(--font-hud);font-size:10px;font-weight:400;color:var(--muted)}
@@ -255,10 +335,85 @@ details.admin summary::before{content:"▶ "} details.admin[open] summary::befor
 /* tests page */
 .pass{color:var(--green);font-family:var(--font-hud)} .fail{color:var(--red);font-family:var(--font-hud)}
 
-/* ---------- reveal animation ---------- */
-.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
-.js .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
+/* ---------- Retro Arcade Reveal-on-Scroll Animation ---------- */
+@keyframes arcadeBoxPop {
+  0% {
+    opacity: 0;
+    transform: translateY(32px) scale(0.96);
+    box-shadow: 0 0 0 2px var(--ink), 0 0 0 rgba(255, 207, 63, 0);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 0 0 2px var(--gold), 0 0 16px rgba(255, 207, 63, 0.4), var(--bevel);
+  }
+  85% {
+    transform: translateY(1px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 0 2px var(--ink), var(--bevel);
+  }
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.96);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity, box-shadow;
+}
+
+.js .reveal.in {
+  opacity: 1;
+  animation: arcadeBoxPop 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Staggered entrance for adjacent cards in grids */
+.grid .reveal:nth-child(2).in { animation-delay: 0.08s; }
+.grid .reveal:nth-child(3).in { animation-delay: 0.16s; }
+.grid .reveal:nth-child(4).in { animation-delay: 0.24s; }
+
+/* Interactive Hover Lift & Gold Glow */
+.card {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 0 2px var(--gold), 0 8px 0 var(--ink), 0 16px 28px rgba(7, 19, 48, 0.7);
+}
+
+.card:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 2px var(--gold), 0 3px 0 var(--ink);
+}
+
+/* Subtle CRT scanline shimmer on reveal */
+.card.reveal.in::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(95, 227, 255, 0.08), rgba(255, 207, 63, 0.12), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  animation: cardScanline 0.85s ease-out 0.15s 1 normal forwards;
+}
+
+@keyframes cardScanline {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+}
 
 
 /* ==========================================================================
@@ -660,4 +815,89 @@ details.admin summary::before{content:"▶ "} details.admin[open] summary::befor
   display: grid;
   place-items: center;
   font-size: 16px;
+}
+
+
+/* ---------- Mess Staff Directory & Help Contacts ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+.contact-card {
+  background: var(--surface);
+  box-shadow: 0 0 0 2px var(--ink), var(--bevel);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+  position: relative;
+}
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 2px var(--gold), 0 8px 0 var(--ink), 0 14px 24px rgba(7, 19, 48, 0.6);
+}
+.contact-header {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.contact-avatar {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--gold);
+}
+.contact-name {
+  font-family: var(--font-hud);
+  font-size: 14px;
+  color: var(--gold);
+  margin: 0 0 4px;
+}
+.contact-role {
+  font-size: 12px;
+  color: var(--cyan);
+  font-weight: 500;
+}
+.contact-body {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+}
+.contact-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: 6px 10px;
+  box-shadow: 0 0 0 2px var(--line);
+  text-decoration: none;
+  font-weight: 700;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.contact-phone:hover {
+  background: var(--green);
+  color: var(--ink);
+  box-shadow: 0 0 0 2px var(--ink);
+}
+.contact-badge {
+  display: inline-block;
+  font-family: var(--font-hud);
+  font-size: 10px;
+  padding: 2px 6px;
+  background: rgba(95, 227, 255, 0.15);
+  color: var(--cyan);
+  box-shadow: 0 0 0 1px var(--cyan);
 }

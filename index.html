@@ -43,16 +43,16 @@
     <nav class="container nav-inner" aria-label="Main">
       <a class="logo" href="index.html">MQM<span>.</span></a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" style="color:var(--gold)" data-i18n="nav_home">Home</a></li>
-        <li><a href="student.html" data-i18n="nav_student_link">Student</a></li>
-        <li><a href="staff.html" data-i18n="nav_staff_link">Staff</a></li>
-        <li><a href="about.html" data-i18n="nav_about">About</a></li>
-        <li><a href="help.html" data-i18n="nav_help">Help</a></li>
+        <li><a href="index.html" style="color:var(--gold)" data-i18n="nav_home" data-i18n="nav_home">Home</a></li>
+        <li><a href="student.html" data-i18n="nav_student_link" data-i18n="nav_student_link">Student</a></li>
+        <li><a href="staff.html" data-i18n="nav_staff_link" data-i18n="nav_staff_link">Staff</a></li>
+        <li><a href="about.html" data-i18n="nav_about" data-i18n="nav_about">About</a></li>
+        <li><a href="help.html" data-i18n="nav_help" data-i18n="nav_help">Help</a></li>
       </ul>
       <div class="nav-actions">
         <button class="btn btn-sm lang-btn-fixed" id="lang-toggle" type="button" aria-label="Switch language">EN / हिं / ಕನ್</button>
         <div id="nav-user-slot"></div>
-        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html" data-i18n="nav_student">Student View</a>
+        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html" data-i18n="nav_student" data-i18n="nav_student_view">Student View</a>
         <button class="btn btn-sm menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
     </nav>
@@ -106,7 +106,7 @@
         <!-- LIVE HUD STRIP -->
         <div class="hud-strip" aria-live="polite">
           <div class="hud-item">
-            <div class="hud-label">ZONE CROWD</div>
+            <div class="hud-label" data-i18n="hud_zone_crowd">ZONE CROWD</div>
             <div class="hud-value c-green" id="live-zone">20<span class="pct-unit">%</span></div>
           </div>
           <div class="hud-item">
@@ -150,10 +150,10 @@
               </p>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap">
-              <button class="btn btn-sm" type="button" data-sim-preset="30">30% Normal (&lt;40%)</button>
-              <button class="btn btn-sm" type="button" data-sim-preset="46">46% Alert (≥45%)</button>
-              <button class="btn btn-sm" type="button" data-sim-preset="55">55% Standby (≥50%)</button>
-              <button class="btn btn-sm btn-gold" type="button" data-sim-preset="85">85% Cross Access (&gt;80%)</button>
+              <button class="btn btn-sm" type="button" data-sim-preset="30" data-i18n="sim_btn_normal">30% Normal (<40%)</button>
+              <button class="btn btn-sm" type="button" data-sim-preset="46" data-i18n="sim_btn_alert">46% Staff Alert (≥45%)</button>
+              <button class="btn btn-sm" type="button" data-sim-preset="55" data-i18n="sim_btn_standby">55% Standby (≥50%)</button>
+              <button class="btn btn-sm btn-gold" type="button" data-sim-preset="85" data-i18n="sim_btn_cross">85% Cross Access (>80%)</button>
               <button class="btn btn-sm" type="button" data-sim-preset="43">43% Hysteresis</button>
             </div>
           </div>
@@ -243,13 +243,18 @@
         <div class="grid grid-2" style="align-items:center">
           <div class="card" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
             <img id="home-qr-img" width="130" height="130" alt="Scan QR code for Student View"
-              style="border-radius:8px;background:#fff;padding:6px">
+              style="border-radius:8px;background:#fff;padding:6px"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fmqm.adityak.in%2F">
             <div style="flex:1;min-width:200px">
-              <h3 style="margin:0 0 6px">CANTEEN ENTRANCE QR</h3>
-              <p class="muted" style="margin:0 0 10px;font-size:14px">
+              <h3 style="margin:0 0 6px" data-i18n="qr_sec_title">CANTEEN ENTRANCE QR</h3>
+              <p class="muted" style="margin:0 0 6px;font-size:14px" data-i18n="qr_sec_desc">
                 Stick this code at the dining hall entrance. Students scan with any smartphone camera to see live wait times, claim express passes, or order room delivery.
               </p>
-              <a class="btn btn-sm btn-gold" href="student.html">Open Student View →</a>
+              <p style="margin:0 0 10px;font-size:13px">
+                <span class="muted" data-i18n="qr_url_label">Live Link:</span> 
+                <a href="https://mqm.adityak.in/" target="_blank" rel="noreferrer" style="color:var(--gold);font-family:var(--font-mono);font-size:13px;word-break:break-all;text-decoration:underline">https://mqm.adityak.in/</a>
+              </p>
+              <a class="btn btn-sm btn-gold" href="student.html" data-i18n="nav_student_view">Open Student View →</a>
             </div>
           </div>
 
@@ -277,7 +282,7 @@
         <p>Mess Queue Manager · Jain (Deemed-to-be University) · <span data-year></span></p>
       </div>
       <p>
-        <a class="u" href="index.html">Home</a> · 
+        <a class="u" href="index.html" data-i18n="nav_home">Home</a> · 
         <a class="u" href="student.html">Student Portal</a> · 
         <a class="u" href="staff.html">Staff Console</a> · 
         <a class="u" href="about.html">About &amp; Research</a> · 
@@ -290,13 +295,14 @@
   <script src="js/logic.js"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/ui.js"></script>
   <script>
     (async () => {
       // 1. Render QR code on Home Page
-      const studentUrl = new URL('student.html', location.href).href;
+      const targetUrl = 'https://mqm.adityak.in/';
       const qrImg = document.getElementById('home-qr-img');
-      if (qrImg) qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent(studentUrl);
+      if (qrImg) qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent(targetUrl);
 
       // 2. Run T1-T14 automated tests & show pass/fail badges on Home Page
       if (MQM.runTests) {
@@ -315,72 +321,8 @@
         }
       }
 
-      // 3. Tri-lingual (English / Hindi / Kannada) Language System
-      const dict = {
-        en: {
-          nav_home: 'Home',
-          nav_student_link: 'Student',
-          nav_staff_link: 'Staff',
-          nav_about: 'About',
-          nav_help: 'Help',
-          nav_student: 'Student View',
-          hero_title: 'Smart Mess Queue Manager',
-          hero_sub: 'Real-time line sizes, fastest counter routing, direct-to-room delivery, dish-by-dish quality ratings, and zero food waste.',
-          btn_find: '⚡ Find Fastest Counter ▶',
-          btn_delivery: '🛏️ Room Delivery',
-          btn_menu: '⭐ Rate Today\'s Food',
-          btn_staff: 'Staff Console ↗'
-        },
-        hi: {
-          nav_home: 'होम',
-          nav_student_link: 'छात्र',
-          nav_staff_link: 'स्टाफ',
-          nav_about: 'के बारे में',
-          nav_help: 'मदद',
-          nav_student: 'छात्र दृश्य',
-          hero_title: 'स्मार्ट मेस कतार प्रबंधक',
-          hero_sub: 'वास्तविक समय में कतार, तेज़ काउंटर सुझाव, सीधे कमरे में भोजन वितरण, भोजन रेटिंग और शून्य खाद्य बर्बादी।',
-          btn_find: '⚡ सबसे तेज़ काउंटर खोजें ▶',
-          btn_delivery: '🛏️ रूम डिलीवरी',
-          btn_menu: '⭐ भोजन रेटिंग करें',
-          btn_staff: 'स्टाफ कंसोल ↗'
-        },
-        kn: {
-          nav_home: 'ಮುಖಪುಟ',
-          nav_student_link: 'ವಿದ್ಯಾರ್ಥಿ',
-          nav_staff_link: 'ಸಿಬ್ಬಂದಿ',
-          nav_about: 'ಬಗ್ಗೆ',
-          nav_help: 'ಸಹಾಯ',
-          nav_student: 'ವಿದ್ಯಾರ್ಥಿ ವೀಕ್ಷಣೆ',
-          hero_title: 'ಸ್ಮಾರ್ಟ್ ಮೆಸ್ ಕ್ಯೂ ಮ್ಯಾನೇಜರ್',
-          hero_sub: 'ನೈಜ ಸಮಯದ ಕ್ಯೂ, ವೇಗದ ಕೌಂಟರ್ ಮಾರ್ಗ, ಕೊಠಡಿಗೆ ಆಹಾರ ವಿತರಣೆ, ಆಹಾರ ರೇಟಿಂಗ್ ಮತ್ತು ಶೂನ್ಯ ಆಹಾರ ವ್ಯರ್ಥ.',
-          btn_find: '⚡ ವೇಗದ ಕೌಂಟರ್ ಹುಡುಕಿ ▶',
-          btn_delivery: '🛏️ ರೂಮ್ ಡೆಲಿವರಿ',
-          btn_menu: '⭐ ಆಹಾರ ರೇಟ್ ಮಾಡಿ',
-          btn_staff: 'ಸಿಬ್ಬಂದಿ ಕನ್ಸೋಲ್ ↗'
-        }
-      };
-      const langOrder = ['en', 'hi', 'kn'];
-      let lang = localStorage.getItem('mqm-lang') || 'en';
-      const applyLang = () => {
-        const toggleBtn = document.getElementById('lang-toggle');
-        if (toggleBtn) {
-          if (lang === 'en') toggleBtn.textContent = 'EN / हिं / ಕನ್';
-          else if (lang === 'hi') toggleBtn.textContent = 'हिं / ಕನ್ / EN';
-          else toggleBtn.textContent = 'ಕನ್ / EN / ಹಿं';
-        }
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
-          if (dict[lang] && dict[lang][key]) el.textContent = dict[lang][key];
-        });
-      };
-      applyLang();
-      document.getElementById('lang-toggle')?.addEventListener('click', () => {
-        const idx = langOrder.indexOf(lang);
-        lang = langOrder[(idx + 1) % langOrder.length];
-        localStorage.setItem('mqm-lang', lang);
-        applyLang();
-      });
+      // 3. Central Trilingual Localization (English / Hindi / Kannada)
+      if (window.MQM_I18N) MQM_I18N.apply();
 
       // 4. Live Store Init, Freshness Timer & Offline State
       let currentData = MQM.defaultData();
