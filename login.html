@@ -81,6 +81,7 @@
     <nav class="container nav-inner" aria-label="Main">
       <a class="logo" href="index.html">MQM<span>.</span></a>
       <div class="nav-actions">
+        <button class="btn btn-sm" id="login-lang-btn" type="button">EN / हिं / ಕನ್</button>
         <a class="btn btn-sm" href="index.html">← Home</a>
         <a class="btn btn-sm" href="student.html">Student View</a>
         <a class="btn btn-sm btn-gold" href="staff.html">Staff Console</a>
@@ -289,6 +290,36 @@
       });
 
       // Demo buttons
+      
+      // Tri-lingual (English, Hindi, Kannada) Toggle
+      const langOrder = ['en', 'hi', 'kn'];
+      let lang = localStorage.getItem('mqm-lang') || 'en';
+      const syncLoginLang = () => {
+        const btn = document.getElementById('login-lang-btn');
+        if (btn) {
+          if (lang === 'en') btn.textContent = 'EN / हिं / ಕನ್';
+          else if (lang === 'hi') btn.textContent = 'हिं / ಕನ್ / EN';
+          else btn.textContent = 'ಕನ್ / EN / हिं';
+        }
+        if (lang === 'kn') {
+          tabStudent.textContent = '🎓 ವಿದ್ಯಾರ್ಥಿ ಲಾಗಿನ್';
+          tabStaff.textContent = '🔑 ಮೆಸ್ ಸಿಬ್ಬಂದಿ ಲಾಗಿನ್';
+        } else if (lang === 'hi') {
+          tabStudent.textContent = '🎓 छात्र लॉगिन';
+          tabStaff.textContent = '🔑 मेस स्टाफ लॉगिन';
+        } else {
+          tabStudent.textContent = '🎓 STUDENT SIGN IN';
+          tabStaff.textContent = '🔑 MESS STAFF / ADMIN';
+        }
+      };
+      syncLoginLang();
+      document.getElementById('login-lang-btn')?.addEventListener('click', () => {
+        const idx = langOrder.indexOf(lang);
+        lang = langOrder[(idx + 1) % langOrder.length];
+        localStorage.setItem('mqm-lang', lang);
+        syncLoginLang();
+      });
+
       document.getElementById('btn-demo-nat').addEventListener('click', () => {
         document.getElementById('st-name').value = 'Aditya Kumar';
         document.getElementById('st-roll').value = '21BCE1042';

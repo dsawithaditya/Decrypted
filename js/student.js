@@ -136,13 +136,22 @@
     const z = MQM.zoneAverage(data.counters);
 
     const banner = $('#rec-banner');
+    const curLang = localStorage.getItem('mqm-lang') || 'en';
     if (best) {
-      $('#rec-name').textContent = 'Go to ' + best.name;
-      $('#rec-wait').textContent = MQM.bannerWait(best.wait);
+      if (curLang === 'kn') {
+        $('#rec-name').textContent = best.name + ' ಗೆ ಹೋಗಿ';
+        $('#rec-wait').textContent = best.wait <= 0 ? 'ಈಗಲೇ ಯಾವುದೇ ಕಾಯುವಿಕೆ ಇಲ್ಲ' : 'ಸುಮಾರು ' + Math.round(best.wait) + ' ನಿಮಿಷ ಕಾಯುವ ಸಮಯ';
+      } else if (curLang === 'hi') {
+        $('#rec-name').textContent = best.name + ' पर जाएं';
+        $('#rec-wait').textContent = best.wait <= 0 ? 'अभी कोई प्रतीक्षा नहीं' : 'लगभग ' + Math.round(best.wait) + ' मिनट प्रतीक्षा';
+      } else {
+        $('#rec-name').textContent = 'Go to ' + best.name;
+        $('#rec-wait').textContent = MQM.bannerWait(best.wait);
+      }
       banner.className = 'rec-banner rec-' + MQM.colorTag(best.pct).key;
     } else {
-      $('#rec-name').textContent = 'No counter open';
-      $('#rec-wait').textContent = 'Please wait for staff to open a counter.';
+      $('#rec-name').textContent = curLang === 'kn' ? 'ಯಾವುದೇ ಕೌಂಟರ್ ತೆರೆದಿಲ್ಲ' : (curLang === 'hi' ? 'कोई काउंटर नहीं खुला' : 'No counter open');
+      $('#rec-wait').textContent = curLang === 'kn' ? 'ಸಿಬ್ಬಂದಿ ಕೌಂಟರ್ ತೆರೆಯುವವರೆಗೆ ದಯವಿಟ್ಟು ಕಾಯಿರಿ.' : (curLang === 'hi' ? 'कृपया प्रतीक्षा करें।' : 'Please wait for staff to open a counter.');
       banner.className = 'rec-banner rec-na';
     }
 
@@ -534,31 +543,81 @@
     }
   }
 
-  // ---------- Language Toggle ----------
+  // ---------- Tri-Lingual (English, Hindi, Kannada) Toggle ----------
   function setupLang() {
+    const langOrder = ['en', 'hi', 'kn'];
     let lang = localStorage.getItem('mqm-lang') || 'en';
+
     const syncLang = () => {
+      const btn = $('#student-lang-btn');
+      if (btn) {
+        if (lang === 'en') btn.textContent = 'EN / हिं / ಕನ್';
+        else if (lang === 'hi') btn.textContent = 'हिं / ಕನ್ / EN';
+        else btn.textContent = 'ಕನ್ / EN / हिं';
+      }
+
       const rl = $('#rec-label');
       const bn = $('#btn-who-nat');
       const bi = $('#btn-who-int');
       const h1 = $('#st-heading');
-      if (lang === 'hi') {
+      const tabQ = $('#tab-btn-queue');
+      const tabD = $('#tab-btn-delivery');
+      const tabM = $('#tab-btn-menu');
+      const tabW = $('#tab-btn-waste');
+      const passBtn = $('#btn-claim-pass');
+      const pushBtn = $('#btn-push-alert');
+      const eatYes = $('#btn-eat-yes');
+      const eatNo = $('#btn-eat-no');
+
+      if (lang === 'kn') {
+        if (rl) rl.textContent = 'ನಿಮಗಾಗಿ ಅತ್ಯುತ್ತಮ ಕೌಂಟರ್';
+        if (bn) bn.textContent = 'ರಾಷ್ಟ್ರೀಯ ವಿದ್ಯಾರ್ಥಿ';
+        if (bi) bi.textContent = 'ಅಂತರರಾಷ್ಟ್ರೀಯ ವಿದ್ಯಾರ್ಥಿ';
+        if (h1) h1.innerHTML = 'ಸ್ಮಾರ್ಟ್ ಮೆಸ್ <span>ಸಹಾಯಕ</span>';
+        if (tabQ) tabQ.innerHTML = '⚡ ಲೈವ್ ಕ್ಯೂ & ಕೌಂಟರ್';
+        if (tabD) tabD.innerHTML = '🛏️ ಕೋಣೆ ಡೆಲಿವರಿ <span class="badge" id="delivery-badge" hidden>1</span>';
+        if (tabM) tabM.innerHTML = '⭐ ಇಂದಿನ ಮೆನು & ರೇಟಿಂಗ್';
+        if (tabW) tabW.innerHTML = '🌱 ಶೂನ್ಯ ಆಹಾರ ವ್ಯರ್ಥ';
+        if (passBtn) passBtn.textContent = '🎫 ಎಕ್ಸ್‌ಪ್ರೆಸ್ ಪಾಸ್ ಪಡೆಯಿರಿ ▶';
+        if (pushBtn) pushBtn.textContent = '🔔 ಜನಸಂದಣಿ < 50% ಆದಾಗ ತಿಳಿಸಿ';
+        if (eatYes) eatYes.textContent = '🍽️ ನಾನು ಇಂದು ಮೆಸ್‌ನಲ್ಲಿ ಊಟ ಮಾಡುತ್ತೇನೆ';
+        if (eatNo) eatNo.textContent = '🚫 ಈ ಊಟವನ್ನು ಬಿಡುತ್ತಿದ್ದೇನೆ';
+      } else if (lang === 'hi') {
         if (rl) rl.textContent = 'आपके लिए सबसे तेज़ काउंटर';
         if (bn) bn.textContent = 'नेशनल छात्र';
         if (bi) bi.textContent = 'इंटरनेशनल छात्र';
         if (h1) h1.innerHTML = 'स्मार्ट मेस <span>साथी</span>';
+        if (tabQ) tabQ.innerHTML = '⚡ लाइव कतार और काउंटर';
+        if (tabD) tabD.innerHTML = '🛏️ रूम डिलीवरी <span class="badge" id="delivery-badge" hidden>1</span>';
+        if (tabM) tabM.innerHTML = '⭐ आज का मेनू और रेटिंग';
+        if (tabW) tabW.innerHTML = '🌱 ज़ीरो फ़ूड वेस्ट';
+        if (passBtn) passBtn.textContent = '🎫 एक्सप्रेस पास प्राप्त करें ▶';
+        if (pushBtn) pushBtn.textContent = '🔔 भीड़ < 50% होने पर सूचित करें';
+        if (eatYes) eatYes.textContent = '🍽️ मैं आज मेस में खा रहा हूँ';
+        if (eatNo) eatNo.textContent = '🚫 भोजन छोड़ रहा हूँ';
       } else {
         if (rl) rl.textContent = 'BEST COUNTER FOR YOU';
         if (bn) bn.textContent = 'National student';
         if (bi) bi.textContent = 'International student';
         if (h1) h1.innerHTML = 'Smart Mess <span>Companion</span>';
+        if (tabQ) tabQ.innerHTML = '⚡ LIVE QUEUE &amp; COUNTERS';
+        if (tabD) tabD.innerHTML = '🛏️ ROOM DELIVERY <span class="badge" id="delivery-badge" hidden>1</span>';
+        if (tabM) tabM.innerHTML = '⭐ TODAY\'S MENU &amp; RATINGS';
+        if (tabW) tabW.innerHTML = '🌱 ZERO FOOD WASTE';
+        if (passBtn) passBtn.textContent = '🎫 Claim Express Pass ▶';
+        if (pushBtn) pushBtn.textContent = '🔔 Alert Me When Free (<50%)';
+        if (eatYes) eatYes.textContent = '🍽️ I AM EATING IN MESS';
+        if (eatNo) eatNo.textContent = '🚫 SKIPPING THIS MEAL';
       }
     };
+
     syncLang();
     $('#student-lang-btn')?.addEventListener('click', () => {
-      lang = lang === 'en' ? 'hi' : 'en';
+      const curIdx = langOrder.indexOf(lang);
+      lang = langOrder[(curIdx + 1) % langOrder.length];
       localStorage.setItem('mqm-lang', lang);
       syncLang();
+      renderQueue();
     });
   }
 

@@ -679,9 +679,76 @@
     }
   }
 
+  
+  // ---------- Tri-Lingual (English, Hindi, Kannada) Toggle for Staff ----------
+  function setupStaffLang() {
+    const langOrder = ['en', 'hi', 'kn'];
+    let lang = localStorage.getItem('mqm-lang') || 'en';
+
+    const syncStaffLang = () => {
+      const btn = $('#staff-lang-btn');
+      if (btn) {
+        if (lang === 'en') btn.textContent = 'EN / हिं / ಕನ್';
+        else if (lang === 'hi') btn.textContent = 'हिं / ಕನ್ / EN';
+        else btn.textContent = 'ಕನ್ / EN / हिं';
+      }
+
+      const tabQ = $('#stab-btn-queue');
+      const tabD = $('#stab-btn-dispatch');
+      const tabK = $('#stab-btn-kitchen');
+      const tabW = $('#stab-btn-waste');
+      const tabA = $('#stab-btn-admin');
+      const btnOpen = $('#btn-open');
+      const btnClose = $('#btn-close');
+      const btnForce = $('#btn-force-cross');
+      const btnAuto = $('#btn-auto');
+
+      if (lang === 'kn') {
+        if (tabQ) tabQ.textContent = '🎛️ ಕ್ಯೂ & ಕೌಂಟರ್';
+        if (tabD) tabD.innerHTML = '🛏️ ರೂಮ್ ಡೆಲಿವರಿ <span class="badge" id="staff-del-badge">3</span>';
+        if (tabK) tabK.textContent = '🍳 ಅಡುಗೆ ಮನೆ & ಆಹಾರ ಗುಣಮಟ್ಟ';
+        if (tabW) tabW.textContent = '🌱 ಹಾಜರಾತಿ ಮುನ್ಸೂಚನೆ';
+        if (tabA) tabA.textContent = '⚙️ ಸೆಟ್ಟಿಂಗ್ಸ್ & QR';
+        if (btnOpen) btnOpen.textContent = 'ಸ್ಟ್ಯಾಂಡ್‌ಬೈ ತೆರೆಯಿರಿ';
+        if (btnClose) btnClose.textContent = 'ಸ್ಟ್ಯಾಂಡ್‌ಬೈ ಮುಚ್ಚಿ';
+        if (btnForce) btnForce.textContent = 'ಕ್ರಾಸ್-ಆಕ್ಸೆಸ್ ಆನ್ ಮಾಡಿ';
+        if (btnAuto) btnAuto.textContent = 'ಆಟೋ ಮೋಡ್';
+      } else if (lang === 'hi') {
+        if (tabQ) tabQ.textContent = '🎛️ कतार और काउंटर';
+        if (tabD) tabD.innerHTML = '🛏️ रूम डिलीवरी <span class="badge" id="staff-del-badge">3</span>';
+        if (tabK) tabK.textContent = '🍳 रसोई और गुणवत्ता';
+        if (tabW) tabW.textContent = '🌱 उपस्थिति पूर्वानुमान';
+        if (tabA) tabA.textContent = '⚙️ सेटिंग्स और QR';
+        if (btnOpen) btnOpen.textContent = 'स्टैंडबाय खोलें';
+        if (btnClose) btnClose.textContent = 'स्टैंडबाय बंद करें';
+        if (btnForce) btnForce.textContent = 'क्रॉस-एक्सेस चालू करें';
+        if (btnAuto) btnAuto.textContent = 'ऑटो मोड';
+      } else {
+        if (tabQ) tabQ.textContent = '🎛️ QUEUE & COUNTERS';
+        if (tabD) tabD.innerHTML = '🛏️ ROOM DELIVERIES <span class="badge" id="staff-del-badge">3</span>';
+        if (tabK) tabK.textContent = '🍳 KITCHEN & DISH SENTIMENT';
+        if (tabW) tabW.textContent = '🌱 ATTENDANCE FORECAST';
+        if (tabA) tabA.textContent = '⚙️ SETTINGS & QR';
+        if (btnOpen) btnOpen.textContent = 'Open standby';
+        if (btnClose) btnClose.textContent = 'Close standby';
+        if (btnForce) btnForce.textContent = 'Force Cross-Access';
+        if (btnAuto) btnAuto.textContent = 'Reset to Auto';
+      }
+    };
+
+    syncStaffLang();
+    $('#staff-lang-btn')?.addEventListener('click', () => {
+      const curIdx = langOrder.indexOf(lang);
+      lang = langOrder[(curIdx + 1) % langOrder.length];
+      localStorage.setItem('mqm-lang', lang);
+      syncStaffLang();
+    });
+  }
+
   // ---------- Start App ----------
   (async () => {
     initTabs();
+    setupStaffLang();
     await Store.init();
     data = await Store.load();
     Store.subscribe(d => {

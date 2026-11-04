@@ -43,6 +43,13 @@ A smart, full-stack, rule-based canteen queue manager, direct-to-room delivery p
 - **Supabase Auth + PostgreSQL + Realtime**: Sub-200ms websocket sync across devices with Row-Level Security (RLS).
 - **Offline / Local Demo Fallback**: Uses `localStorage` + `BroadcastChannel` so demos and test suites always run without internet or backend keys.
 
+### 6. 🌐 Tri-Lingual Localization (English / Hindi / Kannada)
+- Native regional localization for Jain University (Bangalore, Karnataka):
+  - **English (EN)**: Default international campus language.
+  - **Hindi (हिन्दी / हिं)**: National student community language.
+  - **Kannada (ಕನ್ನಡ / ಕನ್)**: Karnataka state & local canteen staff language.
+- Instant 1-click cycle toggle across `index.html`, `student.html`, `staff.html`, and `login.html`, translating live counter recommendations, subtabs, delivery statuses, and meal attendance.
+
 ---
 
 ## 📁 Project Structure

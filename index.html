@@ -55,7 +55,7 @@
         <li><a href="#team" data-i18n="nav_team">Team</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="btn btn-sm" id="lang-toggle" type="button" aria-label="Switch language">EN / हिं</button>
+        <button class="btn btn-sm" id="lang-toggle" type="button" aria-label="Switch language">EN / हिं / ಕನ್</button>
         <div id="nav-user-slot"></div>
         <a class="btn btn-sm hide-xs" href="login.html">Profile</a>
         <a class="btn btn-sm hide-xs" href="staff.html">Staff</a>
@@ -800,23 +800,54 @@ flowchart TD
         }
       }
 
-      // 3. Hindi / English Language Toggle
+      // 3. Tri-lingual (English / Hindi / Kannada) Language System
       const dict = {
         en: {
+          nav_problem: 'Problem',
+          nav_logic: 'Logic',
+          nav_results: 'Results',
+          nav_algo: 'Algorithm',
+          nav_feedback: 'Feedback',
+          nav_team: 'Team',
+          nav_student: 'Student View',
           hero_sub: 'Shorter lines and less waiting. A smart rule system that checks the crowd at every counter, opens extra counters at rush hour, and tells you exactly where to go.',
           btn_find: '▶ Find my counter',
-          btn_staff: 'Staff console',
-          nav_student: 'Student View'
+          btn_staff: 'Staff console'
         },
         hi: {
+          nav_problem: 'समस्या',
+          nav_logic: 'नियम',
+          nav_results: 'परिणाम',
+          nav_algo: 'एल्गोरिदम',
+          nav_feedback: 'फीडबैक',
+          nav_team: 'टीम',
+          nav_student: 'छात्र दृश्य',
           hero_sub: 'छोटी कतारें और कम प्रतीक्षा। एक स्मार्ट नियम प्रणाली जो हर काउंटर पर भीड़ की जांच करती है, भीड़ के समय अतिरिक्त काउंटर खोलती है, और आपको सबसे तेज़ काउंटर बताती है।',
           btn_find: '▶ मेरा काउंटर खोजें',
-          btn_staff: 'स्टाफ कंसोल',
-          nav_student: 'छात्र दृश्य'
+          btn_staff: 'स्टाफ कंसोल'
+        },
+        kn: {
+          nav_problem: 'ಸಮಸ್ಯೆ',
+          nav_logic: 'ನಿಯಮಗಳು',
+          nav_results: 'ಫಲಿತಾಂಶಗಳು',
+          nav_algo: 'ಅಲ್ಗಾರಿದಮ್',
+          nav_feedback: 'ಪ್ರತಿಕ್ರಿಯೆ',
+          nav_team: 'ತಂಡ',
+          nav_student: 'ವಿದ್ಯಾರ್ಥಿ ವೀಕ್ಷಣೆ',
+          hero_sub: 'ಕಡಿಮೆ ಕ್ಯೂ ಮತ್ತು ಕಡಿಮೆ ಕಾಯುವ ಸಮಯ. ಪ್ರತಿ ಕೌಂಟರ್‌ನಲ್ಲಿ ಜನಸಂದಣಿಯನ್ನು ಪರಿಶೀಲಿಸುವ, ಗರಿಷ್ಠ ಸಮಯದಲ್ಲಿ ಹೆಚ್ಚುವರಿ ಕೌಂಟರ್‌ಗಳನ್ನು ತೆರೆಯುವ ಮತ್ತು ನಿಮಗೆ ಸರಿಯಾದ ಕೌಂಟರ್ ತೋರಿಸುವ ಸ್ಮಾರ್ಟ್ ನಿಯಮ ವ್ಯವಸ್ಥೆ.',
+          btn_find: '▶ ನನ್ನ ಕೌಂಟರ್ ಹುಡುಕಿ',
+          btn_staff: 'ಸಿಬ್ಬಂದಿ ಕನ್ಸೋಲ್'
         }
       };
+      const langOrder = ['en', 'hi', 'kn'];
       let lang = localStorage.getItem('mqm-lang') || 'en';
       const applyLang = () => {
+        const toggleBtn = document.getElementById('lang-toggle');
+        if (toggleBtn) {
+          if (lang === 'en') toggleBtn.textContent = 'EN / हिं / ಕನ್';
+          else if (lang === 'hi') toggleBtn.textContent = 'हिं / ಕನ್ / EN';
+          else toggleBtn.textContent = 'ಕನ್ / EN / हिं';
+        }
         document.querySelectorAll('[data-i18n]').forEach(el => {
           const key = el.getAttribute('data-i18n');
           if (dict[lang] && dict[lang][key]) el.textContent = dict[lang][key];
@@ -824,7 +855,8 @@ flowchart TD
       };
       applyLang();
       document.getElementById('lang-toggle')?.addEventListener('click', () => {
-        lang = lang === 'en' ? 'hi' : 'en';
+        const idx = langOrder.indexOf(lang);
+        lang = langOrder[(idx + 1) % langOrder.length];
         localStorage.setItem('mqm-lang', lang);
         applyLang();
       });
