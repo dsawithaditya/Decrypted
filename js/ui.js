@@ -1,4 +1,4 @@
-/* Shared UI: mobile menu, year, scroll-reveal, interactive boxes, moving clouds, custom arrow follower, i18n */
+/* Shared UI: mobile menu, year, scroll-reveal, interactive boxes, moving clouds, 8-bit pixel arrow follower, i18n */
 document.documentElement.classList.add('js');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // 5. Custom Arcade Arrow Follower (Circle Ring + Center Dot + Pixel Trail across whole website)
+  // 5. Custom 8-Bit Pixel HUD Reticle + Pixel Square Core + Pixel Trail across whole website
   const cursorDot = document.createElement('div');
   cursorDot.className = 'mqm-cursor-dot';
   cursorDot.setAttribute('aria-hidden', 'true');
@@ -84,6 +84,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const cursorRing = document.createElement('div');
   cursorRing.className = 'mqm-cursor-ring';
   cursorRing.setAttribute('aria-hidden', 'true');
+  cursorRing.innerHTML = `
+    <svg viewBox="0 0 24 24" shape-rendering="crispEdges">
+      <g class="reticle-main">
+        <!-- Top-Left Pixel Bracket -->
+        <rect x="0" y="0" width="7" height="2" />
+        <rect x="0" y="2" width="2" height="5" />
+        <rect x="2" y="2" width="2" height="2" />
+        <!-- Top-Right Pixel Bracket -->
+        <rect x="17" y="0" width="7" height="2" />
+        <rect x="22" y="2" width="2" height="5" />
+        <rect x="20" y="2" width="2" height="2" />
+        <!-- Bottom-Left Pixel Bracket -->
+        <rect x="0" y="22" width="7" height="2" />
+        <rect x="0" y="17" width="2" height="5" />
+        <rect x="2" y="20" width="2" height="2" />
+        <!-- Bottom-Right Pixel Bracket -->
+        <rect x="17" y="22" width="7" height="2" />
+        <rect x="22" y="17" width="2" height="5" />
+        <rect x="20" y="20" width="2" height="2" />
+      </g>
+      <g class="reticle-accent">
+        <!-- 4 Cardinal Pixel Crosshair Ticks -->
+        <rect x="11" y="0" width="2" height="2" />
+        <rect x="11" y="22" width="2" height="2" />
+        <rect x="0" y="11" width="2" height="2" />
+        <rect x="22" y="11" width="2" height="2" />
+      </g>
+    </svg>
+  `;
 
   document.body.appendChild(cursorRing);
   document.body.appendChild(cursorDot);
@@ -101,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const animateCursor = () => {
     if (cursorInitialized) {
-      // Smooth spring lerp for the outer circle ring (2nd image effect)
+      // Smooth spring lerp for the outer 8-bit pixel HUD reticle
       ringX += (mouseX - ringX) * 0.25;
       ringY += (mouseY - ringY) * 0.25;
       cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
