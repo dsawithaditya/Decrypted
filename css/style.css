@@ -69,8 +69,67 @@ img,svg{display:block;max-width:100%}
   background-image:radial-gradient(#fff 1px,transparent 1.7px),radial-gradient(#cfe6ff 1px,transparent 1.7px);
   background-size:90px 70px,130px 110px;background-position:10px 20px,60px 45px;
   -webkit-mask-image:linear-gradient(#000,transparent 65%);mask-image:linear-gradient(#000,transparent 65%)}
-.cloud{position:absolute;pointer-events:none;animation:drift var(--dur,30s) ease-in-out infinite alternate}
-@keyframes drift{from{transform:translateX(-30px)}to{transform:translateX(30px)}}
+.cloud {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 3;
+  animation: drift var(--dur, 10s) ease-in-out infinite alternate;
+  filter: drop-shadow(4px 4px 0 rgba(7, 19, 48, 0.5));
+  transition: filter 0.22s ease;
+  overflow: visible;
+}
+.cloud g,
+.cloud > rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.22s ease;
+}
+.cloud:hover {
+  filter: drop-shadow(0 -2px 0 var(--gold)) drop-shadow(0 2px 0 var(--cyan)) drop-shadow(5px 7px 0 var(--ink)) drop-shadow(0 0 18px rgba(255, 207, 63, 0.75));
+}
+.cloud:hover g {
+  animation: cloudHoverFloat 0.9s ease-in-out infinite alternate;
+}
+.cloud:hover > rect {
+  animation: cloudHoverFloat 0.9s ease-in-out infinite alternate;
+  fill: var(--gold);
+}
+.cloud:active g,
+.cloud:active > rect,
+.cloud.cloud-jump g,
+.cloud.cloud-jump > rect {
+  animation: cloudBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+@keyframes drift {
+  0% { transform: translate3d(-85px, -6px, 0); }
+  50% { transform: translate3d(0px, 7px, 0); }
+  100% { transform: translate3d(85px, -6px, 0); }
+}
+@keyframes cloudHoverFloat {
+  0% { transform: translateY(-4px) scale(1.16) rotate(-2deg); }
+  100% { transform: translateY(-9px) scale(1.22) rotate(2deg); }
+}
+@keyframes cloudBounce {
+  0% { transform: scale(1.16) translateY(-4px); }
+  35% { transform: scale(0.88, 1.3) translateY(-12px) rotate(-5deg); }
+  70% { transform: scale(1.26, 0.88) translateY(3px) rotate(4deg); }
+  100% { transform: scale(1.16) translateY(-4px) rotate(0deg); }
+}
+.cloud-sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  box-shadow: 2px 2px 0 var(--ink);
+  animation: pixelSparkleFly 0.55s steps(5) forwards;
+}
+@keyframes pixelSparkleFly {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx, 20px), var(--ty, -30px)) scale(0.25); }
+}
 .hero-content{position:relative;z-index:2}
 .tag{display:inline-block;font-family:var(--font-hud);font-size:12px;padding:6px 12px;background:var(--ink);color:var(--cyan);box-shadow:0 0 0 2px var(--cyan);letter-spacing:1px}
 .hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(58px,11vw,132px);line-height:.88;margin-top:22px;color:var(--gold);
@@ -335,11 +394,11 @@ details.admin summary::before{content:"▶ "} details.admin[open] summary::befor
 /* tests page */
 .pass{color:var(--green);font-family:var(--font-hud)} .fail{color:var(--red);font-family:var(--font-hud)}
 
-/* ---------- Retro Arcade Reveal-on-Scroll Animation ---------- */
+/* ---------- Retro Arcade Reveal, Hover & Clickable Box Animations ---------- */
 @keyframes arcadeBoxPop {
   0% {
     opacity: 0;
-    transform: translateY(32px) scale(0.96);
+    transform: translateY(30px) scale(0.96);
     box-shadow: 0 0 0 2px var(--ink), 0 0 0 rgba(255, 207, 63, 0);
   }
   65% {
@@ -359,62 +418,206 @@ details.admin summary::before{content:"▶ "} details.admin[open] summary::befor
 
 .js .reveal {
   opacity: 0;
-  transform: translateY(32px) scale(0.96);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(28px) scale(0.96);
+  transition: opacity 0.35s ease, transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease;
   will-change: transform, opacity, box-shadow;
 }
 
 .js .reveal.in {
   opacity: 1;
-  animation: arcadeBoxPop 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  transform: translateY(0) scale(1);
+  animation: arcadeBoxPop 0.52s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Once entrance animation finishes, clear animation so :hover and :active always win */
+.js .reveal.in.reveal-ready,
+.js .reveal.in:hover,
+.js .reveal.in:active {
+  animation: none;
 }
 
 /* Staggered entrance for adjacent cards in grids */
-.grid .reveal:nth-child(2).in { animation-delay: 0.08s; }
-.grid .reveal:nth-child(3).in { animation-delay: 0.16s; }
-.grid .reveal:nth-child(4).in { animation-delay: 0.24s; }
+.grid .reveal:nth-child(2).in:not(.reveal-ready) { animation-delay: 0.07s; }
+.grid .reveal:nth-child(3).in:not(.reveal-ready) { animation-delay: 0.14s; }
+.grid .reveal:nth-child(4).in:not(.reveal-ready) { animation-delay: 0.21s; }
 
-/* Interactive Hover Lift & Gold Glow */
-.card {
-  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, border-color 0.22s ease;
-  overflow: hidden;
+/* Interactive Arcade Boxes (All Cards, Contact Boxes, Counter Cards, Menu Cards, HUD Items, Callouts) */
+.card,
+.contact-card,
+.ccard,
+.menu-card,
+.hud-item,
+.callout,
+.express-pass-card {
+  cursor: pointer;
   position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+  background-image: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, -200%),
+    rgba(255, 207, 63, 0.13),
+    rgba(95, 227, 255, 0.06) 45%,
+    transparent 75%
+  );
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 0 2px var(--gold), 0 8px 0 var(--ink), 0 16px 28px rgba(7, 19, 48, 0.7);
+/* Top Gold & Cyan Arcade Energy Strip on Arrow Hover */
+.card::before,
+.contact-card::before,
+.ccard::before,
+.menu-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--cyan), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 3;
 }
 
-.card:active {
-  transform: translateY(-1px);
-  box-shadow: 0 0 0 2px var(--gold), 0 3px 0 var(--ink);
+/* Arrow Hover State */
+.card:hover,
+.contact-card:hover,
+.ccard:hover,
+.menu-card:hover {
+  transform: translate(-3px, -6px);
+  box-shadow:
+    0 0 0 2px var(--gold),
+    6px 8px 0 var(--ink),
+    0 12px 26px rgba(255, 207, 63, 0.28),
+    var(--bevel);
+}
+
+.card:hover::before,
+.contact-card:hover::before,
+.ccard:hover::before,
+.menu-card:hover::before {
+  transform: scaleX(1);
+}
+
+.hud-item:hover,
+.callout:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 2px var(--gold), 4px 5px 0 var(--ink);
+}
+
+/* Emoji / Icon / Badge Bounce inside Hovered Box */
+.box-emoji-icon,
+.pillar .icon,
+.contact-avatar,
+.member .avatar,
+.card .num-badge {
+  display: inline-block;
+  transition: transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.22s ease, box-shadow 0.22s ease;
+}
+
+.card:hover .box-emoji-icon {
+  transform: translateY(-4px) scale(1.22) rotate(-8deg);
+  filter: drop-shadow(0 4px 8px rgba(255, 207, 63, 0.55));
+}
+
+.pillar:hover .icon,
+.contact-card:hover .contact-avatar,
+.card:hover .member .avatar {
+  transform: translateY(-4px) scale(1.14) rotate(-6deg);
+  box-shadow: 0 0 0 2px var(--gold), 5px 5px 0 var(--ink);
+}
+
+.card:hover h3,
+.card:hover .card-title,
+.contact-card:hover .contact-name,
+.ccard:hover .ccard-head h3,
+.menu-card:hover .menu-card-title {
+  color: var(--gold);
+  text-shadow: 2px 2px 0 var(--ink), 0 0 10px rgba(255, 207, 63, 0.35);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Clickable Press & Bounce State */
+@keyframes arcadeBoxClick {
+  0% {
+    transform: translate(-3px, -6px) scale(1);
+  }
+  35% {
+    transform: translate(2px, 3px) scale(0.975);
+    box-shadow: 0 0 0 2px var(--cyan), 2px 2px 0 var(--ink), 0 0 20px rgba(95, 227, 255, 0.55);
+  }
+  75% {
+    transform: translate(-4px, -7px) scale(1.015);
+    box-shadow: 0 0 0 2px var(--gold), 7px 9px 0 var(--ink), 0 0 24px rgba(255, 207, 63, 0.45);
+  }
+  100% {
+    transform: translate(-3px, -6px) scale(1);
+  }
+}
+
+.card:active,
+.contact-card:active,
+.ccard:active,
+.menu-card:active,
+.hud-item:active,
+.callout:active {
+  transform: translate(2px, 3px) scale(0.98) !important;
+  box-shadow: 0 0 0 2px var(--cyan), 2px 2px 0 var(--ink), 0 0 18px rgba(95, 227, 255, 0.5) !important;
+}
+
+.box-clicked {
+  animation: arcadeBoxClick 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* Retro Pixel Click Ripple inside Clicked Box */
+.pixel-click-ripple {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  margin-top: -7px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 0 2px var(--cyan);
+  pointer-events: none;
+  z-index: 5;
+  animation: pixelRippleExpand 0.48s steps(6) forwards;
+}
+
+@keyframes pixelRippleExpand {
+  0% {
+    opacity: 0.95;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(9);
+  }
 }
 
 /* Subtle CRT scanline shimmer on reveal */
-.card.reveal.in::after {
+.card.reveal.in::after,
+.contact-card.reveal.in::after {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(95, 227, 255, 0.08), rgba(255, 207, 63, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(95, 227, 255, 0.08), rgba(255, 207, 63, 0.14), transparent);
   transform: skewX(-20deg);
   pointer-events: none;
-  animation: cardScanline 0.85s ease-out 0.15s 1 normal forwards;
+  animation: cardScanline 0.85s ease-out 0.12s 1 normal forwards;
 }
 
 @keyframes cardScanline {
   0% { left: -100%; }
   100% { left: 200%; }
 }
-
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .js .reveal{opacity:1;transform:none}
-}
-
 
 /* ==========================================================================
    UPGRADE MODULES: Modern UX within Pixel-Modern Deep Navy & Gold Arcade Theme
