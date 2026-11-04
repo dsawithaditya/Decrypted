@@ -1,161 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1f4b">
   <meta name="robots" content="noindex">
-  <title>Staff Console | Mess Queue Manager</title>
+  <title>Staff Console | Mess Queue Manager · Jain University</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1f4b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' fill='%23fbbf24' font-family='monospace' font-weight='900' font-size='28'%3EMQM%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .zone-val,
+    .hud-value,
+    .rule-pct {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 3px;
+      line-height: 1;
+    }
+
+    .pct-unit {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 0.52em;
+      font-weight: 800;
+      opacity: 0.92;
+      letter-spacing: 0;
+      transform: translateY(-0.18em);
+      display: inline-block;
+    }
+
+    .zone-bar-wrap {
+      position: relative;
+      margin: 22px 0 28px;
+    }
+
+    #zone-marks {
+      position: relative;
+      height: 28px;
+      margin-top: 6px;
+    }
+
+    #zone-marks .mark {
+      position: absolute;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    #zone-marks .mark::before {
+      content: '';
+      position: absolute;
+      top: -22px;
+      width: 2px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+    }
+
+    #zone-marks .mark b {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 4px;
+      border-radius: 4px;
+      background: rgba(8, 20, 52, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #cbd5e1;
+      white-space: nowrap;
+    }
+
+    #zone-marks .mark.stagger-down b {
+      margin-top: 13px;
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.4);
+    }
+
+    #zone-marks .mark.stagger-down::before {
+      height: 30px;
+      background: #fbbf24;
+    }
+
+    .soldout-toggle {
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .soldout-toggle input {
+      accent-color: #ef4444;
+      cursor: pointer;
+    }
+
+    .kitchen-alert-card {
+      background: #7f1d1d;
+      border: 2px solid var(--red);
+      color: #fff;
+      padding: 18px 22px;
+      box-shadow: 0 0 0 2px var(--ink), 6px 6px 0 var(--ink);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      animation: pop .3s ease-out;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- PIN GATE -->
-<div class="gate" id="gate">
-  <form class="card gate-box" id="gate-form" autocomplete="off">
-    <div class="logo">MQM<span>.</span></div>
-    <h2>Staff login</h2>
-    <p class="muted">Enter the staff PIN to continue.</p>
-    <input id="pin" class="input pin-input" type="password" inputmode="numeric" maxlength="8" aria-label="Staff PIN">
-    <p class="error" id="pin-error" hidden>Wrong PIN. Try again.</p>
-    <button class="btn btn-gold btn-lg" type="submit">Enter ▶</button>
-    <a class="small-link" href="index.html">← Back to home</a>
-  </form>
-</div>
+  <!-- PIN GATE (Shown only if not signed in) -->
+  <div class="gate" id="gate">
+    <form class="card gate-box" id="gate-form" autocomplete="off">
+      <div class="logo">MQM<span>.</span></div>
+      <h2>Staff login</h2>
+      <p class="muted">Enter the staff PIN to continue (default: 1234) or sign in via portal.</p>
+      <input id="pin" class="input pin-input" type="password" inputmode="numeric" maxlength="8" aria-label="Staff PIN" autofocus>
+      <p class="error" id="pin-error" hidden>Wrong PIN. Try again.</p>
+      <button class="btn btn-gold btn-lg" type="submit">Enter ▶</button>
+      <a class="small-link" href="login.html">Sign in with email/credentials ↗</a>
+      <a class="small-link" href="index.html">← Back to home</a>
+    </form>
+  </div>
 
-<header class="nav">
-  <nav class="container nav-inner" aria-label="Main">
-    <a class="logo" href="index.html">MQM<span>.</span></a>
-    <div class="nav-actions">
-      <span class="hud-chip" id="clock">--:--</span>
-      <a class="btn btn-sm hide-xs" href="student.html" target="_blank">Student view ↗</a>
-      <button class="btn btn-sm btn-red" id="btn-logout">Lock</button>
-    </div>
-  </nav>
-</header>
-
-<main id="dash" hidden>
-  <section class="sky page-sky">
-    <div class="stars" aria-hidden="true"></div>
-    <div class="container hero-content">
-      <span class="tag">STAFF CONSOLE</span>
-      <h1 class="page-title">Control <span>room</span></h1>
-      <div class="clock-row">
-        <span class="hud-chip" id="store-mode">Live sync</span>
-        <span class="hud-chip fresh" id="fresh">Counts updated just now</span>
+  <header class="nav">
+    <nav class="container nav-inner" aria-label="Main">
+      <a class="logo" href="index.html">MQM<span>.</span></a>
+      <div class="nav-actions">
+        <button class="btn btn-sm" id="btn-sound-toggle" type="button" title="Toggle sound alerts">🔔 Sound: ON</button>
+        <span class="hud-chip" id="clock">--:--</span>
+        <div id="nav-user-slot"></div>
+        <a class="btn btn-sm hide-xs" href="student.html" target="_blank">Student View ↗</a>
+        <button class="btn btn-sm btn-red" id="btn-logout" type="button">Lock</button>
       </div>
-    </div>
-    <div class="pixel-edge"></div>
-  </section>
+    </nav>
+  </header>
 
-  <section class="section tight">
-    <div class="container">
-
-      <div class="dash-top">
-        <div class="card">
-          <h3 class="card-title">ZONE CROWD (NATIONAL AVG)</h3>
-          <div class="zone-val" id="zone-val">--</div>
-          <div class="zone-bar-wrap">
-            <div class="bar"><i class="fill" id="zone-bar"></i></div>
-            <div id="zone-marks"></div>
-          </div>
-          <p class="muted" id="zone-action"></p>
+  <main id="dash" hidden>
+    <section class="sky page-sky">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <span class="tag">STAFF CONSOLE · CONTROL ROOM</span>
+        <h1 class="page-title">Mess <span>Control Center</span></h1>
+        <div class="clock-row">
+          <span class="hud-chip" id="store-mode">● Live sync</span>
+          <span class="hud-chip fresh" id="fresh">Counts updated just now</span>
         </div>
-
-        <div class="card">
-          <h3 class="card-title">COUNTER STATE</h3>
-          <div class="chips">
-            <span class="chip" id="chip-standby">Standby</span>
-            <span class="chip" id="chip-cross">Cross access</span>
-            <span class="chip warn" id="chip-override">Standby: AUTO</span>
-          </div>
-          <div class="btn-row">
-            <button class="btn btn-green btn-sm" id="btn-open">Open standby</button>
-            <button class="btn btn-red btn-sm" id="btn-close">Close standby</button>
-            <button class="btn btn-sm" id="btn-auto">Back to auto</button>
-          </div>
-          <p class="muted" style="margin-top:12px;font-size:13px">The open and close buttons switch to manual override. "Back to auto" lets the rules decide again.</p>
-        </div>
-
-        <div class="card">
-          <h3 class="card-title">MODE</h3>
-          <div class="segmented" role="group" aria-label="Mode" style="margin-top:0">
-            <button class="seg" data-mode="manual">Manual</button>
-            <button class="seg" data-mode="simulation">Simulation</button>
-          </div>
-          <div id="sim-panel" hidden style="margin-top:16px">
-            <label class="field"><span>Speed (one full lunch rush in…)</span>
-              <select class="input" id="sim-speed">
-                <option value="60">1 minute</option>
-                <option value="120" selected>2 minutes (demo)</option>
-                <option value="300">5 minutes</option>
-              </select>
-            </label>
-            <p style="margin-top:12px">Simulated time: <b class="hud" id="sim-clock">11:30 AM</b></p>
-            <div class="bar sim-progress"><i class="fill bg-amber" id="sim-progress"></i></div>
-            <button class="btn btn-sm" id="btn-sim-restart" style="margin-top:14px">↺ Restart rush</button>
-          </div>
+        <div class="notice notice-amber" id="staff-offline-banner" hidden style="max-width:600px;margin:10px auto 0">
+          Could not connect, showing last known data.
         </div>
       </div>
+      <div class="pixel-edge"></div>
+    </section>
 
-      <div class="dash-main">
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-            <h3 class="card-title" style="margin:0">COUNTERS</h3>
-            <button class="btn btn-sm btn-red" id="btn-reset">Reset all counts</button>
+    <section class="section tight">
+      <div class="container">
+
+        <!-- Automatic Kitchen Early-Warning Alert (Appears if any dish < 2.5★ or has 3+ complaints) -->
+        <div class="kitchen-alert-card" id="kitchen-alert-banner" hidden>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="font-size:32px">🚨</div>
+            <div>
+              <strong style="font-family:var(--font-hud);font-size:14px;letter-spacing:1px;color:var(--gold)">
+                KITCHEN EARLY-WARNING ALERT
+              </strong>
+              <p id="kitchen-alert-text" style="margin-top:2px;font-size:13px;color:#fecaca">
+                Dish rating alert triggered during active lunch service!
+              </p>
+            </div>
           </div>
-          <div id="counter-rows"></div>
+          <button class="btn btn-sm btn-gold" id="btn-ack-alert" type="button">Acknowledge Alert</button>
         </div>
 
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-            <h3 class="card-title" style="margin:0">ALERTS</h3>
-            <button class="btn btn-sm" id="btn-clear-alerts">Clear</button>
+        <!-- Modern Tabbed Sub-Navigation -->
+        <nav class="subnav-tabs" role="tablist" aria-label="Staff Modules">
+          <button class="subtab active" id="stab-btn-queue" data-stab="queue" type="button" role="tab">
+            🎛️ QUEUE &amp; COUNTERS
+          </button>
+          <button class="subtab" id="stab-btn-dispatch" data-stab="dispatch" type="button" role="tab">
+            🛏️ ROOM DELIVERIES <span class="badge" id="staff-del-badge">3</span>
+          </button>
+          <button class="subtab" id="stab-btn-kitchen" data-stab="kitchen" type="button" role="tab">
+            🍳 KITCHEN &amp; DISH SENTIMENT
+          </button>
+          <button class="subtab" id="stab-btn-waste" data-stab="waste" type="button" role="tab">
+            🌱 ATTENDANCE FORECAST
+          </button>
+          <button class="subtab" id="stab-btn-admin" data-stab="admin" type="button" role="tab">
+            ⚙️ SETTINGS &amp; QR
+          </button>
+        </nav>
+
+        <!-- ===================================================================
+             SUBTAB 1: QUEUE & COUNTER CONTROLS
+             =================================================================== -->
+        <div id="stab-view-queue" class="stab-pane">
+          <div class="dash-top">
+            <!-- Zone Crowd National Average -->
+            <div class="card">
+              <h3 class="card-title">ZONE CROWD (NATIONAL AVG)</h3>
+              <div class="zone-val c-green" id="zone-val">30<span class="pct-unit">%</span></div>
+              <div class="zone-bar-wrap">
+                <div class="bar"><i class="fill bg-green" id="zone-bar" style="width:30%"></i></div>
+                <div id="zone-marks"></div>
+              </div>
+              <p class="muted" id="zone-action">Below 40%: normal routing</p>
+            </div>
+
+            <!-- Counter State & Manual Overrides -->
+            <div class="card">
+              <h3 class="card-title">COUNTER STATE &amp; OVERRIDES</h3>
+              <div class="chips">
+                <span class="chip" id="chip-standby">Standby: CLOSED</span>
+                <span class="chip" id="chip-cross">Cross access: OFF</span>
+                <span class="chip warn" id="chip-override">Standby: AUTO</span>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-green btn-sm" id="btn-open" type="button">Open standby</button>
+                <button class="btn btn-red btn-sm" id="btn-close" type="button">Close standby</button>
+                <button class="btn btn-cyan btn-sm" id="btn-force-cross" type="button">Force Cross-Access</button>
+                <button class="btn btn-sm" id="btn-auto" type="button">Reset to Auto</button>
+              </div>
+              <p class="muted" style="margin-top:12px;font-size:12px">
+                Open/Close forces manual standby. "Force Cross-Access" opens international counters immediately.
+              </p>
+            </div>
+
+            <!-- Simulation Mode Card -->
+            <div class="card">
+              <h3 class="card-title">MODE</h3>
+              <div class="segmented" role="group" aria-label="Mode" style="margin-top:0">
+                <button class="seg active" data-mode="manual" type="button">Manual</button>
+                <button class="seg" data-mode="simulation" type="button">Simulation</button>
+              </div>
+              <div id="sim-panel" hidden style="margin-top:16px">
+                <label class="field"><span>Speed (lunch rush simulation)</span>
+                  <select class="input" id="sim-speed">
+                    <option value="60">1 minute</option>
+                    <option value="120" selected>2 minutes (demo)</option>
+                    <option value="300">5 minutes</option>
+                  </select>
+                </label>
+                <p style="margin-top:12px">Simulated time: <b class="hud" id="sim-clock">11:30 AM</b></p>
+                <div class="bar sim-progress"><i class="fill bg-amber" id="sim-progress"></i></div>
+                <button class="btn btn-sm" id="btn-sim-restart" type="button" style="margin-top:14px">↺ Restart rush</button>
+              </div>
+            </div>
           </div>
-          <ul class="alert-list" id="alert-list" aria-live="polite" style="margin-top:14px"></ul>
+
+          <!-- Counter Sliders & Live Alerts List -->
+          <div class="dash-main">
+            <div class="card">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                <h3 class="card-title" style="margin:0">COUNTERS &amp; QUEUE CONTROLS</h3>
+                <button class="btn btn-sm btn-red" id="btn-reset" type="button">Reset counts to 0</button>
+              </div>
+              <div id="counter-rows"></div>
+            </div>
+
+            <div class="card">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+                <h3 class="card-title" style="margin:0">ALERTS (SOUND + VIBRATION)</h3>
+                <button class="btn btn-sm" id="btn-clear-alerts" type="button">Clear</button>
+              </div>
+              <ul class="alert-list" id="alert-list" aria-live="polite" style="margin-top:14px"></ul>
+            </div>
+          </div>
         </div>
+
+        <!-- ===================================================================
+             SUBTAB 2: ROOM DELIVERY DISPATCH QUEUE
+             =================================================================== -->
+        <div id="stab-view-dispatch" class="stab-pane" hidden>
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+              <div>
+                <h3 class="card-title" style="margin:0">ROOM DELIVERY DISPATCH QUEUE</h3>
+                <p class="muted" style="font-size:13px;margin-top:4px">
+                  Prioritized by medical urgency: High Fever &amp; Quarantine orders are shown first.
+                </p>
+              </div>
+              <div class="segmented" id="dispatch-filter" style="margin:0">
+                <button class="seg active" data-filter="all">All</button>
+                <button class="seg" data-filter="requested">Requested</button>
+                <button class="seg" data-filter="preparing">Packing</button>
+                <button class="seg" data-filter="out_for_delivery">In Transit</button>
+              </div>
+            </div>
+
+            <!-- Deliveries Table / Cards -->
+            <div style="margin-top:20px;overflow-x:auto">
+              <table style="width:100%">
+                <thead>
+                  <tr>
+                    <th>PRIORITY / REASON</th>
+                    <th>STUDENT &amp; ROOM</th>
+                    <th>MEAL &amp; DIET</th>
+                    <th>DELIVERY MODE &amp; RUNNER</th>
+                    <th>STATUS &amp; OTP</th>
+                    <th>DISPATCH ACTION</th>
+                  </tr>
+                </thead>
+                <tbody id="dispatch-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             SUBTAB 3: KITCHEN SENTIMENT & DISH RATINGS
+             =================================================================== -->
+        <div id="stab-view-kitchen" class="stab-pane" hidden>
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+              <div>
+                <h3 class="card-title" style="margin:0">LIVE DISH QUALITY &amp; REFILL MONITOR</h3>
+                <p class="muted" style="font-size:13px;margin-top:4px">
+                  Real-time ratings submitted by students right now. Toggle refill status to inform students before lines form.
+                </p>
+              </div>
+            </div>
+
+            <div class="table-wrap" style="margin-top:18px">
+              <table>
+                <thead>
+                  <tr>
+                    <th>DISH NAME</th>
+                    <th>MEAL SLOT</th>
+                    <th>AVG RATING</th>
+                    <th>REVIEWS</th>
+                    <th>STUDENT TAGS</th>
+                    <th>REFILL STATUS</th>
+                  </tr>
+                </thead>
+                <tbody id="staff-menu-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             SUBTAB 4: ZERO FOOD WASTE ATTENDANCE FORECAST
+             =================================================================== -->
+        <div id="stab-view-waste" class="stab-pane" hidden>
+          <div class="card">
+            <h3 class="card-title">HEADCOUNT FORECAST (ZERO FOOD WASTE)</h3>
+            <p class="muted" style="font-size:13px">
+              Based on students pre-checking in on their phones before mealtime.
+            </p>
+
+            <div class="hud-strip" style="margin:20px 0">
+              <div class="hud-item">
+                <div class="hud-label">EATERS CONFIRMED</div>
+                <div class="hud-value c-green" id="staff-att-eat">348</div>
+              </div>
+              <div class="hud-item">
+                <div class="hud-label">SKIPPED MEALS</div>
+                <div class="hud-value c-amber" id="staff-att-skip">42</div>
+              </div>
+              <div class="hud-item">
+                <div class="hud-label">PORTION SAVING</div>
+                <div class="hud-value c-cyan" id="staff-att-save">~18%</div>
+              </div>
+            </div>
+
+            <p class="muted" style="font-size:13px;margin-top:12px">
+              Kitchen Advice: Prepare approximately <b>350 portions</b> for the active lunch slot instead of the standard 400.
+            </p>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             SUBTAB 5: ADMIN SETTINGS & STUDENT QR CODE
+             =================================================================== -->
+        <div id="stab-view-admin" class="stab-pane" hidden>
+          <div class="card admin">
+            <h3 class="card-title">ALGORITHM THRESHOLDS &amp; SERVING SPEEDS</h3>
+            <form id="settings-form" style="margin-top:16px">
+              <div class="form-grid">
+                <label class="field"><span>Early alert threshold (%)</span><input class="input" type="number" id="set-alertThreshold"></label>
+                <label class="field"><span>Open standby threshold (%)</span><input class="input" type="number" id="set-standbyThreshold"></label>
+                <label class="field"><span>Cross access threshold (%)</span><input class="input" type="number" id="set-crossAccessThreshold"></label>
+                <label class="field"><span>Close threshold (%)</span><input class="input" type="number" id="set-closeThreshold"></label>
+                <label class="field"><span>Cross Overflow Cap (%)</span><input class="input" type="number" id="set-crossCapThreshold" value="75"></label>
+                <label class="field"><span>Avg serving time (seconds)</span><input class="input" type="number" id="set-avgServeSeconds"></label>
+                <label class="field"><span>Refresh interval (seconds)</span><input class="input" type="number" id="set-refreshSeconds"></label>
+                <label class="field"><span>Staff PIN</span><input class="input" type="text" id="set-staffPin" maxlength="8"></label>
+              </div>
+
+              <h3 class="card-title" style="margin-top:24px">COUNTER CAPACITIES</h3>
+              <div class="form-grid" id="cap-list"></div>
+
+              <div class="btn-row" style="margin-top:20px">
+                <button class="btn btn-gold" type="submit">Save settings</button>
+                <button class="btn" type="button" id="btn-defaults">Restore defaults</button>
+              </div>
+              <p class="form-msg" id="settings-msg"></p>
+            </form>
+          </div>
+
+          <div class="card qr-card" style="margin-top:22px">
+            <img id="qr-img" width="220" height="220" alt="QR code for the student view">
+            <div>
+              <h3 class="card-title">CANTEEN ENTRANCE QR CODE</h3>
+              <p class="muted">Print this code and stick it at the canteen entrance. Students scan to open:</p>
+              <p><a id="qr-link" target="_blank" rel="noreferrer"></a></p>
+              <p class="muted" style="font-size:13px;margin-top:8px">Opens student view with live queue, digital express passes, and today's menu.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
+    </section>
+  </main>
 
-      <details class="card admin" style="margin-top:22px">
-        <summary>ADMIN SETTINGS</summary>
-        <form id="settings-form">
-          <div class="form-grid">
-            <label class="field"><span>Early alert threshold (%)</span><input class="input" type="number" id="set-alertThreshold"></label>
-            <label class="field"><span>Open standby threshold (%)</span><input class="input" type="number" id="set-standbyThreshold"></label>
-            <label class="field"><span>Cross access threshold (%)</span><input class="input" type="number" id="set-crossAccessThreshold"></label>
-            <label class="field"><span>Close threshold (%)</span><input class="input" type="number" id="set-closeThreshold"></label>
-            <label class="field"><span>Avg serving time (seconds)</span><input class="input" type="number" id="set-avgServeSeconds"></label>
-            <label class="field"><span>Refresh interval (seconds)</span><input class="input" type="number" id="set-refreshSeconds"></label>
-            <label class="field"><span>Staff PIN</span><input class="input" type="text" id="set-staffPin" maxlength="8"></label>
-          </div>
-          <h3 class="card-title" style="margin-top:24px">COUNTER CAPACITY</h3>
-          <div class="form-grid" id="cap-list"></div>
-          <div class="btn-row" style="margin-top:20px">
-            <button class="btn btn-gold" type="submit">Save settings</button>
-            <button class="btn" type="button" id="btn-defaults">Restore defaults</button>
-          </div>
-          <p class="form-msg" id="settings-msg"></p>
-        </form>
-      </details>
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite"></div>
 
-      <div class="card qr-card" style="margin-top:22px">
-        <img id="qr-img" width="220" height="220" alt="QR code for the student view">
-        <div>
-          <h3 class="card-title">STUDENT QR CODE</h3>
-          <p class="muted">Print this and stick it at the canteen entrance. It opens:</p>
-          <p><a id="qr-link" target="_blank" rel="noreferrer"></a></p>
-          <p class="muted" style="font-size:13px;margin-top:8px">Note: the QR only works on phones after the site is hosted (GitHub Pages or Netlify).</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-</main>
-
-<script src="js/logic.js"></script>
-<script src="js/firebase.js"></script>
-<script src="js/simulation.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/staff.js"></script>
+  <script src="js/logic.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/staff.js"></script>
 </body>
 </html>

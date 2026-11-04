@@ -1,77 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1f4b">
-  <title>Student View | Mess Queue Manager</title>
+  <title>Student View | Mess Queue Manager · Jain University</title>
+  <meta name="description"
+    content="Live canteen queue status, fastest counter recommendation, room delivery, and menu rating for students at Jain University mess.">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1f4b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' fill='%23fbbf24' font-family='monospace' font-weight='900' font-size='28'%3EMQM%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<header class="nav">
-  <nav class="container nav-inner" aria-label="Main">
-    <a class="logo" href="index.html">MQM<span>.</span></a>
-    <div class="nav-actions">
-      <span class="hud-chip" id="clock">--:--</span>
-      <a class="btn btn-sm hide-xs" href="index.html">About</a>
+  <header class="nav">
+    <nav class="container nav-inner" aria-label="Main">
+      <a class="logo" href="index.html">MQM<span>.</span></a>
+      <div class="nav-actions">
+        <button class="btn btn-sm" id="student-lang-btn" type="button">EN / हिं</button>
+        <span class="hud-chip" id="clock">--:--</span>
+        <div id="nav-user-slot"></div>
+        <a class="btn btn-sm hide-xs" href="index.html">Home</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="sky page-sky">
+      <div class="stars" aria-hidden="true"></div>
+      <svg class="cloud" style="top:90px;right:6%;width:170px;--dur:24s" viewBox="0 0 32 12"
+        shape-rendering="crispEdges" aria-hidden="true">
+        <g fill="#fff">
+          <rect x="10" y="0" width="8" height="2" />
+          <rect x="8" y="2" width="18" height="2" />
+          <rect x="4" y="4" width="24" height="2" />
+          <rect x="2" y="6" width="28" height="2" />
+          <rect x="0" y="8" width="32" height="2" />
+        </g>
+        <rect x="0" y="10" width="32" height="2" fill="#cfe3f7" />
+      </svg>
+      <div class="container hero-content">
+        <span class="tag">STUDENT PORTAL · LIVE</span>
+        <h1 class="page-title" id="st-heading">Smart Mess <span>Companion</span></h1>
+        <div class="clock-row">
+          <span class="hud-chip" id="updated">Updated just now</span>
+          <span class="hud-chip" id="profile-pill">Hostel: Not Set (<a class="u" href="login.html" style="color:var(--gold)">Sign In</a>)</span>
+        </div>
+        <div class="segmented" role="group" aria-label="I am a">
+          <button class="seg active" data-who="national" id="btn-who-nat">National student</button>
+          <button class="seg" data-who="international" id="btn-who-int">International student</button>
+        </div>
+      </div>
+      <div class="pixel-edge"></div>
+    </section>
+
+    <section class="section tight">
+      <div class="container">
+
+        <!-- Modern Tabbed Sub-Navigation -->
+        <nav class="subnav-tabs" role="tablist" aria-label="Student Views">
+          <button class="subtab active" id="tab-btn-queue" data-tab="queue" type="button" role="tab">
+            ⚡ LIVE QUEUE &amp; COUNTERS
+          </button>
+          <button class="subtab" id="tab-btn-delivery" data-tab="delivery" type="button" role="tab">
+            🛏️ ROOM DELIVERY <span class="badge" id="delivery-badge" hidden>1</span>
+          </button>
+          <button class="subtab" id="tab-btn-menu" data-tab="menu" type="button" role="tab">
+            ⭐ TODAY'S MENU &amp; RATINGS
+          </button>
+          <button class="subtab" id="tab-btn-waste" data-tab="waste" type="button" role="tab">
+            🌱 ZERO FOOD WASTE
+          </button>
+        </nav>
+
+        <!-- ===================================================================
+             TAB 1: LIVE QUEUE & COUNTERS
+             =================================================================== -->
+        <div id="tab-view-queue" class="tab-pane">
+          <!-- Connection / Offline banner -->
+          <div class="notice notice-amber" id="offline-banner" hidden>
+            Could not connect, showing last known cached data.
+          </div>
+
+          <!-- Best Counter Recommendation Banner -->
+          <div class="rec-banner" id="rec-banner" aria-live="polite">
+            <div class="rec-label" id="rec-label">BEST COUNTER FOR YOU</div>
+            <div class="rec-name" id="rec-name">Counter 3</div>
+            <div class="rec-wait" id="rec-wait">About 2 min wait</div>
+          </div>
+
+          <!-- Digital Cross-Access Active Banner -->
+          <div class="express-pass-banner" id="cross-pass-banner" hidden>
+            <div>
+              <span class="tag" style="background:var(--red);color:#fff">RUSH HOUR ACTIVE</span>
+              <h3 style="font-family:var(--font-hud);font-size:18px;margin-top:6px;color:var(--text)">
+                National Crowd &gt; 80%: International Counters are UNLOCKED!
+              </h3>
+              <p class="muted" style="font-size:13px;margin-top:4px">
+                Claim a 15-minute Digital Express Pass to bypass the crowd and eat at the least busy International counter.
+              </p>
+            </div>
+            <button class="btn btn-gold btn-lg" id="btn-claim-pass" type="button">
+              🎫 Claim Express Pass ▶
+            </button>
+          </div>
+
+          <div class="notice notice-blue" id="standby-banner" hidden>An extra Standby counter is open.</div>
+          <div class="notice notice-amber" id="stale-banner" hidden>Warning: Counter counts were updated more than 5 minutes ago.</div>
+
+          <!-- Notification & Forecast Controls -->
+          <div class="card" style="margin-top:22px">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+              <div>
+                <h3 class="card-title" style="margin:0">CROWD MONITOR &amp; PUSH ALERT</h3>
+                <p class="muted" style="font-size:13px;margin-top:4px">Get notified when lines clear below 50% so you can walk over at the best time.</p>
+              </div>
+              <button class="btn btn-sm btn-cyan" id="btn-push-alert" type="button">
+                🔔 Alert Me When Free (&lt;50%)
+              </button>
+            </div>
+
+            <!-- Peak-Hour Forecast Bar Chart -->
+            <div style="margin-top:20px">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px">
+                <span class="hud" style="color:var(--cyan)">TODAY'S RUSH CURVE (11:30 AM – 2:30 PM)</span>
+                <span class="pill pill-green">🟢 BEST TIME: 11:30–12:00 PM</span>
+              </div>
+              <div class="forecast-chart" id="forecast-chart"></div>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div class="legend">
+            <span><span class="pill pill-green">GREEN</span> Free (below 50%)</span>
+            <span><span class="pill pill-amber">AMBER</span> Busy (50–80%)</span>
+            <span><span class="pill pill-red">RED</span> Very crowded (above 80%)</span>
+          </div>
+
+          <!-- Live Counter Grid -->
+          <div class="counter-grid" id="counter-grid"></div>
+        </div>
+
+        <!-- ===================================================================
+             TAB 2: DIRECT-TO-ROOM MESS FOOD DELIVERY
+             =================================================================== -->
+        <div id="tab-view-delivery" class="tab-pane" hidden>
+          <div class="grid grid-2">
+            <!-- Request Form Card -->
+            <div class="card">
+              <span class="tag">STUDENT CARE SERVICE</span>
+              <h3 class="card-title" style="margin-top:10px">REQUEST ROOM DELIVERY</h3>
+              <p class="muted" style="font-size:13px;margin-bottom:16px">
+                For hostel students who cannot visit the canteen due to illness, fever, leg injury, quarantine, or overlapping academic exams.
+              </p>
+
+              <form id="form-delivery-request">
+                <div style="display:grid;gap:14px">
+                  <div class="field-row">
+                    <label class="field">
+                      <span>Full Name</span>
+                      <input class="input" id="del-name" required placeholder="Aditya Kumar">
+                    </label>
+                    <label class="field">
+                      <span>Roll Number / USN</span>
+                      <input class="input" id="del-roll" required placeholder="21BCE1042">
+                    </label>
+                  </div>
+
+                  <div class="field-row">
+                    <label class="field">
+                      <span>Hostel Block</span>
+                      <select class="input" id="del-block">
+                        <option value="Block A">Block A</option>
+                        <option value="Block B" selected>Block B</option>
+                        <option value="Block C">Block C</option>
+                        <option value="Girls Hostel 1">Girls Hostel 1</option>
+                        <option value="Girls Hostel 2">Girls Hostel 2</option>
+                      </select>
+                    </label>
+                    <label class="field">
+                      <span>Room Number</span>
+                      <input class="input" id="del-room" required placeholder="B-312" value="B-312">
+                    </label>
+                  </div>
+
+                  <label class="field">
+                    <span>Contact Phone / WhatsApp</span>
+                    <input class="input" id="del-phone" type="tel" required placeholder="9876543210" value="9876543210">
+                  </label>
+
+                  <label class="field">
+                    <span>Reason for Delivery</span>
+                    <select class="input" id="del-reason" required>
+                      <option value="medical">🚨 Medical / High Fever (Urgent Priority)</option>
+                      <option value="injury">🩹 Leg / Mobility Injury</option>
+                      <option value="quarantine">😷 Isolation / Infection Quarantine</option>
+                      <option value="exam">📚 Overlapping Lab / Exam Viva</option>
+                    </select>
+                  </label>
+
+                  <div class="field-row">
+                    <label class="field">
+                      <span>Meal Slot</span>
+                      <select class="input" id="del-meal-type">
+                        <option value="lunch" selected>Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="snacks">Snacks</option>
+                      </select>
+                    </label>
+                    <label class="field">
+                      <span>Diet Box</span>
+                      <select class="input" id="del-diet">
+                        <option value="Light Sick Diet (Khichdi + Curd Rice)">Light Sick Diet (Khichdi + Curd Rice)</option>
+                        <option value="Standard Today Thali" selected>Standard Today's Thali</option>
+                        <option value="Boiled Veggies & Warm Soup">Boiled Veggies &amp; Warm Soup</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <label class="field">
+                    <span>Preferred Delivery Mode</span>
+                    <select class="input" id="del-mode">
+                      <option value="staff">Mess Staff Runner (Standard)</option>
+                      <option value="peer_buddy">Hostel Peer Buddy (Student volunteer earns +10 Karma points!)</option>
+                    </select>
+                  </label>
+
+                  <label class="field">
+                    <span>Special Instructions / Medical Notes</span>
+                    <textarea class="input" id="del-notes" rows="2" placeholder="e.g. Please send extra curd, room bell is broken."></textarea>
+                  </label>
+
+                  <button class="btn btn-gold btn-lg" type="submit">Submit Delivery Request ▶</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Live Status & Active Trackers -->
+            <div>
+              <div class="card" id="active-tracker-box">
+                <h3 class="card-title">LIVE ORDER TRACKER</h3>
+                <div id="tracker-content">
+                  <p class="muted">No active room deliveries. Fill the request form if you need food sent to your hostel room.</p>
+                </div>
+              </div>
+
+              <!-- Karma Points Card -->
+              <div class="card" style="margin-top:20px;background:var(--ink);border:2px dashed var(--gold)">
+                <div style="display:flex;align-items:center;gap:14px">
+                  <div style="font-size:36px">🌟</div>
+                  <div>
+                    <h4 style="font-family:var(--font-hud);font-size:13px;color:var(--gold)">HOSTEL PEER BUDDY PROGRAM</h4>
+                    <p class="muted" style="font-size:12px;margin-top:2px">
+                      Heading back to your hostel block? Pick up a sealed food box for an unwell batchmate and earn <b>+10 Mess Karma Points</b> redeemable for weekend canteen treats!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             TAB 3: TODAY'S MENU & DISH RATINGS + FEEDBACK
+             =================================================================== -->
+        <div id="tab-view-menu" class="tab-pane" hidden>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+            <div>
+              <h2 class="section-title" style="font-size:38px;margin:0">Today's <span>Menu &amp; Ratings</span></h2>
+              <p class="muted" style="font-size:14px">Rate each dish during or right after your meal. Low ratings alert the chef immediately!</p>
+            </div>
+            <div class="segmented" id="menu-slot-selector" style="margin:0">
+              <button class="seg active" data-slot="lunch">Lunch</button>
+              <button class="seg" data-slot="breakfast">Breakfast</button>
+              <button class="seg" data-slot="dinner">Dinner</button>
+            </div>
+          </div>
+
+          <!-- Dishes Grid -->
+          <div class="menu-grid" id="dishes-grid"></div>
+
+          <!-- Overall Mess Experience Feedback Form -->
+          <div class="card" style="margin-top:34px">
+            <h3 class="card-title">OVERALL MESS EXPERIENCE FEEDBACK</h3>
+            <p class="muted" style="font-size:13px">Help the canteen administration track hygiene, queue speed, and staff behavior.</p>
+
+            <form id="form-overall-feedback" style="margin-top:16px">
+              <div class="form-grid">
+                <label class="field">
+                  <span>Hygiene &amp; Plate Cleanliness (1–5 ★)</span>
+                  <select class="input" id="fb-hygiene">
+                    <option value="5">★★★★★ 5 - Very Clean</option>
+                    <option value="4" selected>★★★★☆ 4 - Good</option>
+                    <option value="3">★★★☆☆ 3 - Average</option>
+                    <option value="2">★★☆☆☆ 2 - Needs Attention</option>
+                    <option value="1">★☆☆☆☆ 1 - Poor Hygiene</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span>Queue Speed &amp; Counter Flow (1–5 ★)</span>
+                  <select class="input" id="fb-speed">
+                    <option value="5">★★★★★ 5 - Very Fast</option>
+                    <option value="4" selected>★★★★☆ 4 - Smooth</option>
+                    <option value="3">★★★☆☆ 3 - Moderate Wait</option>
+                    <option value="2">★★☆☆☆ 2 - Slow Moving</option>
+                    <option value="1">★☆☆☆☆ 1 - Unacceptable Delay</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span>Staff Courtesy &amp; Service (1–5 ★)</span>
+                  <select class="input" id="fb-courtesy">
+                    <option value="5" selected>★★★★★ 5 - Courteous</option>
+                    <option value="4">★★★★☆ 4 - Polite</option>
+                    <option value="3">★★★☆☆ 3 - Neutral</option>
+                    <option value="2">★★☆☆☆ 2 - Unhelpful</option>
+                    <option value="1">★☆☆☆☆ 1 - Rude</option>
+                  </select>
+                </label>
+              </div>
+
+              <label class="field" style="margin-top:14px">
+                <span>Comments or Specific Incident Report</span>
+                <textarea class="input" id="fb-comments" rows="2" placeholder="e.g. Counter 2 ran out of chapati at 12:45 PM; tables were wiped quickly."></textarea>
+              </label>
+
+              <div class="btn-row" style="margin-top:16px">
+                <button class="btn btn-gold" type="submit">Submit Mess Feedback ✓</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             TAB 4: ZERO FOOD WASTE PRE-CHECK-IN
+             =================================================================== -->
+        <div id="tab-view-waste" class="tab-pane" hidden>
+          <div class="card" style="text-align:center;max-width:680px;margin:0 auto">
+            <span class="tag">ZERO FOOD WASTE INITIATIVE</span>
+            <h2 class="page-title" style="font-size:42px;margin-top:10px">Meal <span>Pre-Check-In</span></h2>
+            <p class="muted" style="margin:10px auto 20px;max-width:520px">
+              Let the kitchen know if you are eating today. Real-time headcounts allow chefs to cook exact quantities, saving 20–30% food from going to the bin!
+            </p>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px">
+              <button class="btn btn-green btn-lg" id="btn-eat-yes" type="button" style="height:80px;font-size:16px">
+                🍽️ I AM EATING IN MESS
+              </button>
+              <button class="btn btn-red btn-lg" id="btn-eat-no" type="button" style="height:80px;font-size:16px">
+                🚫 SKIPPING THIS MEAL
+              </button>
+            </div>
+
+            <div id="attendance-status-msg" style="margin-top:18px;font-family:var(--font-hud);color:var(--gold)">
+              Status: Response recorded for today's lunch!
+            </div>
+
+            <div class="hud-strip" style="margin-top:28px">
+              <div class="hud-item">
+                <div class="hud-label">EXPECTED EATERS</div>
+                <div class="hud-value c-green" id="att-eat-count">348</div>
+              </div>
+              <div class="hud-item">
+                <div class="hud-label">SKIPPING MEAL</div>
+                <div class="hud-value c-amber" id="att-skip-count">42</div>
+              </div>
+              <div class="hud-item">
+                <div class="hud-label">FOOD SAVED EST.</div>
+                <div class="hud-value c-cyan" id="att-waste-saved">~18%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Digital Express Pass Modal -->
+  <div class="modal-overlay" id="express-pass-modal" hidden>
+    <div class="modal-window">
+      <div class="modal-head">
+        <h3 class="modal-title">CROSS-ACCESS PASS</h3>
+        <button class="modal-close-btn" id="btn-close-pass-modal" type="button">✕</button>
+      </div>
+      <div class="express-pass-card" id="pass-card-content">
+        <!-- Rendered dynamically -->
+      </div>
     </div>
-  </nav>
-</header>
-
-<main>
-  <section class="sky page-sky">
-    <div class="stars" aria-hidden="true"></div>
-    <svg class="cloud" style="top:90px;right:6%;width:170px;--dur:24s" viewBox="0 0 32 12" shape-rendering="crispEdges" aria-hidden="true">
-      <g fill="#fff"><rect x="10" y="0" width="8" height="2"/><rect x="8" y="2" width="18" height="2"/><rect x="4" y="4" width="24" height="2"/><rect x="2" y="6" width="28" height="2"/><rect x="0" y="8" width="32" height="2"/></g><rect x="0" y="10" width="32" height="2" fill="#cfe3f7"/>
-    </svg>
-    <div class="container hero-content">
-      <span class="tag">STUDENT VIEW · LIVE</span>
-      <h1 class="page-title">Find the <span>fastest</span> counter</h1>
-      <div class="clock-row">
-        <span class="hud-chip" id="updated">Updated just now</span>
-      </div>
-      <div class="segmented" role="group" aria-label="I am a">
-        <button class="seg" data-who="national">National student</button>
-        <button class="seg" data-who="international">International student</button>
-      </div>
-    </div>
-    <div class="pixel-edge"></div>
-  </section>
-
-  <section class="section tight">
-    <div class="container">
-      <div class="rec-banner" id="rec-banner" aria-live="polite">
-        <div class="rec-label">BEST COUNTER FOR YOU</div>
-        <div class="rec-name" id="rec-name">Loading…</div>
-        <div class="rec-wait" id="rec-wait"></div>
-      </div>
-
-      <div class="notice notice-red" id="cross-banner" hidden>Rush hour: national students can now use the International counters.</div>
-      <div class="notice notice-blue" id="standby-banner" hidden>An extra Standby counter is open.</div>
-      <div class="notice notice-amber" id="stale-banner" hidden></div>
-
-      <div class="legend">
-        <span><span class="pill pill-green">GREEN</span> Free (below 50%)</span>
-        <span><span class="pill pill-amber">AMBER</span> Busy (50–80%)</span>
-        <span><span class="pill pill-red">RED</span> Very crowded (above 80%)</span>
-      </div>
-
-      <div class="counter-grid" id="counter-grid"></div>
-    </div>
-  </section>
-</main>
-
-<footer class="footer">
-  <div class="container footer-inner">
-    <p>Mess Queue Manager · Team Decrypted</p>
-    <p><a class="u" href="index.html">About the project</a></p>
   </div>
-</footer>
 
-<script src="js/logic.js"></script>
-<script src="js/firebase.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/student.js"></script>
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>Mess Queue Manager · Team Decrypted (SE-302A)</p>
+      <p><a class="u" href="index.html">About the project</a> · <a class="u" href="login.html">Profile</a></p>
+    </div>
+  </footer>
+
+  <script src="js/logic.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/student.js"></script>
 </body>
 </html>

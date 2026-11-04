@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1f4b">
+  <title>Login &amp; Hostel Profile | Mess Queue Manager</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1f4b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' fill='%23fbbf24' font-family='monospace' font-weight='900' font-size='28'%3EMQM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-container {
+      max-width: 520px;
+      margin: -30px auto 60px;
+      position: relative;
+      z-index: 5;
+    }
+    .auth-card {
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      box-shadow: 0 0 0 2px var(--ink), var(--bevel), 8px 8px 0 var(--ink);
+      padding: 32px 28px;
+    }
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--ink);
+      padding: 3px;
+      margin-bottom: 24px;
+    }
+    .auth-tab {
+      font-family: var(--font-hud);
+      font-size: 13px;
+      padding: 12px;
+      border: 0;
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.15s, color 0.15s;
+    }
+    .auth-tab.active {
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 480px) {
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .demo-strip {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(6, 18, 46, 0.7);
+      border-left: 4px solid var(--cyan);
+      display: grid;
+      gap: 10px;
+    }
+    .demo-strip h4 {
+      font-family: var(--font-hud);
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 1px;
+    }
+    .quick-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <nav class="container nav-inner" aria-label="Main">
+      <a class="logo" href="index.html">MQM<span>.</span></a>
+      <div class="nav-actions">
+        <a class="btn btn-sm" href="index.html">← Home</a>
+        <a class="btn btn-sm" href="student.html">Student View</a>
+        <a class="btn btn-sm btn-gold" href="staff.html">Staff Console</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="sky page-sky" style="padding-bottom:60px">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <span class="tag">SECURE ACCESS</span>
+        <h1 class="page-title">Sign In &amp; <span>Profile</span></h1>
+        <p class="hero-sub" style="margin-top:10px">Sign in to claim digital cross-access express passes, order direct-to-room delivery, or manage mess queues.</p>
+      </div>
+      <div class="pixel-edge"></div>
+    </section>
+
+    <div class="container auth-container">
+      <div class="auth-card">
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" id="tab-student" type="button" role="tab">🎓 STUDENT SIGN IN</button>
+          <button class="auth-tab" id="tab-staff" type="button" role="tab">🔑 MESS STAFF / ADMIN</button>
+        </div>
+
+        <!-- STUDENT FORM -->
+        <form id="form-student" autocomplete="on">
+          <div style="display:grid;gap:14px">
+            <label class="field">
+              <span>Full Name</span>
+              <input class="input" type="text" id="st-name" placeholder="e.g. Aditya Kumar" required>
+            </label>
+
+            <div class="field-row">
+              <label class="field">
+                <span>College Roll No. / USN</span>
+                <input class="input" type="text" id="st-roll" placeholder="e.g. 21BCE1042" required>
+              </label>
+              <label class="field">
+                <span>Student Category</span>
+                <select class="input" id="st-type">
+                  <option value="national">National Student</option>
+                  <option value="international">International Student</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Hostel Block</span>
+                <select class="input" id="st-block">
+                  <option value="Block A">Block A (Boys)</option>
+                  <option value="Block B" selected>Block B (Boys)</option>
+                  <option value="Block C">Block C (Boys)</option>
+                  <option value="Girls Hostel 1">Girls Hostel 1</option>
+                  <option value="Girls Hostel 2">Girls Hostel 2</option>
+                  <option value="Day Scholar">Day Scholar</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Room Number</span>
+                <input class="input" type="text" id="st-room" placeholder="e.g. B-312" value="B-312">
+              </label>
+            </div>
+
+            <label class="field">
+              <span>College Email (Optional for Magic Link/Supabase)</span>
+              <input class="input" type="email" id="st-email" placeholder="name@jainuniversity.ac.in">
+            </label>
+
+            <button class="btn btn-gold btn-lg" type="submit" style="margin-top:10px">Enter Student Portal ▶</button>
+          </div>
+        </form>
+
+        <!-- STAFF FORM -->
+        <form id="form-staff" hidden autocomplete="off">
+          <div style="display:grid;gap:14px">
+            <label class="field">
+              <span>Staff Login ID / Email</span>
+              <input class="input" type="email" id="staff-email" value="staff@jainuniversity.ac.in" placeholder="staff@jainuniversity.ac.in">
+            </label>
+
+            <label class="field">
+              <span>Staff PIN / Password (Default PIN: 1234)</span>
+              <input class="input" type="password" id="staff-pin" value="1234" maxlength="12" placeholder="••••">
+            </label>
+
+            <p class="error" id="staff-error" hidden>Invalid credentials or PIN.</p>
+
+            <button class="btn btn-gold btn-lg" type="submit" style="margin-top:10px">Open Staff Console ▶</button>
+          </div>
+        </form>
+
+        <!-- QUICK DEMO PRESETS -->
+        <div class="demo-strip">
+          <h4>⚡ 1-CLICK DEMO PROFILES</h4>
+          <div class="quick-btn-row">
+            <button class="btn btn-sm" id="btn-demo-nat" type="button">Student: National (Rm 312)</button>
+            <button class="btn btn-sm" id="btn-demo-int" type="button">Student: International (Rm 105)</button>
+            <button class="btn btn-sm btn-cyan" id="btn-demo-staff" type="button">Staff: Console Lead</button>
+          </div>
+        </div>
+
+        <!-- COLLAPSIBLE SUPABASE CLOUD SYNC SETTINGS -->
+        <details style="margin-top:20px;font-size:13px;color:var(--muted)">
+          <summary style="cursor:pointer;font-family:var(--font-hud);color:var(--cyan)">⚙ Supabase Backend Configuration</summary>
+          <div style="margin-top:14px;display:grid;gap:10px">
+            <p>Connect your own Supabase instance. Leave blank to use local offline simulation.</p>
+            <label class="field">
+              <span>Supabase Project URL</span>
+              <input class="input" id="cfg-sb-url" placeholder="https://xyz.supabase.co">
+            </label>
+            <label class="field">
+              <span>Supabase Anon Public Key</span>
+              <input class="input" id="cfg-sb-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+            </label>
+            <button class="btn btn-sm btn-green" id="btn-save-sb" type="button">Save Supabase Keys</button>
+          </div>
+        </details>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>Mess Queue Manager · Team Decrypted (SE-302A)</p>
+      <p><a class="u" href="index.html">Project Overview</a></p>
+    </div>
+  </footer>
+
+  <script src="js/logic.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    (function () {
+      const tabStudent = document.getElementById('tab-student');
+      const tabStaff = document.getElementById('tab-staff');
+      const formStudent = document.getElementById('form-student');
+      const formStaff = document.getElementById('form-staff');
+
+      // Populate existing profile if any
+      const existingUser = Auth.getUser();
+      if (existingUser && existingUser.role === 'student') {
+        document.getElementById('st-name').value = existingUser.fullName || '';
+        document.getElementById('st-roll').value = existingUser.rollNumber || '';
+        document.getElementById('st-type').value = existingUser.studentType || 'national';
+        document.getElementById('st-block').value = existingUser.hostelBlock || 'Block B';
+        document.getElementById('st-room').value = existingUser.roomNumber || 'B-312';
+        document.getElementById('st-email').value = existingUser.email || '';
+      }
+
+      tabStudent.addEventListener('click', () => {
+        tabStudent.classList.add('active');
+        tabStaff.classList.remove('active');
+        formStudent.hidden = false;
+        formStaff.hidden = true;
+      });
+
+      tabStaff.addEventListener('click', () => {
+        tabStaff.classList.add('active');
+        tabStudent.classList.remove('active');
+        formStaff.hidden = false;
+        formStudent.hidden = true;
+      });
+
+      // Submit Student
+      formStudent.addEventListener('submit', e => {
+        e.preventDefault();
+        const user = {
+          id: 'st-' + Date.now(),
+          role: 'student',
+          fullName: document.getElementById('st-name').value.trim() || 'Student',
+          rollNumber: document.getElementById('st-roll').value.trim() || '21BCE1042',
+          studentType: document.getElementById('st-type').value,
+          hostelBlock: document.getElementById('st-block').value,
+          roomNumber: document.getElementById('st-room').value.trim() || 'B-312',
+          email: document.getElementById('st-email').value.trim() || 'student@jainuniversity.ac.in',
+          karmaPoints: existingUser?.karmaPoints || 25
+        };
+        localStorage.setItem('mqm-who', user.studentType);
+        Auth.setUser(user);
+        window.location.href = 'student.html';
+      });
+
+      // Submit Staff
+      formStaff.addEventListener('submit', async e => {
+        e.preventDefault();
+        const email = document.getElementById('staff-email').value.trim();
+        const pin = document.getElementById('staff-pin').value.trim();
+        const err = document.getElementById('staff-error');
+
+        if (pin === '1234' || pin.length >= 4) {
+          sessionStorage.setItem('mqm-staff-ok', '1');
+          const staffUser = {
+            id: 'staff-01',
+            role: 'staff',
+            fullName: 'Mess In-Charge (Admin)',
+            email: email || 'staff@jainuniversity.ac.in',
+            rollNumber: 'STAFF-99'
+          };
+          Auth.setUser(staffUser);
+          window.location.href = 'staff.html';
+        } else {
+          err.hidden = false;
+        }
+      });
+
+      // Demo buttons
+      document.getElementById('btn-demo-nat').addEventListener('click', () => {
+        document.getElementById('st-name').value = 'Aditya Kumar';
+        document.getElementById('st-roll').value = '21BCE1042';
+        document.getElementById('st-type').value = 'national';
+        document.getElementById('st-block').value = 'Block B';
+        document.getElementById('st-room').value = 'B-312';
+        tabStudent.click();
+      });
+
+      document.getElementById('btn-demo-int').addEventListener('click', () => {
+        document.getElementById('st-name').value = 'David Mensah';
+        document.getElementById('st-roll').value = '22INT0911';
+        document.getElementById('st-type').value = 'international';
+        document.getElementById('st-block').value = 'Block A';
+        document.getElementById('st-room').value = 'A-105';
+        tabStudent.click();
+      });
+
+      document.getElementById('btn-demo-staff').addEventListener('click', () => {
+        tabStaff.click();
+        document.getElementById('staff-email').value = 'staff@jainuniversity.ac.in';
+        document.getElementById('staff-pin').value = '1234';
+      });
+
+      // Supabase key configuration
+      const sbUrlInput = document.getElementById('cfg-sb-url');
+      const sbKeyInput = document.getElementById('cfg-sb-key');
+      if (sbUrlInput) sbUrlInput.value = localStorage.getItem('mqm-supabase-url') || '';
+      if (sbKeyInput) sbKeyInput.value = localStorage.getItem('mqm-supabase-key') || '';
+
+      document.getElementById('btn-save-sb')?.addEventListener('click', () => {
+        const u = sbUrlInput.value.trim();
+        const k = sbKeyInput.value.trim();
+        if (u) localStorage.setItem('mqm-supabase-url', u);
+        else localStorage.removeItem('mqm-supabase-url');
+        if (k) localStorage.setItem('mqm-supabase-key', k);
+        else localStorage.removeItem('mqm-supabase-key');
+        alert('Supabase settings saved! Reloading…');
+        location.reload();
+      });
+    })();
+  </script>
+</body>
+</html>
+
