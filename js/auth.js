@@ -42,29 +42,34 @@
       if (!container) return;
 
       const user = this.getUser();
+      // If NOT signed in: only show Sign In button (no Profile button)
       if (!user) {
         container.innerHTML = `
-          <a class="btn btn-sm btn-gold" href="login.html">Sign In ▶</a>
+          <a class="btn btn-sm btn-gold nav-auth-btn" href="login.html">Sign In ▶</a>
         `;
         return;
       }
 
+      // If SIGNED IN: Profile button is now visible!
       if (user.role === 'staff' || user.role === 'admin') {
         container.innerHTML = `
-          <div class="user-chip user-chip-staff">
+          <div class="user-chip user-chip-staff" style="margin-right:4px">
             <span class="user-avatar-tag">STAFF</span>
-            <span class="user-name">${user.fullName || 'Mess In-Charge'}</span>
-            <button class="btn btn-sm btn-red user-logout-btn" type="button" title="Log Out">Lock</button>
+            <span class="user-name">${user.fullName || 'Admin'}</span>
           </div>
+          <a class="btn btn-sm btn-cyan" href="staff.html" title="Staff Console">Profile</a>
+          <button class="btn btn-sm btn-red user-logout-btn" type="button" title="Log Out">Lock</button>
         `;
       } else {
         const typeChip = user.studentType === 'international' ? 'INTL' : 'NAT';
+        const roomLabel = user.roomNumber || 'Hostel';
         container.innerHTML = `
-          <div class="user-chip">
+          <div class="user-chip" style="margin-right:4px">
             <span class="user-avatar-tag">${typeChip}</span>
-            <span class="user-name">${user.fullName || 'Student'} (${user.roomNumber || 'Room'})</span>
-            <button class="btn btn-sm user-logout-btn" type="button" title="Log Out">Exit</button>
+            <span class="user-name">${user.fullName || 'Student'} (${roomLabel})</span>
           </div>
+          <a class="btn btn-sm btn-cyan" href="login.html" title="View / Edit Profile">Profile</a>
+          <button class="btn btn-sm user-logout-btn" type="button" title="Log Out">Exit</button>
         `;
       }
 
@@ -85,4 +90,3 @@
   root.Auth = Auth;
   Auth.initNavbar();
 })(typeof window !== 'undefined' ? window : globalThis);
-

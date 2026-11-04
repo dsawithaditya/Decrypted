@@ -5,21 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1f4b">
-  <title>Mess Queue Manager | Live Canteen Crowd & Wait Time · Team Decrypted</title>
+  <title>Mess Queue Manager | Smart Canteen Ecosystem · Jain University</title>
   <meta name="description"
-    content="Check live canteen queue wait times, best counter recommendations, and smart 45/50/80/40 threshold routing at Jain University mess. Team Decrypted, SE-302A.">
-  <!-- Share Preview / WhatsApp OpenGraph -->
-  <meta property="og:title" content="Mess Queue Manager | Team Decrypted (SE-302A)">
+    content="Real-time canteen queue tracking, fastest counter routing, direct-to-room delivery, dish ratings, and zero food waste at Jain University canteen mess.">
+  <meta property="og:title" content="Mess Queue Manager | Jain University Canteen Mess">
   <meta property="og:description"
     content="Live canteen queue tracker & smart counter routing. Cut lunch wait times from 11.5 min to 4.2 min.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mqm.adityak.in/">
-  <!-- Inline SVG Favicon -->
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1f4b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' fill='%23fbbf24' font-family='monospace' font-weight='900' font-size='28'%3EMQM%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Clean, proportional % unit next to pixel numerals (matches theme) */
     .hud-value,
     .rule-pct {
       display: inline-flex;
@@ -47,26 +43,23 @@
     <nav class="container nav-inner" aria-label="Main">
       <a class="logo" href="index.html">MQM<span>.</span></a>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#problem" data-i18n="nav_problem">Problem</a></li>
-        <li><a href="#logic" data-i18n="nav_logic">Logic</a></li>
-        <li><a href="#results" data-i18n="nav_results">Results</a></li>
-        <li><a href="#algorithm" data-i18n="nav_algo">Algorithm</a></li>
-        <li><a href="#feedback" data-i18n="nav_feedback">Feedback</a></li>
-        <li><a href="#team" data-i18n="nav_team">Team</a></li>
+        <li><a href="index.html" style="color:var(--gold)" data-i18n="nav_home">Home</a></li>
+        <li><a href="student.html" data-i18n="nav_student_link">Student</a></li>
+        <li><a href="staff.html" data-i18n="nav_staff_link">Staff</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="help.html" data-i18n="nav_help">Help</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="btn btn-sm" id="lang-toggle" type="button" aria-label="Switch language">EN / हिं / ಕನ್</button>
+        <button class="btn btn-sm lang-btn-fixed" id="lang-toggle" type="button" aria-label="Switch language">EN / हिं / ಕನ್</button>
         <div id="nav-user-slot"></div>
-        <a class="btn btn-sm hide-xs" href="login.html">Profile</a>
-        <a class="btn btn-sm hide-xs" href="staff.html">Staff</a>
-        <a class="btn btn-sm btn-gold" href="student.html" data-i18n="nav_student">Student View</a>
+        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html" data-i18n="nav_student">Student View</a>
         <button class="btn btn-sm menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
     </nav>
   </header>
 
   <main>
-    <!-- HERO -->
+    <!-- HERO SECTION WITH LIVE HUD STRIP -->
     <section class="sky">
       <div class="stars" aria-hidden="true"></div>
       <svg class="cloud" style="top:110px;left:6%;width:150px;--dur:26s" viewBox="0 0 32 12"
@@ -91,46 +84,34 @@
         </g>
         <rect x="0" y="10" width="32" height="2" fill="#cfe3f7" />
       </svg>
-      <svg class="cloud" style="bottom:90px;left:18%;width:110px;--dur:22s;opacity:.8" viewBox="0 0 32 12"
-        shape-rendering="crispEdges" aria-hidden="true">
-        <g fill="#fff">
-          <rect x="10" y="0" width="8" height="2" />
-          <rect x="8" y="2" width="18" height="2" />
-          <rect x="4" y="4" width="24" height="2" />
-          <rect x="2" y="6" width="28" height="2" />
-          <rect x="0" y="8" width="32" height="2" />
-        </g>
-        <rect x="0" y="10" width="32" height="2" fill="#cfe3f7" />
-      </svg>
 
       <div class="container hero-content">
-        <span class="tag">TEAM DECRYPTED · SE-302A · IPS</span>
-        <h1 class="hero-title" data-i18n="hero_title">MESS QUEUE<span class="line2">MANAGER</span></h1>
-        <p class="hero-sub" data-i18n="hero_sub">Shorter lines and less waiting. A smart rule system that checks the
-          crowd at every counter, opens extra counters at rush hour, and tells you exactly where to go.</p>
-        <div class="hero-actions">
-          <a class="btn btn-gold btn-lg" href="student.html" data-i18n="btn_find">▶ Find my counter</a>
-          <a class="btn btn-lg" href="staff.html" data-i18n="btn_staff">Staff console</a>
-        </div>
+        <span class="tag">JAIN UNIVERSITY CANTEEN MESS</span>
+        <h1 class="hero-title" data-i18n="hero_title">
+          Smart Mess <span class="line2">Queue Manager</span>
+        </h1>
+        <p class="hero-sub" data-i18n="hero_sub">
+          Real-time line sizes, fastest counter routing, direct-to-room delivery, dish-by-dish quality ratings, and zero food waste.
+        </p>
 
-        <!-- Connection & Freshness Status Bar -->
+        <!-- LIVE CLOCK & FRESHNESS ROW -->
         <div class="clock-row" style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-          <span class="hud-chip" id="home-conn-status">● Live data active</span>
+          <span class="hud-chip" id="home-conn-status">● Live sync active</span>
           <span class="hud-chip" id="home-updated">Updated just now</span>
         </div>
         <div class="notice notice-amber" id="home-offline-banner" hidden style="max-width:680px;margin:10px auto 0">
-          Could not connect, showing last known data.
+          Could not connect, showing last known cached data.
         </div>
 
-        <!-- Pre-populated HUD values with clean % unit -->
+        <!-- LIVE HUD STRIP -->
         <div class="hud-strip" aria-live="polite">
           <div class="hud-item">
             <div class="hud-label">ZONE CROWD</div>
             <div class="hud-value c-green" id="live-zone">20<span class="pct-unit">%</span></div>
           </div>
           <div class="hud-item">
-            <div class="hud-label">BEST COUNTER</div>
-            <div class="hud-value" id="live-best">Counter 3 (2 min)</div>
+            <div class="hud-label">FASTEST COUNTER</div>
+            <div class="hud-value" id="live-best">Counter 3 (~2 min)</div>
           </div>
           <div class="hud-item">
             <div class="hud-label">STANDBY</div>
@@ -145,19 +126,28 @@
             <div class="hud-value c-amber" id="live-deliveries">3 ACTIVE</div>
           </div>
           <div class="hud-item">
-            <div class="hud-label">TOP DISH TODAY</div>
+            <div class="hud-label">TODAY'S SPECIAL</div>
             <div class="hud-value c-gold" id="live-top-dish" style="font-size:20px">Paneer Masala (4.8★)</div>
           </div>
         </div>
 
-        <!-- Interactive Live Demo / Simulation Bar on Home Page -->
+        <!-- HERO QUICK ACTION BUTTONS -->
+        <div class="hero-actions">
+          <a class="btn btn-gold btn-lg" href="student.html" data-i18n="btn_find">⚡ Find Fastest Counter ▶</a>
+          <a class="btn btn-cyan btn-lg" href="student.html#tab-view-delivery" data-i18n="btn_delivery">🛏️ Room Delivery</a>
+          <a class="btn btn-lg" href="student.html#tab-view-menu" data-i18n="btn_menu">⭐ Rate Today's Food</a>
+          <a class="btn btn-lg hide-xs" href="staff.html" data-i18n="btn_staff">Staff Console ↗</a>
+        </div>
+
+        <!-- INTERACTIVE LIVE ALGORITHM DEMO BAR -->
         <div class="card"
-          style="margin-top:20px;text-align:left;background:rgba(11,31,75,0.88);border:1px solid rgba(251,191,36,0.4)">
+          style="margin-top:24px;text-align:left;background:rgba(11,31,75,0.92);border:1px solid rgba(251,191,36,0.4)">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
             <div>
-              <strong style="color:var(--gold,#fbbf24)">⚡ INTERACTIVE DEMO SIMULATOR</strong>
-              <p class="muted" style="margin:4px 0 0;font-size:13px" id="demo-status-msg">Click any threshold preset
-                below to test the 45/50/80/40 rules live right here:</p>
+              <strong style="color:var(--gold,#fbbf24)">⚡ LIVE THRESHOLD SIMULATOR</strong>
+              <p class="muted" style="margin:4px 0 0;font-size:13px" id="demo-status-msg">
+                Test the 45/50/80/40 algorithm rules right now on the live dashboard:
+              </p>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap">
               <button class="btn btn-sm" type="button" data-sim-preset="30">30% Normal (&lt;40%)</button>
@@ -172,587 +162,107 @@
       <div class="pixel-edge"></div>
     </section>
 
-    <!-- LIVE QR CODE & TEST VERIFICATION STRIP -->
-    <section class="section section-alt" style="padding:28px 0">
+    <!-- CORE MODULES GRID (THE 4 PILLARS OF THE SYSTEM) -->
+    <section class="section" id="services">
+      <div class="container">
+        <p class="eyebrow">Smart Mess Ecosystem</p>
+        <h2 class="section-title">Four Pillars of <span>Better Dining</span></h2>
+        <p class="lead">From eliminating lunch queue bottlenecks to providing direct-to-room delivery for sick students and cutting kitchen waste.</p>
+
+        <div class="grid grid-2" style="margin-top:32px">
+          <!-- Card 1 -->
+          <div class="card reveal">
+            <div style="font-size:32px;margin-bottom:8px">⚡</div>
+            <h3 class="card-title">REAL-TIME QUEUE &amp; SMART ROUTING</h3>
+            <p>Know exactly which line is moving fastest before you arrive at the dining hall.</p>
+            <ul class="list">
+              <li><b>Live Wait Estimation</b>: Calculated from queue size and 30-second serving stopwatch rate.</li>
+              <li><b>Early 45% Notice</b>: Staff are alerted with audio/vibration before lines build up.</li>
+              <li><b>Digital Express Pass</b>: Unlocks least crowded International counters when crowd exceeds 80%.</li>
+              <li><b>75% Smart Overflow Cap</b>: Prevents international counter overcrowding.</li>
+            </ul>
+            <div style="margin-top:16px">
+              <a class="btn btn-sm btn-gold" href="student.html">Open Live Queue Screen →</a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card reveal">
+            <div style="font-size:32px;margin-bottom:8px">🛏️</div>
+            <h3 class="card-title">DIRECT-TO-ROOM FOOD DELIVERY</h3>
+            <p>Students who are unwell, injured, in quarantine, or busy in exam viva don't have to skip meals.</p>
+            <ul class="list">
+              <li><b>Medical Priority</b>: High-fever &amp; quarantine orders are immediately prioritized.</li>
+              <li><b>Special Diets</b>: Standard Today's Thali or Light Sick Diet (Khichdi, Curd Rice, Soup).</li>
+              <li><b>Peer Buddy Rewards</b>: Volunteer students earn <b>+10 Mess Karma Points</b>.</li>
+              <li><b>4-Digit Security OTP</b>: Prevents wrong room drop-offs and guarantees meal safety.</li>
+            </ul>
+            <div style="margin-top:16px">
+              <a class="btn btn-sm btn-cyan" href="student.html#tab-view-delivery">Request Room Delivery →</a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card reveal">
+            <div style="font-size:32px;margin-bottom:8px">⭐</div>
+            <h3 class="card-title">DISH RATINGS &amp; KITCHEN EARLY-WARNING</h3>
+            <p>Continuous food quality sentiment monitoring so chefs can correct issues during active service.</p>
+            <ul class="list">
+              <li><b>Per-Dish 1–5★</b>: Rate Dal Tadka, Paneer Butter Masala, or Rotis individually.</li>
+              <li><b>Instant Reaction Tags</b>: 🔥 Fresh &amp; Hot, ❄️ Cold, 🧂 Salt Issue, 🛢️ Too Oily.</li>
+              <li><b>Early Kitchen Warning</b>: Triggers red alert if any dish rating drops below 2.5★.</li>
+              <li><b>Live Refill Badges</b>: Available, Refilling in 3m, or Running Low.</li>
+            </ul>
+            <div style="margin-top:16px">
+              <a class="btn btn-sm btn-gold" href="student.html#tab-view-menu">View Today's Menu &amp; Rate →</a>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="card reveal">
+            <div style="font-size:32px;margin-bottom:8px">🌱</div>
+            <h3 class="card-title">ZERO FOOD WASTE PRE-CHECK-IN</h3>
+            <p>Help the canteen cooks prepare the exact amount of food needed every meal.</p>
+            <ul class="list">
+              <li><b>1-Tap Pre-Check-In</b>: Tap "Eating in Mess" or "Skipping Meal" 1 hour before mealtime.</li>
+              <li><b>Exact Headcount Forecast</b>: Reduces unconsumed kitchen food waste by 20–30%.</li>
+              <li><b>"Notify Me When Free"</b>: Push alerts chime when the queue clears below 50%.</li>
+              <li><b>Optimal Eating Window</b>: Live rush curve charts highlight the green low-wait times.</li>
+            </ul>
+            <div style="margin-top:16px">
+              <a class="btn btn-sm btn-green" href="student.html#tab-view-waste">Pre-Check-In to Save Food →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE ENTRANCE QR & TEST VERIFICATION STRIP -->
+    <section class="section section-alt" style="padding:40px 0">
       <div class="container">
         <div class="grid grid-2" style="align-items:center">
           <div class="card" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-            <img id="home-qr-img" width="120" height="120" alt="Scan QR code for Student View"
+            <img id="home-qr-img" width="130" height="130" alt="Scan QR code for Student View"
               style="border-radius:8px;background:#fff;padding:6px">
             <div style="flex:1;min-width:200px">
-              <h3 style="margin:0 0 6px">SCAN FOR STUDENT VIEW</h3>
-              <p class="muted" style="margin:0 0 8px;font-size:14px">Scan from the projector or mess entrance to see
-                live counter wait times on your phone.</p>
-              <a class="btn btn-sm btn-gold" href="student.html">Open Student Screen →</a>
+              <h3 style="margin:0 0 6px">CANTEEN ENTRANCE QR</h3>
+              <p class="muted" style="margin:0 0 10px;font-size:14px">
+                Stick this code at the dining hall entrance. Students scan with any smartphone camera to see live wait times, claim express passes, or order room delivery.
+              </p>
+              <a class="btn btn-sm btn-gold" href="student.html">Open Student View →</a>
             </div>
           </div>
+
           <div class="card">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-              <h3 style="margin:0">AUTOMATED LOGIC TESTS (T1–T14)</h3>
+              <h3 style="margin:0">AUTOMATED LOGIC VERIFICATION (T1–T14)</h3>
               <span class="pill pill-green" id="home-test-badge">14 / 14 PASSED</span>
             </div>
-            <p class="muted" style="margin:8px 0 12px;font-size:14px">All boundary conditions (30%, 46%, 55%, 85%, 45%
-              hysteresis, 38% close, 0 queue, all &gt;80%, 0 capacity) verified automatically.</p>
-            <div id="home-test-pills" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"></div>
+            <p class="muted" style="margin:8px 0 12px;font-size:14px">
+              All boundary conditions (T1–T9 Core Queue Engine) + Innovations (T10–T14: 75% Overflow Cap, Express Token Pass, Medical Delivery Priority, Kitchen Alert Sentiment, and Zero-Waste Pre-Check-In) verified.
+            </p>
+            <div id="home-test-pills" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px"></div>
             <a class="btn btn-sm btn-cyan" href="tests.html">View full T1–T14 test table →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROBLEM -->
-    <section class="section" id="problem">
-      <div class="container">
-        <p class="eyebrow">01 · Problem statement</p>
-        <h2 class="section-title">Long lines. <span>Empty counters.</span></h2>
-        <p class="lead">At lunch, the mess food counters get very crowded. Some counters are full while others sit
-          empty. We need a simple, smart rule system that checks queue size and moves students to less crowded counters,
-          so food is served faster and nobody waits too long.</p>
-
-        <div class="grid grid-2">
-          <div class="card reveal">
-            <h3>OBJECTIVES</h3>
-            <ul class="list">
-              <li>Reduce total waiting time for students getting food.</li>
-              <li>Use step-by-step logic to manage line capacity.</li>
-              <li>Open extra counters automatically during rush hours.</li>
-              <li>Show a clear flowchart and pseudocode for the process.</li>
-              <li>Collect and apply feedback from students and mess staff.</li>
-            </ul>
-          </div>
-          <div class="card reveal">
-            <h3>WHO USES IT</h3>
-            <ul class="list">
-              <li><b>Students:</b> scan the QR code, see the best counter, crowd % and wait time.</li>
-              <li><b>Mess staff:</b> update crowd counts, receive sound/vibration alerts, open or close counters, mark
-                sold-out items.</li>
-              <li><b>Admin (optional):</b> change thresholds, capacity and serving time.</li>
-            </ul>
-            <p style="margin-top:14px">Runs as a <b style="color:var(--gold)">web app</b> on any phone or laptop
-              browser, so there's nothing to install.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHAT CHANGED -->
-    <section class="section section-alt">
-      <div class="container">
-        <p class="eyebrow">02 · Upgrade</p>
-        <h2 class="section-title">Same problem, <span>smarter logic</span></h2>
-        <div class="table-wrap reveal">
-          <table>
-            <thead>
-              <tr>
-                <th>OLD LOGIC</th>
-                <th>NEW LOGIC</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>One overall crowd %</td>
-                <td>Crowd calculated <strong>per counter</strong></td>
-              </tr>
-              <tr>
-                <td>Only 80% and 50% thresholds</td>
-                <td>Added <strong>45% early alert</strong> (from survey feedback)</td>
-              </tr>
-              <tr>
-                <td>Counters could flip open/closed repeatedly</td>
-                <td>Added <strong>hysteresis</strong>: close only below 40%</td>
-              </tr>
-              <tr>
-                <td>No waiting time shown</td>
-                <td>Added <strong>estimated wait time</strong> per counter</td>
-              </tr>
-              <tr>
-                <td>No direction for students</td>
-                <td>Added <strong>"best counter" recommendation</strong> + sold-out filter</td>
-              </tr>
-              <tr>
-                <td>Only a displayed message</td>
-                <td>Added <strong>staff sound/vibration alerts</strong> with a 2-minute notice</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOGIC -->
-    <section class="section" id="logic">
-      <div class="container">
-        <p class="eyebrow">03 · Core logic</p>
-        <h2 class="section-title">The <span>rules</span></h2>
-        <div class="grid grid-2">
-          <div class="card reveal">
-            <h3>CROWD PERCENTAGE</h3>
-            <pre class="code">crowd_% = (people_in_queue / capacity) × 100
-<span class="c">// capacity 20, people 16 → 80%</span></pre>
-          </div>
-          <div class="card reveal">
-            <h3>ESTIMATED WAIT TIME</h3>
-            <pre class="code">wait_min = (people × avg_serve_sec) / 60
-<span class="c">// 16 × 30 s = 480 s → 8 minutes</span></pre>
-          </div>
-        </div>
-
-        <div class="grid grid-4">
-          <div class="card rule r-amber reveal">
-            <div class="rule-pct">≥45<span class="pct-unit">%</span></div>
-            <h3>EARLY ALERT</h3>
-            <p>Staff get a 2-minute sound &amp; screen notice to prepare the standby counter.</p><span
-              class="who">STAFF</span>
-          </div>
-          <div class="card rule r-blue reveal">
-            <div class="rule-pct">≥50<span class="pct-unit">%</span></div>
-            <h3>OPEN STANDBY</h3>
-            <p>The extra standby counter opens.</p><span class="who">STAFF + STUDENTS</span>
-          </div>
-          <div class="card rule r-red reveal">
-            <div class="rule-pct">&gt;80<span class="pct-unit">%</span></div>
-            <h3>CROSS ACCESS</h3>
-            <p>National students may use the international counters.</p><span class="who">STAFF + STUDENTS</span>
-          </div>
-          <div class="card rule r-green reveal">
-            <div class="rule-pct">&lt;40<span class="pct-unit">%</span></div>
-            <h3>CLOSE / NORMAL</h3>
-            <p>The standby counter closes and normal routing resumes.</p><span class="who">STAFF</span>
-          </div>
-        </div>
-
-        <div class="callout reveal"><b>WHY HYSTERESIS?</b> If a counter opened at 50% and closed at 49%, it would flip
-          every minute while the crowd hovers around 50%. Closing only below 40% keeps things stable.</div>
-        <div class="callout reveal"><b>WHICH CROWD %?</b> The rules use the <b>average crowd of the national
-            counters</b>, which fill up first. Students still see each counter's own %.</div>
-
-        <div class="table-wrap reveal">
-          <table>
-            <thead>
-              <tr>
-                <th>CROWD %</th>
-                <th>COLOR</th>
-                <th>LABEL</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Below 50%</td>
-                <td><span class="pill pill-green">GREEN</span></td>
-                <td>Free</td>
-              </tr>
-              <tr>
-                <td>50% to 80%</td>
-                <td><span class="pill pill-amber">AMBER</span></td>
-                <td>Busy</td>
-              </tr>
-              <tr>
-                <td>Above 80%</td>
-                <td><span class="pill pill-red">RED</span></td>
-                <td>Very crowded</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- SMART MESS FULL-STACK UPGRADES -->
-    <section class="section" id="upgrades">
-      <div class="container">
-        <p class="eyebrow">04 · Full-Stack Innovations</p>
-        <h2 class="section-title">New Smart <span>Mess Features</span></h2>
-        <p class="lead">Upgrading the Jain University canteen mess from queue management to an end-to-end intelligent dining ecosystem connected via Supabase Auth, PostgreSQL &amp; Realtime.</p>
-
-        <div class="grid grid-2" style="margin-top:28px">
-          <div class="card reveal">
-            <div style="font-size:32px;margin-bottom:8px">🛏️</div>
-            <h3>DIRECT-TO-ROOM MESS FOOD DELIVERY</h3>
-            <p>Students who are unwell with high fever, mobility injury, quarantine, or overlapping laboratory exams no longer need to skip meals. Features:</p>
-            <ul class="list" style="margin-top:8px">
-              <li><b>Urgent Medical Priority</b>: High-fever &amp; quarantine orders bubble to the top of the staff queue.</li>
-              <li><b>Light Sick Diet</b>: Freshly packed Khichdi, Curd Rice, or Boiled Veggies.</li>
-              <li><b>Hostel Peer Buddy Program</b>: Students earn <b>+10 Mess Karma Points</b> for delivering to peers.</li>
-              <li><b>Live 4-Stage Tracker</b> with 4-digit security OTP.</li>
-            </ul>
-          </div>
-
-          <div class="card reveal">
-            <div style="font-size:32px;margin-bottom:8px">⭐</div>
-            <h3>DISH-LEVEL RATINGS &amp; KITCHEN EARLY WARNING</h3>
-            <p>Continuous real-time food quality monitoring to prevent bad dining experiences:</p>
-            <ul class="list" style="margin-top:8px">
-              <li><b>Item-by-Item 1–5★</b>: Students rate each dish (e.g. Paneer Butter Masala, Dal Tadka).</li>
-              <li><b>Quick Reaction Tags</b>: 🔥 Fresh &amp; Hot, ❄️ Cold, 🧂 Salt Issue, 🛢️ Too Oily.</li>
-              <li><b>Instant Kitchen Alert</b>: If any dish drops below 2.5★ or receives 3+ complaint tags, staff console triggers an emergency beep so chefs can adjust the next batch immediately!</li>
-              <li><b>Live Refill Badges</b>: Available, Refilling in 3m, or Running Low.</li>
-            </ul>
-          </div>
-
-          <div class="card reveal">
-            <div style="font-size:32px;margin-bottom:8px">🎫</div>
-            <h3>SMART OVERFLOW CAP &amp; EXPRESS PASSES</h3>
-            <p>Prevents overcrowding smaller International counters (15-person capacity) during rush hour:</p>
-            <ul class="list" style="margin-top:8px">
-              <li><b>75% Overflow Cap</b>: If an International counter reaches 75% capacity, MQM automatically pauses routing National students to it.</li>
-              <li><b>Digital Express Pass</b>: Generates a time-stamped 15-minute token with QR code routing students to the least busy counter.</li>
-            </ul>
-          </div>
-
-          <div class="card reveal">
-            <div style="font-size:32px;margin-bottom:8px">🌱</div>
-            <h3>ZERO FOOD WASTE &amp; PUSH ALERTS</h3>
-            <p>Sustainability and convenience driven by student pre-check-in:</p>
-            <ul class="list" style="margin-top:8px">
-              <li><b>Pre-Check-In Headcount</b>: Students tap "Eating in Mess" or "Skipping Meal" up to 1 hr before mealtime, reducing canteen food waste by 20–30%.</li>
-              <li><b>"Notify Me When Free (<50%)"</b>: Web Notifications API + audio alert triggers when lines clear.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MEASURED BEFORE / AFTER RESULTS & DAILY CROWD CHART -->
-    <section class="section section-alt" id="results">
-      <div class="container">
-        <p class="eyebrow">04 · Measured Impact</p>
-        <h2 class="section-title">Before vs. After <span>Results</span></h2>
-        <p class="lead">Measured during peak lunch rush (12:15 PM – 1:15 PM) at the Jain University canteen mess with
-          stopwatch timing (30s avg serving time per student).</p>
-
-        <div class="grid grid-4" style="margin-bottom:24px">
-          <div class="card reveal">
-            <div class="rule-pct" style="color:#22c55e">-63<span class="pct-unit">%</span></div>
-            <h3>AVG PEAK WAIT</h3>
-            <p>Dropped from <b>11.5 min</b> (before) to <b>4.2 min</b> (after smart routing).</p>
-          </div>
-          <div class="card reveal">
-            <div class="rule-pct" style="color:#38bdf8">1.4m</div>
-            <h3>STANDBY RESPONSE</h3>
-            <p>Standby opened within <b>1.4 min</b> of the 45% early alert (target &lt; 2 min).</p>
-          </div>
-          <div class="card reveal">
-            <div class="rule-pct" style="color:#fbbf24">14→3</div>
-            <h3>COUNTER IMBALANCE</h3>
-            <p>Max queue gap between busiest &amp; emptiest counter dropped from <b>14 to 3 people</b>.</p>
-          </div>
-          <div class="card reveal">
-            <div class="rule-pct" style="color:#22c55e">92<span class="pct-unit">%</span></div>
-            <h3>STUDENT CLARITY</h3>
-            <p><b>46 / 50 students</b> surveyed rated the "Go to Counter X" banner immediately clear.</p>
-          </div>
-        </div>
-
-        <div class="grid grid-2">
-          <!-- Before vs After Wait Time Visual Bar Chart -->
-          <div class="card reveal">
-            <h3>PEAK WAIT TIME COMPARISON (MINUTES)</h3>
-            <div style="margin-top:14px;display:flex;flex-direction:column;gap:14px">
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
-                  <span><b>Counter 1 (National)</b> — Before: 12.0m → After: 4.5m</span><span>-62%</span>
-                </div>
-                <div class="bar" style="height:10px;margin-bottom:4px"><i class="fill bg-red" style="width:96%"></i>
-                </div>
-                <div class="bar" style="height:10px"><i class="fill bg-green" style="width:36%"></i></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
-                  <span><b>Counter 2 (National)</b> — Before: 11.5m → After: 4.0m</span><span>-65%</span>
-                </div>
-                <div class="bar" style="height:10px;margin-bottom:4px"><i class="fill bg-red" style="width:92%"></i>
-                </div>
-                <div class="bar" style="height:10px"><i class="fill bg-green" style="width:32%"></i></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
-                  <span><b>Counter 3 (National)</b> — Before: 11.0m → After: 4.0m</span><span>-64%</span>
-                </div>
-                <div class="bar" style="height:10px;margin-bottom:4px"><i class="fill bg-red" style="width:88%"></i>
-                </div>
-                <div class="bar" style="height:10px"><i class="fill bg-green" style="width:32%"></i></div>
-              </div>
-              <p class="muted" style="font-size:12px;margin:4px 0 0"><span class="pill pill-red">RED</span> Unmanaged
-                Queue &nbsp; <span class="pill pill-green">GREEN</span> With MQM (50% Standby + 80% Cross Access)</p>
-            </div>
-          </div>
-
-          <!-- Daily Crowd Chart (Peak Hours) -->
-          <div class="card reveal">
-            <h3>DAILY MESS CROWD PROFILE (11:30 AM – 2:00 PM)</h3>
-            <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px"><span>11:30 AM
-                    (Early)</span><b>22% · Free</b></div>
-                <div class="bar"><i class="fill bg-green" style="width:22%"></i></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px"><span>12:00 PM (Alert Trigger
-                    ≥45%)</span><b>48% · Early Alert</b></div>
-                <div class="bar"><i class="fill bg-amber" style="width:48%"></i></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px"><span>12:15 PM (Standby Opens
-                    ≥50%)</span><b>64% · Busy</b></div>
-                <div class="bar"><i class="fill bg-amber" style="width:64%"></i></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px"><span>12:30 PM (Peak Rush &gt;80%
-                    Cross Access)</span><b>88% · Peak</b></div>
-                <div class="bar"><i class="fill bg-red" style="width:88%"></i></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px"><span>1:15 PM (Hysteresis Hold
-                    40–45%)</span><b>43% · Standby Active</b></div>
-                <div class="bar"><i class="fill bg-green" style="width:43%"></i></div>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:13px"><span>1:45 PM (Normal
-                    &lt;40%)</span><b>28% · Standby Closed</b></div>
-                <div class="bar"><i class="fill bg-green" style="width:28%"></i></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ALGORITHM -->
-    <section class="section" id="algorithm">
-      <div class="container">
-        <p class="eyebrow">05 · Algorithm</p>
-        <h2 class="section-title">Step by <span>step</span></h2>
-        <div class="grid grid-2">
-          <div class="card reveal">
-            <h3>STEPS</h3>
-            <ol class="steps">
-              <li>Read the queue count of every counter.</li>
-              <li>Calculate crowd % and wait time for each counter.</li>
-              <li>Calculate the national zone average.</li>
-              <li>Above 80%: cross-counter access ON and standby open.</li>
-              <li>Else 50% or more: open the standby counter.</li>
-              <li>Else 45% or more: send an early alert to staff.</li>
-              <li>Below 40%: close standby and cross access.</li>
-              <li>Choose the best open, non-sold-out counter and update the student screen.</li>
-              <li>Wait 1–2 minutes and repeat.</li>
-            </ol>
-          </div>
-          <div class="reveal">
-            <pre class="code"><span class="k">START</span>
-<span class="k">LOOP</span> every 1-2 minutes:
-  <span class="k">FOR</span> each counter:
-    crowd_pct = queue / capacity * 100
-    wait_min  = queue * avg_serve_sec / 60
-  <span class="k">ENDFOR</span>
-  zone_avg = average crowd_pct of national counters
-
-  <span class="k">IF</span> zone_avg &gt; 80 <span class="k">THEN</span>
-    cross_access = ON ; standby_open = ON
-  <span class="k">ELSE IF</span> zone_avg &gt;= 50 <span class="k">THEN</span>
-    standby_open = ON
-  <span class="k">ELSE IF</span> zone_avg &gt;= 45 <span class="k">THEN</span>
-    SEND alert "Prepare standby in 2 min"
-  <span class="k">ELSE IF</span> zone_avg &lt; 40 <span class="k">THEN</span>
-    cross_access = OFF ; standby_open = OFF
-  <span class="k">ENDIF</span>
-
-  best = open + allowed counter with lowest wait
-  SHOW "Go to " + best.name
-<span class="k">ENDLOOP</span>
-<span class="k">END</span></pre>
-          </div>
-        </div>
-
-        <div class="mermaid-box reveal">
-          <pre class="mermaid">
-flowchart TD
-    A[Start: read queue count of each counter] --> B[Calculate crowd % and wait time per counter]
-    B --> C[Calculate national zone average]
-    C --> D{Zone crowd &gt; 80%?}
-    D -- Yes --> E[Turn ON cross-counter access and open standby]
-    D -- No --> F{Zone crowd &gt;= 50%?}
-    F -- Yes --> G[Open standby counter]
-    F -- No --> H{Zone crowd &gt;= 45%?}
-    H -- Yes --> I[Alert staff: 2-minute notice]
-    H -- No --> J{Zone crowd &lt; 40%?}
-    J -- Yes --> K[Close standby and cross access]
-    J -- No --> L[Keep current state]
-    E --> M[Pick best counter by lowest wait]
-    G --> M
-    I --> M
-    K --> M
-    L --> M
-    M --> N[Update student screens]
-    N --> O[Wait 1-2 minutes]
-    O --> A
-</pre>
-        </div>
-        <p style="margin-top:20px"><a class="btn btn-cyan" href="tests.html">Run logic tests T1–T9 →</a></p>
-      </div>
-    </section>
-
-    <!-- PILLARS -->
-    <section class="section section-alt" id="pillars">
-      <div class="container">
-        <p class="eyebrow">06 · Computational thinking</p>
-        <h2 class="section-title">The four <span>pillars</span></h2>
-        <div class="grid grid-4">
-          <div class="card pillar reveal">
-            <div class="icon">D</div>
-            <h3>DECOMPOSITION</h3>
-            <p>Split the problem into measuring queues, checking thresholds, opening counters, directing students, and
-              notifying staff.</p>
-          </div>
-          <div class="card pillar reveal">
-            <div class="icon">P</div>
-            <h3>PATTERN RECOGNITION</h3>
-            <p>National counters fill up at lunch while international ones stay free. The rush peaks at 12:30 PM.</p>
-          </div>
-          <div class="card pillar reveal">
-            <div class="icon">A</div>
-            <h3>ABSTRACTION</h3>
-            <p>Track only queue count, capacity, sold-out state, and serving time. Ignore individual meal details.</p>
-          </div>
-          <div class="card pillar reveal">
-            <div class="icon">∞</div>
-            <h3>ALGORITHMIC THINKING</h3>
-            <p>Fixed IF/ELSE rules (45/50/80/40), repeated on a timer.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEEDBACK -->
-    <section class="section" id="feedback">
-      <div class="container">
-        <p class="eyebrow">07 · Feedback</p>
-        <h2 class="section-title">Built from <span>your feedback</span></h2>
-        <div class="table-wrap reveal">
-          <table>
-            <thead>
-              <tr>
-                <th>FEEDBACK FROM SURVEY</th>
-                <th>FEATURE IN THE NEW DESIGN</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Students didn't know which line to join</td>
-                <td>"Go to Counter X" recommendation and big signs</td>
-              </tr>
-              <tr>
-                <td>Staff need advance alert &amp; aren't always watching screens</td>
-                <td>45% early alert with sound beep, vibration, and 2-minute notice</td>
-              </tr>
-              <tr>
-                <td>Students missed seeing screens</td>
-                <td>Floor arrows, plus the phone view via QR code on home &amp; entrance</td>
-              </tr>
-              <tr>
-                <td>Students wasted time in lines that ran out of food</td>
-                <td>Sold-out menu toggle skips empty-food counters automatically</td>
-              </tr>
-              <tr>
-                <td>Cross-counter access saved time during peak rush</td>
-                <td>Kept the 50% standby and 80% cross-access rules</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card reveal">
-            <h3>FUTURE SCOPE</h3>
-            <ul class="list">
-              <li>Camera-based people counting</li>
-              <li>Student QR check-in / check-out</li>
-              <li>Automated weekly rush-hour analytics</li>
-            </ul>
-          </div>
-          <div class="card reveal">
-            <h3>&nbsp;</h3>
-            <ul class="list">
-              <li>ML rush prediction from historical data</li>
-              <li>Pre-order meal token system</li>
-              <li>Full multi-language voice announcements</li>
-            </ul>
-          </div>
-          <div class="card reveal">
-            <h3>VERIFIED SUCCESS METRICS</h3>
-            <ul class="list">
-              <li><b>63% lower</b> avg wait time (11.5m → 4.2m)</li>
-              <li><b>92%</b> student clarity rating (46/50 survey)</li>
-              <li>Standby opened in <b>1.4 min</b> (&lt;2 min target)</li>
-              <li>Queue gap reduced from <b>14 to 3 students</b></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TEAM -->
-    <section class="section section-alt" id="team">
-      <div class="container">
-        <p class="eyebrow">08 · Team 3</p>
-        <h2 class="section-title">Team <span>Decrypted</span></h2>
-        <p class="lead">IPS: Computational Thinking as an Engineering Mindset · Section SE-302A · Faculty: Dr. Sujithra
-          · Venue: Canteen Mess, Jain (Deemed-to-be University)</p>
-        <div class="grid grid-3">
-          <div class="card member reveal">
-            <div class="avatar">AK</div>
-            <div>
-              <h4>Aditya Kumar <span class="lead-badge">LEAD</span></h4>
-              <div class="role">PROGRAMMING</div>
-              <p>logic.js and Firebase</p>
-            </div>
-          </div>
-          <div class="card member reveal">
-            <div class="avatar">OG</div>
-            <div>
-              <h4>Ojash Kumar Gupta</h4>
-              <div class="role">ALGORITHM</div>
-              <p>Rules, tests, pseudocode, flowchart</p>
-            </div>
-          </div>
-          <div class="card member reveal">
-            <div class="avatar">CK</div>
-            <div>
-              <h4>Charvi Krithika</h4>
-              <div class="role">FRONT END</div>
-              <p>Student view</p>
-            </div>
-          </div>
-          <div class="card member reveal">
-            <div class="avatar">KJ</div>
-            <div>
-              <h4>Kirtee Jain</h4>
-              <div class="role">FRONT END + SLIDES</div>
-              <p>Staff view and presentation</p>
-            </div>
-          </div>
-          <div class="card member reveal">
-            <div class="avatar">AS</div>
-            <div>
-              <h4>Aman Singh</h4>
-              <div class="role">SURVEY + TESTING</div>
-              <p>Canteen test, serving-time measurement</p>
-            </div>
-          </div>
-          <div class="card member reveal">
-            <div class="avatar">SK</div>
-            <div>
-              <h4>Senthil Kumar S</h4>
-              <div class="role">SURVEY + TESTING</div>
-              <p>Student feedback round 2</p>
-            </div>
-          </div>
-          <div class="card member reveal">
-            <div class="avatar">TP</div>
-            <div>
-              <h4>Thulasi Prasadr</h4>
-              <div class="role">DOCUMENTATION</div>
-              <p>Report, screenshots, evidence</p>
-            </div>
           </div>
         </div>
       </div>
@@ -764,11 +274,16 @@ flowchart TD
     <div class="container footer-inner">
       <div>
         <div class="logo">MQM<span>.</span></div>
-        <p>Team Decrypted · Jain (Deemed-to-be University) · <span data-year></span></p>
+        <p>Mess Queue Manager · Jain (Deemed-to-be University) · <span data-year></span></p>
       </div>
-      <p><a class="u" href="https://github.com/dsawithad/IPS" target="_blank" rel="noreferrer">GitHub repo</a> · <a
-          class="u" href="student.html">Student</a> · <a class="u" href="staff.html">Staff</a> · <a class="u"
-          href="tests.html">Tests</a></p>
+      <p>
+        <a class="u" href="index.html">Home</a> · 
+        <a class="u" href="student.html">Student Portal</a> · 
+        <a class="u" href="staff.html">Staff Console</a> · 
+        <a class="u" href="about.html">About &amp; Research</a> · 
+        <a class="u" href="help.html">Help &amp; FAQ</a> · 
+        <a class="u" href="tests.html">Tests (T1–T14)</a>
+      </p>
     </div>
   </footer>
 
@@ -783,7 +298,7 @@ flowchart TD
       const qrImg = document.getElementById('home-qr-img');
       if (qrImg) qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent(studentUrl);
 
-      // 2. Run T1-T9 automated tests & show pass/fail badges on Home Page
+      // 2. Run T1-T14 automated tests & show pass/fail badges on Home Page
       if (MQM.runTests) {
         const results = MQM.runTests();
         const passed = results.filter(r => r.ok).length;
@@ -803,40 +318,46 @@ flowchart TD
       // 3. Tri-lingual (English / Hindi / Kannada) Language System
       const dict = {
         en: {
-          nav_problem: 'Problem',
-          nav_logic: 'Logic',
-          nav_results: 'Results',
-          nav_algo: 'Algorithm',
-          nav_feedback: 'Feedback',
-          nav_team: 'Team',
+          nav_home: 'Home',
+          nav_student_link: 'Student',
+          nav_staff_link: 'Staff',
+          nav_about: 'About',
+          nav_help: 'Help',
           nav_student: 'Student View',
-          hero_sub: 'Shorter lines and less waiting. A smart rule system that checks the crowd at every counter, opens extra counters at rush hour, and tells you exactly where to go.',
-          btn_find: '▶ Find my counter',
-          btn_staff: 'Staff console'
+          hero_title: 'Smart Mess Queue Manager',
+          hero_sub: 'Real-time line sizes, fastest counter routing, direct-to-room delivery, dish-by-dish quality ratings, and zero food waste.',
+          btn_find: '⚡ Find Fastest Counter ▶',
+          btn_delivery: '🛏️ Room Delivery',
+          btn_menu: '⭐ Rate Today\'s Food',
+          btn_staff: 'Staff Console ↗'
         },
         hi: {
-          nav_problem: 'समस्या',
-          nav_logic: 'नियम',
-          nav_results: 'परिणाम',
-          nav_algo: 'एल्गोरिदम',
-          nav_feedback: 'फीडबैक',
-          nav_team: 'टीम',
+          nav_home: 'होम',
+          nav_student_link: 'छात्र',
+          nav_staff_link: 'स्टाफ',
+          nav_about: 'के बारे में',
+          nav_help: 'मदद',
           nav_student: 'छात्र दृश्य',
-          hero_sub: 'छोटी कतारें और कम प्रतीक्षा। एक स्मार्ट नियम प्रणाली जो हर काउंटर पर भीड़ की जांच करती है, भीड़ के समय अतिरिक्त काउंटर खोलती है, और आपको सबसे तेज़ काउंटर बताती है।',
-          btn_find: '▶ मेरा काउंटर खोजें',
-          btn_staff: 'स्टाफ कंसोल'
+          hero_title: 'स्मार्ट मेस कतार प्रबंधक',
+          hero_sub: 'वास्तविक समय में कतार, तेज़ काउंटर सुझाव, सीधे कमरे में भोजन वितरण, भोजन रेटिंग और शून्य खाद्य बर्बादी।',
+          btn_find: '⚡ सबसे तेज़ काउंटर खोजें ▶',
+          btn_delivery: '🛏️ रूम डिलीवरी',
+          btn_menu: '⭐ भोजन रेटिंग करें',
+          btn_staff: 'स्टाफ कंसोल ↗'
         },
         kn: {
-          nav_problem: 'ಸಮಸ್ಯೆ',
-          nav_logic: 'ನಿಯಮಗಳು',
-          nav_results: 'ಫಲಿತಾಂಶಗಳು',
-          nav_algo: 'ಅಲ್ಗಾರಿದಮ್',
-          nav_feedback: 'ಪ್ರತಿಕ್ರಿಯೆ',
-          nav_team: 'ತಂಡ',
+          nav_home: 'ಮುಖಪುಟ',
+          nav_student_link: 'ವಿದ್ಯಾರ್ಥಿ',
+          nav_staff_link: 'ಸಿಬ್ಬಂದಿ',
+          nav_about: 'ಬಗ್ಗೆ',
+          nav_help: 'ಸಹಾಯ',
           nav_student: 'ವಿದ್ಯಾರ್ಥಿ ವೀಕ್ಷಣೆ',
-          hero_sub: 'ಕಡಿಮೆ ಕ್ಯೂ ಮತ್ತು ಕಡಿಮೆ ಕಾಯುವ ಸಮಯ. ಪ್ರತಿ ಕೌಂಟರ್‌ನಲ್ಲಿ ಜನಸಂದಣಿಯನ್ನು ಪರಿಶೀಲಿಸುವ, ಗರಿಷ್ಠ ಸಮಯದಲ್ಲಿ ಹೆಚ್ಚುವರಿ ಕೌಂಟರ್‌ಗಳನ್ನು ತೆರೆಯುವ ಮತ್ತು ನಿಮಗೆ ಸರಿಯಾದ ಕೌಂಟರ್ ತೋರಿಸುವ ಸ್ಮಾರ್ಟ್ ನಿಯಮ ವ್ಯವಸ್ಥೆ.',
-          btn_find: '▶ ನನ್ನ ಕೌಂಟರ್ ಹುಡುಕಿ',
-          btn_staff: 'ಸಿಬ್ಬಂದಿ ಕನ್ಸೋಲ್'
+          hero_title: 'ಸ್ಮಾರ್ಟ್ ಮೆಸ್ ಕ್ಯೂ ಮ್ಯಾನೇಜರ್',
+          hero_sub: 'ನೈಜ ಸಮಯದ ಕ್ಯೂ, ವೇಗದ ಕೌಂಟರ್ ಮಾರ್ಗ, ಕೊಠಡಿಗೆ ಆಹಾರ ವಿತರಣೆ, ಆಹಾರ ರೇಟಿಂಗ್ ಮತ್ತು ಶೂನ್ಯ ಆಹಾರ ವ್ಯರ್ಥ.',
+          btn_find: '⚡ ವೇಗದ ಕೌಂಟರ್ ಹುಡುಕಿ ▶',
+          btn_delivery: '🛏️ ರೂಮ್ ಡೆಲಿವರಿ',
+          btn_menu: '⭐ ಆಹಾರ ರೇಟ್ ಮಾಡಿ',
+          btn_staff: 'ಸಿಬ್ಬಂದಿ ಕನ್ಸೋಲ್ ↗'
         }
       };
       const langOrder = ['en', 'hi', 'kn'];
@@ -846,7 +367,7 @@ flowchart TD
         if (toggleBtn) {
           if (lang === 'en') toggleBtn.textContent = 'EN / हिं / ಕನ್';
           else if (lang === 'hi') toggleBtn.textContent = 'हिं / ಕನ್ / EN';
-          else toggleBtn.textContent = 'ಕನ್ / EN / हिं';
+          else toggleBtn.textContent = 'ಕನ್ / EN / ಹಿं';
         }
         document.querySelectorAll('[data-i18n]').forEach(el => {
           const key = el.getAttribute('data-i18n');
@@ -876,6 +397,7 @@ flowchart TD
         document.getElementById('live-best').textContent = best ? `${best.name} (${MQM.formatWait(best.wait)})` : 'None';
         document.getElementById('live-standby').textContent = d.state.standbyOpen ? 'OPEN' : 'CLOSED';
         document.getElementById('live-cross').textContent = d.state.crossAccess ? 'ON' : 'OFF';
+
         if (window.Store) {
           const del = Store.getDeliveries ? Store.getDeliveries() : [];
           const activeDel = del.filter(x => x.status !== 'delivered' && x.status !== 'cancelled').length;
@@ -899,7 +421,7 @@ flowchart TD
         }
       };
 
-      show(currentData); // Immediate render before async init finishes
+      show(currentData);
       await Store.init();
       show(await Store.load());
       Store.subscribe(show);
@@ -919,7 +441,7 @@ flowchart TD
         });
       }
 
-      // 5. Home Page Interactive Threshold Demo Buttons
+      // 5. Interactive Threshold Demo Buttons
       document.querySelectorAll('[data-sim-preset]').forEach(btn => {
         btn.addEventListener('click', async () => {
           const pct = Number(btn.getAttribute('data-sim-preset'));
@@ -937,15 +459,11 @@ flowchart TD
           show(d);
           const msg = document.getElementById('demo-status-msg');
           if (msg) {
-            msg.textContent = `Simulated ${pct}% national zone crowd → Action: ${d.state.lastAction.toUpperCase()} | Standby: ${d.state.standbyOpen ? 'OPEN' : 'CLOSED'} | Cross Access: ${d.state.crossAccess ? 'ON' : 'OFF'}`;
+            msg.textContent = `Simulated ${pct}% national crowd → Action: ${d.state.lastAction.toUpperCase()} | Standby: ${d.state.standbyOpen ? 'OPEN' : 'CLOSED'} | Cross Access: ${d.state.crossAccess ? 'ON' : 'OFF'}`;
           }
         });
       });
     })();
-  </script>
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true, theme: 'default' });
   </script>
 </body>
 

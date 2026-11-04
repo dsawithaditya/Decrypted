@@ -36,7 +36,10 @@ img,svg{display:block;max-width:100%}
 .nav-links a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .2s}
 .nav-links a:hover{color:var(--text)}
 .nav-links a:hover::after{transform:scaleX(1)}
-.nav-actions{display:flex;gap:10px;align-items:center}
+.nav-actions{display:flex;gap:8px;align-items:center;flex-shrink:0;justify-content:flex-end}
+.lang-btn-fixed{width:126px!important;min-width:126px!important;max-width:126px!important;padding:0 6px!important;font-size:11px!important;text-align:center!important;justify-content:center!important;flex-shrink:0!important}
+.nav-fixed-btn{min-width:130px!important;text-align:center!important;justify-content:center!important;flex-shrink:0!important}
+.nav-links{display:flex;gap:4px;list-style:none;flex-shrink:0}
 .menu-btn{display:none!important}
 @media (max-width:900px){
   .nav-links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg-deep);border-bottom:2px solid var(--line);padding:8px 20px 16px}

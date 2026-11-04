@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1f4b">
+  <title>Help &amp; User Guide | Mess Queue Manager · Jain University</title>
+  <meta name="description"
+    content="User guide, room delivery instructions, dish rating system, staff console walkthrough, and FAQs for the Jain University canteen mess system.">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1f4b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' fill='%23fbbf24' font-family='monospace' font-weight='900' font-size='28'%3EMQM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <header class="nav">
+    <nav class="container nav-inner" aria-label="Main">
+      <a class="logo" href="index.html">MQM<span>.</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="student.html">Student</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="help.html" style="color:var(--gold)">Help</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn btn-sm lang-btn-fixed" id="help-lang-btn" type="button" aria-label="Switch language">EN / हिं / ಕನ್</button>
+        <div id="nav-user-slot"></div>
+        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html">Student View</a>
+        <button class="btn btn-sm menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="sky page-sky">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <span class="tag">SUPPORT &amp; DOCUMENTATION</span>
+        <h1 class="page-title">Help &amp; <span>User Guide</span></h1>
+        <p class="hero-sub" style="margin-top:10px">
+          Everything you need to know about checking queue times, claiming express passes, ordering room food delivery, and managing mess operations.
+        </p>
+      </div>
+      <div class="pixel-edge"></div>
+    </section>
+
+    <!-- STUDENT GUIDE -->
+    <section class="section" id="student-guide">
+      <div class="container">
+        <p class="eyebrow">01 · Student Guide</p>
+        <h2 class="section-title">Using the <span>Student Portal</span></h2>
+        
+        <div class="grid grid-3" style="margin-top:28px">
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">⚡</div>
+            <h3>FINDING THE BEST COUNTER</h3>
+            <p>Open the Student View on your phone. The gold banner at the top automatically points you to the open counter with the lowest wait time.</p>
+          </div>
+
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">🎫</div>
+            <h3>CROSS-ACCESS EXPRESS PASS</h3>
+            <p>When national lines exceed 80%, a glowing banner appears. Tap <b>Claim Express Pass</b> to get a 15-minute token routing you to the least crowded International counter.</p>
+          </div>
+
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">🔔</div>
+            <h3>"NOTIFY ME WHEN FREE"</h3>
+            <p>Studying in your hostel room? Tap the alert button to receive an audio chime and notification when mess crowd drops below 50%.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:22px">
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">🛏️</div>
+            <h3>DIRECT-TO-ROOM DELIVERY</h3>
+            <p>If you have a high fever, mobility injury, or quarantine, fill out the Room Delivery form. Select <b>Light Sick Diet</b> (Khichdi/Soup) or <b>Standard Thali</b>.</p>
+          </div>
+
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">🔒</div>
+            <h3>4-DIGIT SECURITY OTP</h3>
+            <p>Each delivery generates a unique 4-digit OTP. Keep it on your screen and share it with the runner when your food arrives to verify delivery.</p>
+          </div>
+
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">🌟</div>
+            <h3>EARNING KARMA POINTS</h3>
+            <p>Volunteer as a <b>Hostel Peer Buddy</b> to carry a meal box to an unwell student in your hostel block and earn <b>+10 Mess Karma Points</b>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAFF GUIDE -->
+    <section class="section section-alt" id="staff-guide">
+      <div class="container">
+        <p class="eyebrow">02 · Staff Operations</p>
+        <h2 class="section-title">Operating the <span>Staff Console</span></h2>
+
+        <div class="grid grid-3" style="margin-top:28px">
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">🔑</div>
+            <h3>STAFF ACCESS</h3>
+            <p>Open the Staff Console from the navbar. Enter default staff PIN <code>1234</code> or sign in with your staff email address.</p>
+          </div>
+
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">🎛️</div>
+            <h3>QUEUE CONTROLS</h3>
+            <p>Adjust line sizes using sliders or <code>+</code> / <code>−</code> buttons. Check the <b>Sold Out</b> box to immediately divert students from counters that have run out of food.</p>
+          </div>
+
+          <div class="card reveal">
+            <div style="font-size:28px;margin-bottom:6px">🚨</div>
+            <h3>KITCHEN EARLY WARNING</h3>
+            <p>If any dish rating falls below 2.5★ or receives 3+ complaint tags (Cold, Salt Issue), an automatic red alert sounds so chefs can correct the recipe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS -->
+    <section class="section" id="faq">
+      <div class="container">
+        <p class="eyebrow">03 · Common Questions</p>
+        <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+
+        <div style="display:grid;gap:14px;max-width:800px;margin-top:28px">
+          <details class="card reveal" style="padding:18px 22px">
+            <summary style="font-family:var(--font-hud);color:var(--gold);cursor:pointer;font-size:14px">
+              Why does the Standby counter open at 50% instead of 80%?
+            </summary>
+            <p class="muted" style="margin-top:10px;font-size:14px">
+              Opening standby at 50% crowd provides an early buffer before lines back up into the dining hall. By preparing at 45% and opening at 50%, queues never reach dangerous congestion levels.
+            </p>
+          </details>
+
+          <details class="card reveal" style="padding:18px 22px">
+            <summary style="font-family:var(--font-hud);color:var(--gold);cursor:pointer;font-size:14px">
+              How does the 75% Smart Overflow Cap protect International counters?
+            </summary>
+            <p class="muted" style="margin-top:10px;font-size:14px">
+              International counters have smaller capacities (15 people). If cross-access diverted all National students at once, International counters would instantly flood. The 75% cap pauses routing to any International counter that reaches 75% capacity.
+            </p>
+          </details>
+
+          <details class="card reveal" style="padding:18px 22px">
+            <summary style="font-family:var(--font-hud);color:var(--gold);cursor:pointer;font-size:14px">
+              How do I switch the language to Kannada or Hindi?
+            </summary>
+            <p class="muted" style="margin-top:10px;font-size:14px">
+              Click the <code>EN / हिं / ಕನ್</code> button located in the top navigation bar. It cycles smoothly between English, Hindi, and Kannada on all screens.
+            </p>
+          </details>
+
+          <details class="card reveal" style="padding:18px 22px">
+            <summary style="font-family:var(--font-hud);color:var(--gold);cursor:pointer;font-size:14px">
+              Does the app work offline if campus Wi-Fi drops?
+            </summary>
+            <p class="muted" style="margin-top:10px;font-size:14px">
+              Yes! The system includes an automatic offline resilience engine using <code>localStorage</code> and <code>BroadcastChannel</code>. It continues displaying cached counter counts and queue statuses with a freshness warning chip.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="container footer-inner">
+      <div>
+        <div class="logo">MQM<span>.</span></div>
+        <p>Team Decrypted · Jain (Deemed-to-be University)</p>
+      </div>
+      <p>
+        <a class="u" href="index.html">Home</a> · 
+        <a class="u" href="student.html">Student Portal</a> · 
+        <a class="u" href="staff.html">Staff Console</a> · 
+        <a class="u" href="about.html">About &amp; Research</a> · 
+        <a class="u" href="tests.html">Tests (T1–T14)</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/logic.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    const langOrder = ['en', 'hi', 'kn'];
+    let lang = localStorage.getItem('mqm-lang') || 'en';
+    const syncLang = () => {
+      const btn = document.getElementById('help-lang-btn');
+      if (btn) {
+        if (lang === 'en') btn.textContent = 'EN / हिं / ಕನ್';
+        else if (lang === 'hi') btn.textContent = 'हिं / ಕನ್ / EN';
+        else btn.textContent = 'ಕನ್ / EN / हिं';
+      }
+    };
+    syncLang();
+    document.getElementById('help-lang-btn')?.addEventListener('click', () => {
+      const idx = langOrder.indexOf(lang);
+      lang = langOrder[(idx + 1) % langOrder.length];
+      localStorage.setItem('mqm-lang', lang);
+      syncLang();
+    });
+  </script>
+</body>
+
+</html>

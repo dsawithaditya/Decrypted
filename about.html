@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1f4b">
+  <title>About Project &amp; Research | Mess Queue Manager · Team Decrypted</title>
+  <meta name="description"
+    content="Comprehensive engineering documentation, computational thinking analysis, algorithmic rules, before-after results, and team details for the Jain University canteen mess.">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1f4b'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' fill='%23fbbf24' font-family='monospace' font-weight='900' font-size='28'%3EMQM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hud-value,
+    .rule-pct {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 2px;
+      line-height: 1;
+    }
+    .pct-unit {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 0.52em;
+      font-weight: 800;
+      opacity: 0.92;
+      letter-spacing: 0;
+      transform: translateY(-0.18em);
+      display: inline-block;
+      margin-left: 1px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="nav">
+    <nav class="container nav-inner" aria-label="Main">
+      <a class="logo" href="index.html">MQM<span>.</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="student.html">Student</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="about.html" style="color:var(--gold)">About</a></li>
+        <li><a href="help.html">Help</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn btn-sm lang-btn-fixed" id="about-lang-btn" type="button" aria-label="Switch language">EN / हिं / ಕನ್</button>
+        <div id="nav-user-slot"></div>
+        <a class="btn btn-sm btn-gold nav-fixed-btn" href="student.html">Student View</a>
+        <button class="btn btn-sm menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- SKY HERO -->
+    <section class="sky page-sky">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <span class="tag">RESEARCH &amp; ENGINEERING AUDIT</span>
+        <h1 class="page-title">About <span>Mess Queue Manager</span></h1>
+        <p class="hero-sub" style="margin-top:10px">
+          Computational Thinking as an Engineering Mindset · Course SE-302A · Faculty: Dr. Sujithra · Jain (Deemed-to-be University).
+        </p>
+      </div>
+      <div class="pixel-edge"></div>
+    </section>
+
+    <!-- PROBLEM STATEMENT -->
+    <section class="section" id="problem">
+      <div class="container">
+        <p class="eyebrow">01 · Problem Statement</p>
+        <h2 class="section-title">Long lines. <span>Empty counters.</span></h2>
+        <p class="lead">
+          During peak lunch rush (12:15 PM – 1:15 PM), the Jain University mess counters suffered from heavy queuing bottlenecks. National food counters had queues stretching 15–20 students deep, while adjacent international counters sat largely underutilized. Students frequently joined lines only to discover food had run out, and sick or injured students skipped meals entirely.
+        </p>
+
+        <div class="grid grid-3" style="margin-top:28px">
+          <div class="card reveal">
+            <h3>THE CROWD IMBALANCE</h3>
+            <p>National counters (Counters 1–3) were consistently above 90% capacity, while International counters (Counters 4–5) stayed below 20% capacity.</p>
+          </div>
+          <div class="card reveal">
+            <h3>LACK OF ADVANCE WARNING</h3>
+            <p>Canteen kitchen staff were caught off guard when lines suddenly spiked, delaying the opening of backup standby counters by 6–10 minutes.</p>
+          </div>
+          <div class="card reveal">
+            <h3>STUDENT VISIBILITY DEFICIT</h3>
+            <p>Students walking in had no way of knowing which counter was fastest before committing to a 10+ minute queue.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPUTATIONAL THINKING PILLARS -->
+    <section class="section section-alt" id="pillars">
+      <div class="container">
+        <p class="eyebrow">02 · Engineering Mindset</p>
+        <h2 class="section-title">The Four <span>Pillars</span></h2>
+        <p class="lead">How we applied core computational thinking principles to engineer an automated, robust queue balancing system.</p>
+
+        <div class="grid grid-4" style="margin-top:28px">
+          <div class="card pillar reveal">
+            <div class="icon">D</div>
+            <h3>DECOMPOSITION</h3>
+            <p>Deconstructed canteen operations into discrete modules: queue sensing, zone average calculation, threshold triggers, cross-counter load balancing, and dispatch notification.</p>
+          </div>
+          <div class="card pillar reveal">
+            <div class="icon">P</div>
+            <h3>PATTERN RECOGNITION</h3>
+            <p>Identified daily lunch rush surges peaking at 12:30 PM, the disparity between National and International throughput, and 30-second average serving time.</p>
+          </div>
+          <div class="card pillar reveal">
+            <div class="icon">A</div>
+            <h3>ABSTRACTION</h3>
+            <p>Filtered out non-critical details (individual food preference, weather) and focused exclusively on queue count, serving time, capacity, and sold-out flags.</p>
+          </div>
+          <div class="card pillar reveal">
+            <div class="icon">∞</div>
+            <h3>ALGORITHMIC THINKING</h3>
+            <p>Engineered precise deterministic threshold rules (45/50/80/40) with mathematical hysteresis to prevent rapid flapping between states.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DECISION RULES & HYSTERESIS -->
+    <section class="section" id="logic">
+      <div class="container">
+        <p class="eyebrow">03 · Threshold Logic</p>
+        <h2 class="section-title">Rules with <span>Hysteresis</span></h2>
+        <p class="lead">Rules execute on the average crowd of open, available National counters to decide automated actions:</p>
+
+        <div class="grid grid-4" style="margin-top:28px">
+          <div class="card rule r-amber reveal">
+            <div class="rule-pct">≥45<span class="pct-unit">%</span></div>
+            <h3>EARLY ALERT</h3>
+            <p>Triggers audio beep and vibration alert to staff. Kitchen prepares the standby counter with a 2-minute head start.</p>
+            <span class="who">STAFF ALERT</span>
+          </div>
+
+          <div class="card rule r-blue reveal">
+            <div class="rule-pct">≥50<span class="pct-unit">%</span></div>
+            <h3>STANDBY OPENS</h3>
+            <p>Standby counter automatically opens. Student screen routes traffic to Standby 1 immediately.</p>
+            <span class="who">CAPACITY EXPANSION</span>
+          </div>
+
+          <div class="card rule r-red reveal">
+            <div class="rule-pct">&gt;80<span class="pct-unit">%</span></div>
+            <h3>CROSS-ACCESS</h3>
+            <p>National students gain access to International counters with a 75% overflow safety cap and 15-minute Digital Express Pass.</p>
+            <span class="who">OVERFLOW ROUTING</span>
+          </div>
+
+          <div class="card rule r-green reveal">
+            <div class="rule-pct">&lt;40<span class="pct-unit">%</span></div>
+            <h3>HYSTERESIS CLOSE</h3>
+            <p>Standby closes and cross-access resets ONLY when crowd drops below 40%. The 40–45% deadband prevents state flapping.</p>
+            <span class="who">STABLE RESET</span>
+          </div>
+        </div>
+
+        <!-- FLOWCHART & PSEUDOCODE -->
+        <div class="grid grid-2" style="margin-top:36px">
+          <div class="card reveal">
+            <h3>STEP-BY-STEP ALGORITHM</h3>
+            <ol class="steps" style="margin-top:14px">
+              <li>Read queue counts from all active counters.</li>
+              <li>Compute crowd %: <code>queue / capacity × 100</code>.</li>
+              <li>Compute wait time: <code>queue × 30s / 60</code>.</li>
+              <li>Compute average crowd across National counters.</li>
+              <li>If zone &gt; 80%: Turn ON Cross-Access (cap int counters at 75%).</li>
+              <li>Else if zone ≥ 50%: Open Standby counter.</li>
+              <li>Else if zone ≥ 45%: Trigger 2-minute staff alert.</li>
+              <li>Else if zone &lt; 40%: Close standby and reset cross-access.</li>
+              <li>Pick best counter with lowest wait and update student views.</li>
+            </ol>
+          </div>
+          <div class="card reveal">
+            <h3>DECISION FLOWCHART</h3>
+            <div class="mermaid-box" style="margin-top:10px">
+              <pre class="mermaid">
+flowchart TD
+    A[Read queue count of each counter] --> B[Calculate crowd % and wait time]
+    B --> C[Compute national zone average]
+    C --> D{Zone crowd > 80%?}
+    D -- Yes --> E[Turn ON Cross-Access + Open Standby]
+    D -- No --> F{Zone crowd >= 50%?}
+    F -- Yes --> G[Open Standby Counter]
+    F -- No --> H{Zone crowd >= 45%?}
+    H -- Yes --> I[Trigger 2-Min Staff Notice]
+    H -- No --> J{Zone crowd < 40%?}
+    J -- Yes --> K[Close Standby & Cross-Access]
+    J -- No --> L[Hysteresis: Keep State]
+    E --> M[Route to lowest wait counter]
+    G --> M
+    I --> M
+    K --> M
+    L --> M
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEASURED RESULTS -->
+    <section class="section section-alt" id="results">
+      <div class="container">
+        <p class="eyebrow">04 · Measured Results</p>
+        <h2 class="section-title">Before vs. After <span>Impact</span></h2>
+        <p class="lead">Measured during peak lunch rush at Jain University canteen with empirical stopwatch timing.</p>
+
+        <div class="grid grid-4" style="margin-top:28px">
+          <div class="card reveal">
+            <div class="rule-pct" style="color:var(--green)">-63<span class="pct-unit">%</span></div>
+            <h3>PEAK WAIT TIME</h3>
+            <p>Cut average peak lunch wait from <b>11.5 minutes</b> down to <b>4.2 minutes</b>.</p>
+          </div>
+          <div class="card reveal">
+            <div class="rule-pct" style="color:var(--cyan)">1.4m</div>
+            <h3>STANDBY SPEED</h3>
+            <p>Standby counter opened within <b>1.4 minutes</b> of the early warning (target &lt; 2m).</p>
+          </div>
+          <div class="card reveal">
+            <div class="rule-pct" style="color:var(--gold)">14→3</div>
+            <h3>QUEUE GAP</h3>
+            <p>Max imbalance between busiest and emptiest counter dropped from <b>14 to 3 students</b>.</p>
+          </div>
+          <div class="card reveal">
+            <div class="rule-pct" style="color:var(--green)">92<span class="pct-unit">%</span></div>
+            <h3>STUDENT SATISFACTION</h3>
+            <p><b>46 of 50 students</b> surveyed confirmed immediate clarity from the live recommendation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM DECRYPTED -->
+    <section class="section" id="team">
+      <div class="container">
+        <p class="eyebrow">05 · Project Team</p>
+        <h2 class="section-title">Team <span>Decrypted (Team 3)</span></h2>
+        <p class="lead">SE-302A · Department of Computer Science &amp; Engineering · Jain (Deemed-to-be University)</p>
+
+        <div class="grid grid-3" style="margin-top:28px">
+          <div class="card member reveal">
+            <div class="avatar">AK</div>
+            <div>
+              <h4>Aditya Kumar <span class="lead-badge">LEAD</span></h4>
+              <div class="role">FULL-STACK &amp; ARCHITECTURE</div>
+              <p>Full-stack logic, Supabase realtime backend, and room delivery module.</p>
+            </div>
+          </div>
+
+          <div class="card member reveal">
+            <div class="avatar">OG</div>
+            <div>
+              <h4>Ojash Kumar Gupta</h4>
+              <div class="role">ALGORITHM &amp; TESTING</div>
+              <p>Decision rules, hysteresis boundaries, T1–T14 automated test suite.</p>
+            </div>
+          </div>
+
+          <div class="card member reveal">
+            <div class="avatar">CK</div>
+            <div>
+              <h4>Charvi Krithika</h4>
+              <div class="role">UI / UX DESIGN</div>
+              <p>Student mobile experience, menu rating UI, and zero-waste pre-check-in.</p>
+            </div>
+          </div>
+
+          <div class="card member reveal">
+            <div class="avatar">KJ</div>
+            <div>
+              <h4>Kirtee Jain</h4>
+              <div class="role">STAFF CONSOLE &amp; DISPATCH</div>
+              <p>Staff dispatch queue, simulation engine, and emergency alert HUD.</p>
+            </div>
+          </div>
+
+          <div class="card member reveal">
+            <div class="avatar">AS</div>
+            <div>
+              <h4>Aman Singh</h4>
+              <div class="role">EMPIRICAL TESTING</div>
+              <p>Stopwatch serving time measurements, canteen queue benchmarks.</p>
+            </div>
+          </div>
+
+          <div class="card member reveal">
+            <div class="avatar">SK</div>
+            <div>
+              <h4>Senthil Kumar S</h4>
+              <div class="role">SURVEY &amp; VALIDATION</div>
+              <p>Hostel student feedback surveys, Peer Buddy karma mechanism.</p>
+            </div>
+          </div>
+
+          <div class="card member reveal">
+            <div class="avatar">TP</div>
+            <div>
+              <h4>Thulasi Prasadr</h4>
+              <div class="role">TECHNICAL REPORT</div>
+              <p>Engineering report, documentation, evidence compilation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="container footer-inner">
+      <div>
+        <div class="logo">MQM<span>.</span></div>
+        <p>Team Decrypted · Jain (Deemed-to-be University)</p>
+      </div>
+      <p>
+        <a class="u" href="index.html">Home</a> · 
+        <a class="u" href="student.html">Student Portal</a> · 
+        <a class="u" href="staff.html">Staff Console</a> · 
+        <a class="u" href="help.html">Help &amp; FAQ</a> · 
+        <a class="u" href="tests.html">Tests (T1–T14)</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/logic.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+  </script>
+  <script>
+    const langOrder = ['en', 'hi', 'kn'];
+    let lang = localStorage.getItem('mqm-lang') || 'en';
+    const syncLang = () => {
+      const btn = document.getElementById('about-lang-btn');
+      if (btn) {
+        if (lang === 'en') btn.textContent = 'EN / हिं / ಕನ್';
+        else if (lang === 'hi') btn.textContent = 'हिं / ಕನ್ / EN';
+        else btn.textContent = 'ಕನ್ / EN / हिं';
+      }
+    };
+    syncLang();
+    document.getElementById('about-lang-btn')?.addEventListener('click', () => {
+      const idx = langOrder.indexOf(lang);
+      lang = langOrder[(idx + 1) % langOrder.length];
+      localStorage.setItem('mqm-lang', lang);
+      syncLang();
+    });
+  </script>
+</body>
+
+</html>
