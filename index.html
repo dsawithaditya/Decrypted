@@ -62,7 +62,7 @@
     <!-- HERO SECTION WITH LIVE HUD STRIP -->
     <section class="sky">
       <div class="stars" aria-hidden="true"></div>
-      <svg class="cloud" style="top:110px;left:6%;width:150px;--dur:26s" viewBox="0 0 32 12"
+      <svg class="cloud" style="top:84px;left:4%;width:145px;--dur:9s" viewBox="0 0 32 12"
         shape-rendering="crispEdges" aria-hidden="true">
         <g fill="#fff">
           <rect x="10" y="0" width="8" height="2" />
@@ -73,7 +73,7 @@
         </g>
         <rect x="0" y="10" width="32" height="2" fill="#cfe3f7" />
       </svg>
-      <svg class="cloud" style="top:190px;right:7%;width:210px;--dur:34s" viewBox="0 0 32 12"
+      <svg class="cloud" style="top:92px;right:4%;width:175px;--dur:12s" viewBox="0 0 32 12"
         shape-rendering="crispEdges" aria-hidden="true">
         <g fill="#fff">
           <rect x="12" y="0" width="8" height="2" />
@@ -108,26 +108,32 @@
           <div class="hud-item">
             <div class="hud-label" data-i18n="hud_zone_crowd">ZONE CROWD</div>
             <div class="hud-value c-green" id="live-zone">20<span class="pct-unit">%</span></div>
+            <div class="hud-sub" id="live-zone-sub">● NORMAL FLOW</div>
           </div>
           <div class="hud-item">
             <div class="hud-label">FASTEST COUNTER</div>
-            <div class="hud-value" id="live-best">Counter 3 (~2 min)</div>
+            <div class="hud-value c-gold" id="live-best">Counter 3</div>
+            <div class="hud-sub" id="live-best-sub">⚡ ~2 MIN WAIT</div>
           </div>
           <div class="hud-item">
             <div class="hud-label">STANDBY</div>
             <div class="hud-value" id="live-standby">CLOSED</div>
+            <div class="hud-sub" id="live-standby-sub">OPENS AT ≥50%</div>
           </div>
           <div class="hud-item">
             <div class="hud-label">CROSS ACCESS</div>
             <div class="hud-value" id="live-cross">OFF</div>
+            <div class="hud-sub" id="live-cross-sub">OPENS AT >80%</div>
           </div>
           <div class="hud-item">
             <div class="hud-label">ROOM DELIVERIES</div>
             <div class="hud-value c-amber" id="live-deliveries">3 ACTIVE</div>
+            <div class="hud-sub" id="live-deliveries-sub">🛏️ HOSTEL DISPATCH</div>
           </div>
           <div class="hud-item">
             <div class="hud-label">TODAY'S SPECIAL</div>
-            <div class="hud-value c-gold" id="live-top-dish" style="font-size:20px">Paneer Masala (4.8★)</div>
+            <div class="hud-value c-gold" id="live-top-dish">Gulab Jamun</div>
+            <div class="hud-sub" id="live-top-dish-sub">★ 4.9 TOP RATED</div>
           </div>
         </div>
 
@@ -332,13 +338,34 @@
         const z = MQM.zoneAverage(d.counters);
         const best = MQM.bestCounter(d.counters, d.state, d.settings, 'national');
         const zoneEl = document.getElementById('live-zone');
+        const zoneSubEl = document.getElementById('live-zone-sub');
         if (zoneEl) {
           zoneEl.innerHTML = z === null ? 'N/A' : `${Math.round(z)}<span class="pct-unit">%</span>`;
           zoneEl.className = 'hud-value c-' + MQM.colorTag(z).key;
         }
-        document.getElementById('live-best').textContent = best ? `${best.name} (${MQM.formatWait(best.wait)})` : 'None';
-        document.getElementById('live-standby').textContent = d.state.standbyOpen ? 'OPEN' : 'CLOSED';
-        document.getElementById('live-cross').textContent = d.state.crossAccess ? 'ON' : 'OFF';
+        if (zoneSubEl) {
+          zoneSubEl.textContent = z === null ? 'ALL CLOSED' : (z > 80 ? '▲ PEAK SURGE' : (z >= 50 ? '▲ MODERATE LOAD' : '● NORMAL FLOW'));
+        }
+        const bestEl = document.getElementById('live-best');
+        const bestSubEl = document.getElementById('live-best-sub');
+        if (bestEl) bestEl.textContent = best ? best.name : 'None';
+        if (bestSubEl) bestSubEl.textContent = best ? `⚡ ~${MQM.formatWait(best.wait).toUpperCase()} WAIT` : 'NO OPEN COUNTERS';
+
+        const sbEl = document.getElementById('live-standby');
+        const sbSubEl = document.getElementById('live-standby-sub');
+        if (sbEl) {
+          sbEl.textContent = d.state.standbyOpen ? 'OPEN' : 'CLOSED';
+          sbEl.className = 'hud-value ' + (d.state.standbyOpen ? 'c-green' : '');
+        }
+        if (sbSubEl) sbSubEl.textContent = d.state.standbyOpen ? '● COUNTER 6 ACTIVE' : 'OPENS AT ≥50%';
+
+        const crEl = document.getElementById('live-cross');
+        const crSubEl = document.getElementById('live-cross-sub');
+        if (crEl) {
+          crEl.textContent = d.state.crossAccess ? 'ON' : 'OFF';
+          crEl.className = 'hud-value ' + (d.state.crossAccess ? 'c-green' : '');
+        }
+        if (crSubEl) crSubEl.textContent = d.state.crossAccess ? '🎫 EXPRESS ACTIVE' : 'OPENS AT >80%';
 
         if (window.Store) {
           const del = Store.getDeliveries ? Store.getDeliveries() : [];
@@ -348,7 +375,9 @@
           const menu = Store.getMenuItems ? Store.getMenuItems() : [];
           const top = menu.sort((a,b) => (b.avg_rating||0) - (a.avg_rating||0))[0];
           const dishEl = document.getElementById('live-top-dish');
-          if (dishEl && top) dishEl.textContent = top.name.split(' ').slice(0,2).join(' ') + ' (' + Number(top.avg_rating).toFixed(1) + '★)';
+          const dishSubEl = document.getElementById('live-top-dish-sub');
+          if (dishEl && top) dishEl.textContent = top.name.split(' ').slice(0,2).join(' ');
+          if (dishSubEl && top) dishSubEl.textContent = '★ ' + Number(top.avg_rating).toFixed(1) + ' TOP RATED';
         }
         updateFreshness();
       };
